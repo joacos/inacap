@@ -20,6 +20,9 @@ export default function ARViewer({ src, alt, poster }: ARViewerProps) {
   const startCamera = async () => {
     setCameraError(false);
     try {
+      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        throw new Error("navigator.mediaDevices.getUserMedia is not supported or context is insecure");
+      }
       const mediaStream = await navigator.mediaDevices.getUserMedia({
         video: { facingMode: "environment" },
         audio: false,

@@ -5,6 +5,13 @@ export type ObraRelacionada = {
   imagenUrl: string;
 };
 
+export type LocalHito = {
+  titulo: string;
+  descripcion: string;
+  audioUrl: string;
+  imagenes?: string[];
+};
+
 export type Hito = {
   id: number;
   anio: number;
@@ -14,6 +21,7 @@ export type Hito = {
   modelo3dUrl?: string;
   imagenes?: string[];
   obraRelacionada?: ObraRelacionada;
+  local?: LocalHito;
 };
 
 export type ZonaKey = "inacap" | "construccion" | "herramientas";
@@ -42,7 +50,15 @@ export const exposicionData: Record<ZonaKey, Hito[]> = {
       imagenes: [
         "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&auto=format&fit=crop&q=80",
         "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=600&auto=format&fit=crop&q=80"
-      ]
+      ],
+      local: {
+        titulo: "Inicios en Valdivia",
+        descripcion: "INACAP inicia sus primeras actividades formativas y de capacitación en la Región de Los Ríos, respondiendo a la necesidad de operarios técnicos calificados para el sector fluvial y de manufactura local.",
+        audioUrl: "/assets/audio/inacap/inacap_local_1.mp3",
+        imagenes: [
+          "https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?w=600&auto=format&fit=crop&q=80"
+        ]
+      }
     },
     {
       id: 2,
@@ -51,6 +67,11 @@ export const exposicionData: Record<ZonaKey, Hito[]> = {
       descripcion:
         "INACAP amplía su cobertura a regiones, abriendo sedes en Valparaíso, Concepción y Antofagasta. La formación técnica llega a miles de jóvenes que antes no tenían acceso a educación especializada.",
       audioUrl: "/assets/audio/inacap/inacap_2.mp3",
+      local: {
+        titulo: "Talleres Pioneros",
+        descripcion: "Se habilitan dependencias locales adaptadas a la geografía y al quehacer industrial del sur. Se imparten los primeros talleres prácticos orientados a mecánica naval y carpintería de ribera.",
+        audioUrl: "/assets/audio/inacap/inacap_local_2.mp3"
+      }
     },
     {
       id: 3,
@@ -59,6 +80,11 @@ export const exposicionData: Record<ZonaKey, Hito[]> = {
       descripcion:
         "Se consolida como la principal institución de formación técnica del país, con programas reconocidos por la industria y un cuerpo docente de excelencia proveniente del mundo profesional.",
       audioUrl: "/assets/audio/inacap/inacap_3.mp3",
+      local: {
+        titulo: "Aporte al Sector Maderero",
+        descripcion: "INACAP consolida su presencia regional capacitando a técnicos en operaciones forestales y aserraderos, aportando al motor de crecimiento más relevante del Valdivia de la época.",
+        audioUrl: "/assets/audio/inacap/inacap_local_3.mp3"
+      }
     },
     {
       id: 4,
@@ -67,6 +93,11 @@ export const exposicionData: Record<ZonaKey, Hito[]> = {
       descripcion:
         "Se actualizan los planes de estudio para incorporar nuevas tecnologías y metodologías de enseñanza. Los talleres se equipan con maquinaria de última generación importada especialmente para la formación práctica.",
       audioUrl: "/assets/audio/inacap/inacap_4.mp3",
+      local: {
+        titulo: "Nuevos Talleres Mecánicos",
+        descripcion: "Pese a las dificultades económicas nacionales, la sede Valdivia inaugura talleres equipados con tornos y soldadura eléctrica para simular de forma realista el trabajo en los astilleros locales.",
+        audioUrl: "/assets/audio/inacap/inacap_local_4.mp3"
+      }
     },
     {
       id: 5,
@@ -75,6 +106,11 @@ export const exposicionData: Record<ZonaKey, Hito[]> = {
       descripcion:
         "Los primeros laboratorios de computación se instalan en las sedes principales. INACAP lidera la integración tecnológica en la educación técnica, preparing a sus estudiantes para la revolución digital.",
       audioUrl: "/assets/audio/inacap/inacap_5.mp3",
+      local: {
+        titulo: "Conectividad Austral",
+        descripcion: "Llegan los primeros computadores personales a la sede. Se abre un moderno laboratorio informático facilitando el acceso a herramientas de contabilidad e informática para jóvenes valdivianos.",
+        audioUrl: "/assets/audio/inacap/inacap_local_5.mp3"
+      }
     },
     {
       id: 6,
@@ -83,6 +119,11 @@ export const exposicionData: Record<ZonaKey, Hito[]> = {
       descripcion:
         "INACAP da un salto cualitativo al obtener el reconocimiento como Universidad Tecnológica, ampliando su oferta académica con carreras profesionales e ingenierías aplicadas.",
       audioUrl: "/assets/audio/inacap/inacap_6.mp3",
+      local: {
+        titulo: "Sello Profesional e Ingeniería",
+        descripcion: "Con la transformación de INACAP en Universidad Tecnológica, la sede Valdivia amplía su oferta integrando ingenierías aplicadas que apoyen la naciente industria pesquera y logística de la Región.",
+        audioUrl: "/assets/audio/inacap/inacap_local_6.mp3"
+      }
     },
     {
       id: 7,
@@ -91,6 +132,11 @@ export const exposicionData: Record<ZonaKey, Hito[]> = {
       descripcion:
         "Se obtienen las primeras acreditaciones institucionales, validando la calidad educativa ante organismos nacionales e internacionales. Los egresados son reconocidos por su preparación práctica.",
       audioUrl: "/assets/audio/inacap/inacap_7.mp3",
+      local: {
+        titulo: "Acreditación y Vinculación",
+        descripcion: "La sede local celebra la acreditación con alta vinculación al medio, colaborando de cerca con el ecosistema de astilleros y el comercio regional para mejorar la empleabilidad de sus egresados.",
+        audioUrl: "/assets/audio/inacap/inacap_local_7.mp3"
+      }
     },
     {
       id: 8,
@@ -99,6 +145,11 @@ export const exposicionData: Record<ZonaKey, Hito[]> = {
       descripcion:
         "Se implementa el modelo de Aprendizaje Basado en Competencias (ABC), revolucionando la forma de enseñar y evaluar. Los estudiantes aprenden haciendo, en entornos que simulan el mundo laboral real.",
       audioUrl: "/assets/audio/inacap/inacap_8.mp3",
+      local: {
+        titulo: "Laboratorio de Especialidad",
+        descripcion: "El Aprendizaje Basado en Competencias se afianza en Valdivia con laboratorios rediseñados y metodologías activas orientadas a proyectos prácticos en áreas forestales, acuícolas y de servicios.",
+        audioUrl: "/assets/audio/inacap/inacap_local_8.mp3"
+      }
     },
     {
       id: 9,
@@ -107,6 +158,11 @@ export const exposicionData: Record<ZonaKey, Hito[]> = {
       descripcion:
         "La pandemia acelera la transformación digital de INACAP. Se desarrollan plataformas de aprendizaje virtual, laboratorios remotos y nuevas metodologías híbridas que permanecen hasta hoy.",
       audioUrl: "/assets/audio/inacap/inacap_9.mp3",
+      local: {
+        titulo: "Innovación en Pandemia",
+        descripcion: "La sede Valdivia adapta sus aulas al formato online y mixto. Los laboratorios de mecánica y electricidad continúan operando de forma semipresencial bajo estrictos resguardos sanitarios.",
+        audioUrl: "/assets/audio/inacap/inacap_local_9.mp3"
+      }
     },
     {
       id: 10,
@@ -115,6 +171,11 @@ export const exposicionData: Record<ZonaKey, Hito[]> = {
       descripcion:
         "INACAP celebra 6 décadas de compromiso con la educación técnica y profesional de Chile. Con más de 26 sedes a nivel nacional y miles de egresados, mira al futuro con la misma pasión del primer día.",
       audioUrl: "/assets/audio/inacap/inacap_10.mp3",
+      local: {
+        titulo: "Sede del Futuro",
+        descripcion: "INACAP Valdivia conmemora 60 años formando profesionales con foco en sustentabilidad, digitalización industrial e innovación aplicada en alianza con el desarrollo fluvial de la Región de Los Ríos.",
+        audioUrl: "/assets/audio/inacap/inacap_local_10.mp3"
+      }
     },
   ],
 

@@ -9,6 +9,7 @@ interface HitoContentProps {
   hito: Hito;
   zona: ZonaKey;
   direction: number; // 1 = forward, -1 = backward
+  viewMode?: "nacional" | "local";
 }
 
 const variants = {
@@ -36,25 +37,30 @@ const transition = {
   mass: 0.8,
 };
 
-export default function HitoContent({ hito, zona, direction }: HitoContentProps) {
+export default function HitoContent({ hito, zona, direction, viewMode = "nacional" }: HitoContentProps) {
   const isBlueAccent = zona === "inacap" || zona === "herramientas";
   const [imgIndex, setImgIndex] = useState(0);
   const [showObra, setShowObra] = useState(false);
 
+  const isLocalActive = viewMode === "local" && !!hito.local;
+  const currentTitle = isLocalActive ? hito.local!.titulo : hito.titulo;
+  const currentDesc = isLocalActive ? hito.local!.descripcion : hito.descripcion;
+  const currentImages = isLocalActive && hito.local?.imagenes ? hito.local.imagenes : hito.imagenes;
+
   // Auto-play slideshow every 4 seconds
   useEffect(() => {
-    if (!hito.imagenes || hito.imagenes.length <= 1) return;
+    if (!currentImages || currentImages.length <= 1) return;
     const interval = setInterval(() => {
-      setImgIndex((prev) => (prev + 1) % hito.imagenes!.length);
+      setImgIndex((prev) => (prev + 1) % currentImages.length);
     }, 4000);
     return () => clearInterval(interval);
-  }, [hito.imagenes]);
+  }, [currentImages]);
 
-  // Reset index and modal state on hito change
+  // Reset index and modal state on hito or viewMode change
   useEffect(() => {
     setImgIndex(0);
     setShowObra(false);
-  }, [hito.id]);
+  }, [hito.id, viewMode]);
 
   return (
     <div className="relative min-h-[280px]">
@@ -104,13 +110,13 @@ export default function HitoContent({ hito, zona, direction }: HitoContentProps)
             transition={{ delay: 0.15, duration: 0.3 }}
             className="relative -mx-6 h-52 sm:h-64 overflow-hidden mb-6 bg-slate-950/20 group flex items-center justify-center dot-grid"
           >
-            {hito.imagenes && hito.imagenes.length > 0 ? (
+            {currentImages && currentImages.length > 0 ? (
               <>
                 <AnimatePresence mode="wait">
                   <motion.img
                     key={imgIndex}
-                    src={hito.imagenes[imgIndex]}
-                    alt={`${hito.titulo} - Imagen ${imgIndex + 1}`}
+                    src={currentImages[imgIndex]}
+                    alt={`${currentTitle} - Imagen ${imgIndex + 1}`}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
@@ -123,11 +129,11 @@ export default function HitoContent({ hito, zona, direction }: HitoContentProps)
                 <div className="pointer-events-none absolute inset-0 z-10 shadow-[inset_0_0_24px_rgba(2,6,23,0.95)]" />
 
                 {/* Controls (only if > 1 image) */}
-                {hito.imagenes.length > 1 && (
+                {currentImages.length > 1 && (
                   <>
                     <button
                       onClick={() =>
-                        setImgIndex((prev) => (prev - 1 + hito.imagenes!.length) % hito.imagenes!.length)
+                        setImgIndex((prev) => (prev - 1 + currentImages.length) % currentImages.length)
                       }
                       className="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-slate-950/70 border border-slate-800 text-slate-350 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:text-white hover:bg-slate-900 active:scale-95 z-20"
                       aria-label="Imagen anterior"
@@ -138,7 +144,7 @@ export default function HitoContent({ hito, zona, direction }: HitoContentProps)
                     </button>
 
                     <button
-                      onClick={() => setImgIndex((prev) => (prev + 1) % hito.imagenes!.length)}
+                      onClick={() => setImgIndex((prev) => (prev + 1) % currentImages.length)}
                       className="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-slate-950/70 border border-slate-800 text-slate-350 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:text-white hover:bg-slate-900 active:scale-95 z-20"
                       aria-label="Siguiente imagen"
                     >
@@ -149,7 +155,7 @@ export default function HitoContent({ hito, zona, direction }: HitoContentProps)
 
                     {/* Indicators */}
                     <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-20 bg-slate-950/60 px-2.5 py-1 rounded-full border border-slate-800/50 backdrop-blur-sm">
-                      {hito.imagenes.map((_, i) => (
+                      {currentImages.map((_, i) => (
                         <button
                           key={i}
                           onClick={() => setImgIndex(i)}
@@ -205,7 +211,7 @@ export default function HitoContent({ hito, zona, direction }: HitoContentProps)
             transition={{ delay: 0.15, duration: 0.35 }}
             className="text-2xl sm:text-3xl font-bold text-slate-50 mb-4 leading-tight"
           >
-            {hito.titulo}
+            {currentTitle}
           </motion.h2>
 
           {/* Divider */}
@@ -227,7 +233,7 @@ export default function HitoContent({ hito, zona, direction }: HitoContentProps)
             transition={{ delay: 0.25, duration: 0.4 }}
             className="text-base text-slate-300 leading-relaxed max-w-prose"
           >
-            {hito.descripcion}
+            {currentDesc}
           </motion.p>
 
           {/* Hito counter */}
