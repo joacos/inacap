@@ -455,12 +455,31 @@ export default function ZonaHerramientasClientPage() {
                   </span>
                 )}
                 
-                {/* Embedded ARViewer inside the page context */}
-                <div className="w-full h-full">
-                  <ARViewer
+                {/* Embedded direct model-viewer to show model immediately */}
+                <div className="w-full h-full relative">
+                  <model-viewer
                     src={hitos[activeToolId - 1].modelo3dUrl || "/estacion_total.glb"}
                     alt={hitos[activeToolId - 1].titulo}
-                  />
+                    ar
+                    ar-modes="webxr scene-viewer quick-look"
+                    camera-controls
+                    auto-rotate
+                    shadow-intensity="1"
+                    loading="lazy"
+                    style={{ width: "100%", height: "100%", background: "transparent" }}
+                  >
+                    <button
+                      slot="ar-button"
+                      className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 bg-inacap-blue hover:bg-inacap-blue-light text-white font-extrabold text-[10px] rounded-full px-4 py-2.5 glow-blue transition-all duration-300 active:scale-95 flex items-center gap-1.5 shadow-lg border border-inacap-blue-light/25 cursor-pointer"
+                    >
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                        <path d="M2 17l10 5 10-5" />
+                        <path d="M2 12l10 5 10-5" />
+                      </svg>
+                      Proyectar en AR 🚀
+                    </button>
+                  </model-viewer>
                 </div>
               </div>
 
