@@ -1,4 +1,4 @@
-import ZonaClientPage from "@/components/ZonaClientPage";
+import ZonaHerramientasClientPage from "@/components/ZonaHerramientasClientPage";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -7,5 +7,5 @@ export const metadata: Metadata = {
 };
 
 export default function ZonaHerramientasPage() {
-  return <ZonaClientPage zona="herramientas" />;
+  return <ZonaHerramientasClientPage />;
 }
