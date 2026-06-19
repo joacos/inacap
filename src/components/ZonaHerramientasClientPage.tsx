@@ -203,7 +203,7 @@ export default function ZonaHerramientasClientPage() {
                 autoPlay
                 playsInline
                 muted
-                className="w-full h-full object-cover opacity-35"
+                className="w-full h-full object-cover opacity-45"
               />
             ) : (
               <div className="w-full h-full flex flex-col items-center justify-center text-center p-6 text-slate-400 bg-slate-950">
@@ -234,14 +234,14 @@ export default function ZonaHerramientasClientPage() {
                 )}
               </div>
             )}
-            <div className="absolute inset-0 bg-gradient-to-b from-[#020617]/90 via-[#020617]/55 to-[#020617]/95" />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#020617]/80 via-transparent to-[#020617]/95" />
           </motion.div>
         )}
       </AnimatePresence>
 
       {/* FIXED HEADER (Visible during scanning and viewing) */}
       {step !== "instructions" && (
-        <header className="fixed top-0 left-0 right-0 z-40 px-6 pt-6 pb-4 bg-gradient-to-b from-slate-950 via-slate-950/90 to-transparent flex items-center justify-between border-b border-slate-900/10">
+        <header className="fixed top-0 left-0 right-0 z-40 px-6 pt-6 pb-4 bg-gradient-to-b from-slate-950 via-slate-950/80 to-transparent flex items-center justify-between">
           <div className="flex items-center gap-3">
             <button
               onClick={() => {
@@ -268,7 +268,7 @@ export default function ZonaHerramientasClientPage() {
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="flex items-center gap-2.5 glass bg-slate-950/80 rounded-full px-3.5 py-1.5 border border-slate-850 shadow-lg"
+            className="flex items-center gap-2.5 glass bg-slate-950/80 rounded-full px-3.5 py-1.5 border border-slate-800 shadow-lg"
           >
             <div className="relative w-6 h-6 flex-shrink-0">
               <svg viewBox="0 0 36 36" className="w-full h-full -rotate-90">
@@ -294,11 +294,11 @@ export default function ZonaHerramientasClientPage() {
                   transition={{ duration: 0.8, ease: "easeOut" }}
                 />
               </svg>
-              <span className="absolute inset-0 flex items-center justify-center text-[7px] font-black text-slate-300">
+              <span className="absolute inset-0 flex items-center justify-center text-[7px] font-black text-slate-350">
                 {discoveredCount}
               </span>
             </div>
-            <span className="text-[10px] font-bold text-slate-300">
+            <span className="text-[10px] font-black text-slate-250">
               {discoveredCount} / 5
             </span>
           </motion.div>
@@ -319,7 +319,6 @@ export default function ZonaHerramientasClientPage() {
               className="flex-grow flex flex-col justify-between px-6 py-10 max-w-sm mx-auto w-full"
             >
               <div className="flex flex-col items-center text-center mt-6">
-                {/* Floating Icon */}
                 <div className="relative flex items-center justify-center w-20 h-20 rounded-2xl mb-6 border border-inacap-blue-light/35 bg-inacap-blue/15 shadow-[0_0_20px_rgba(59,130,246,0.3)]">
                   <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-inacap-blue-light">
                     <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z" />
@@ -387,100 +386,48 @@ export default function ZonaHerramientasClientPage() {
             </motion.div>
           )}
 
-          {/* STEP 2: SCANNING VIEW (Camera Active in Background) */}
+          {/* STEP 2: SCANNING VIEW (Completely Clean Full-Screen Camera) */}
           {step === "scanning" && (
             <motion.div
               key="scanning"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="flex-grow flex flex-col justify-between pt-24 pb-12 w-full max-w-md mx-auto px-6"
+              className="flex-grow flex flex-col justify-between pt-24 pb-6 w-full max-w-md mx-auto px-6 h-full min-h-[450px]"
             >
-              {/* Scan Reticle Area */}
-              <div className="flex flex-col items-center justify-center my-6 flex-grow">
-                {/* Target Scope */}
-                <div className="relative w-44 h-44 border-2 border-dashed border-inacap-blue-light/75 rounded-2xl flex items-center justify-center">
+              {/* Center Reticle Scope */}
+              <div className="flex-grow flex flex-col items-center justify-center my-auto">
+                <div className="relative w-52 h-52 border-2 border-dashed border-inacap-blue-light/70 rounded-3xl flex items-center justify-center">
                   <motion.div
                     initial={{ top: 0 }}
                     animate={{ top: "100%" }}
                     transition={{ duration: 1.8, repeat: Infinity, ease: "linear" }}
                     className="absolute left-0 right-0 h-0.5 bg-inacap-blue-light shadow-[0_0_12px_rgba(59,130,246,0.6)] z-25"
                   />
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="opacity-30 text-slate-100 animate-pulse">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="opacity-20 text-slate-100 animate-pulse">
                     <path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2" />
                   </svg>
                 </div>
-                <span className="text-[10px] text-slate-400 bg-slate-950/80 px-3.5 py-1.5 rounded-full border border-slate-900 shadow-md mt-5 text-center font-semibold">
+                
+                <span className="text-[10px] text-slate-350 bg-slate-950/80 px-4 py-2 rounded-full border border-slate-900 shadow-md mt-6 text-center font-bold tracking-wide">
                   Apunta tu cámara al código QR de la estación
                 </span>
               </div>
 
-              {/* Tool discovery status list */}
-              <div className="flex flex-col gap-3">
-                <h3 className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1">
-                  Progreso del Recorrido
-                </h3>
-                
-                {hitos.map((tool) => {
-                  const unlocked = isVisited("herramientas", tool.id);
-
-                  return (
-                    <div
-                      key={tool.id}
-                      onClick={() => unlocked && handleOpenAR(tool.id)}
-                      className={`flex items-center justify-between p-3.5 rounded-2xl border transition-all ${
-                        unlocked
-                          ? "bg-slate-900/80 border-slate-800/80 text-slate-200 cursor-pointer hover:bg-slate-850"
-                          : "bg-slate-950/50 border-slate-950/20 text-slate-500 pointer-events-none"
-                      }`}
-                    >
-                      <div className="flex items-center gap-3 min-w-0">
-                        {unlocked ? (
-                          <div className="w-7 h-7 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 flex-shrink-0">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
-                              <polyline points="20 6 9 17 4 12" />
-                            </svg>
-                          </div>
-                        ) : (
-                          <div className="w-7 h-7 rounded-lg bg-slate-950/60 border border-slate-900 flex items-center justify-center text-slate-600 flex-shrink-0">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                              <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-                              <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-                            </svg>
-                          </div>
-                        )}
-                        <span className={`text-xs font-bold truncate ${unlocked ? "text-slate-200" : "text-slate-500"}`}>
-                          {tool.titulo}
-                        </span>
-                      </div>
-
-                      {unlocked && (
-                        <div className="flex items-center gap-1.5 text-[9px] font-bold uppercase tracking-wider text-inacap-blue-light">
-                          <span>Ver 3D</span>
-                          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                            <path d="M9 18l6-6-6-6" />
-                          </svg>
-                        </div>
-                      )}
-                    </div>
-                  );
-                })}
-              </div>
-
-              {/* Debug Simulator */}
-              <div className="mt-8 bg-slate-950/80 border border-slate-900 p-4 rounded-3xl flex flex-col items-center">
-                <span className="text-[9px] font-bold text-slate-550 uppercase tracking-widest mb-3">
-                  Simulador de Escaneo
+              {/* Minimal bottom simulator trigger panel */}
+              <div className="mt-auto bg-slate-950/85 border border-slate-900/60 p-2.5 rounded-2xl flex items-center justify-between gap-3 shadow-2xl backdrop-blur-sm">
+                <span className="text-[8px] font-black text-slate-500 uppercase tracking-widest leading-none flex-shrink-0">
+                  Simular QR:
                 </span>
-                <div className="grid grid-cols-5 gap-2 w-full">
+                <div className="flex gap-1.5 flex-1 justify-end">
                   {[1, 2, 3, 4, 5].map((id) => (
                     <button
                       key={id}
                       onClick={() => handleSuccessfulScan(id)}
-                      className={`w-full aspect-square flex flex-col items-center justify-center rounded-xl border text-[10px] font-black transition-all active:scale-95 cursor-pointer ${
+                      className={`w-7 h-7 flex items-center justify-center rounded-lg border text-[10px] font-black transition-all active:scale-95 cursor-pointer ${
                         isVisited("herramientas", id)
-                          ? "bg-emerald-500/10 border-emerald-500/30 text-emerald-400"
-                          : "bg-slate-900 border-slate-850 text-slate-400 hover:bg-slate-800 hover:text-white"
+                          ? "bg-emerald-500/10 border-emerald-500/35 text-emerald-400"
+                          : "bg-slate-900 border-slate-850 text-slate-400 hover:bg-slate-800"
                       }`}
                     >
                       {id}
