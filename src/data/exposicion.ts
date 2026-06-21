@@ -333,7 +333,7 @@ export const exposicionData: Record<ZonaKey, Hito[]> = {
       titulo: "Familia del Desbaste y Carpintería (Los Cepillos)",
       descripcion: "El cepillo manual y las garlopas de madera dominaban los talleres de carpintería a mediados del siglo XX. El dominio de estas herramientas definía la precisión del oficio y la calidad del acabado en madera.",
       audioUrl: "/assets/audio/herramientas/herramienta_1.mp3",
-      modelo3dUrl: "/estacion_total.glb",
+      modelo3dUrl: "/cepillo.glb",
       imagenes: [
         "https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?w=600&auto=format&fit=crop&q=80"
       ]
@@ -344,7 +344,7 @@ export const exposicionData: Record<ZonaKey, Hito[]> = {
       titulo: "Familia del Perforado (Los Taladros)",
       descripcion: "Los taladros eléctricos portátiles y de pedestal transformaron la velocidad de perforación en madera y metales, marcando el inicio de la mecanización a gran escala en los talleres técnicos.",
       audioUrl: "/assets/audio/herramientas/herramienta_2.mp3",
-      modelo3dUrl: "/estacion_total.glb",
+      modelo3dUrl: "/deWalt.glb",
       imagenes: [
         "https://images.unsplash.com/photo-1504148455328-c376907d081c?w=600&auto=format&fit=crop&q=80"
       ]
@@ -355,7 +355,7 @@ export const exposicionData: Record<ZonaKey, Hito[]> = {
       titulo: "Familia del Corte (Los Serruchos y Sierras)",
       descripcion: "Serruchos tradicionales, sierras de calar y sierras circulares portátiles agilizaron el dimensionamiento de piezas, incrementando la productividad y disminuyendo el esfuerzo físico en obra.",
       audioUrl: "/assets/audio/herramientas/herramienta_3.mp3",
-      modelo3dUrl: "/estacion_total.glb",
+      modelo3dUrl: "/ingleteadora.glb",
       imagenes: [
         "https://images.unsplash.com/photo-1530124560677-bdaea027df01?w=600&auto=format&fit=crop&q=80"
       ]
@@ -377,7 +377,7 @@ export const exposicionData: Record<ZonaKey, Hito[]> = {
       titulo: "Familia de la Unión y Estructura (Las Soldadoras)",
       descripcion: "Soldadoras inversoras compactas y de alta frecuencia facilitaron la unión estructural del acero, permitiendo un arco más de calidad y adaptándose al trabajo pesado tanto en terreno como en taller.",
       audioUrl: "/assets/audio/herramientas/herramienta_5.mp3",
-      modelo3dUrl: "/estacion_total.glb",
+      modelo3dUrl: "/soldadora.glb",
       imagenes: [
         "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=600&auto=format&fit=crop&q=80"
       ]

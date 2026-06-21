@@ -206,7 +206,7 @@ export default function ARViewer({ src, alt, poster }: ARViewerProps) {
                 autoPlay
                 playsInline
                 muted
-                className="absolute inset-0 w-full h-full object-cover opacity-40 pointer-events-none"
+                className="absolute inset-0 w-full h-full object-cover opacity-85 pointer-events-none"
               />
             )}
 

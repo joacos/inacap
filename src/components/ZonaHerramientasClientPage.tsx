@@ -29,8 +29,8 @@ export default function ZonaHerramientasClientPage() {
   const discoveredCount = discoveredTools.length;
   const allDiscovered = discoveredCount === 5;
 
-  // Camera should be active during "scanning" step
-  const isCameraActive = step === "scanning";
+  // Camera should be active during "scanning" and "viewing" steps
+  const isCameraActive = step === "scanning" || step === "viewing";
 
   // Process query parameter (?scan=ID) on page load
   useEffect(() => {
@@ -90,6 +90,7 @@ export default function ZonaHerramientasClientPage() {
 
   // QR Scanning Loop using jsQR loaded from layout
   const scanLoop = useCallback(() => {
+    if (step !== "scanning") return;
     const video = videoRef.current;
     if (video && video.readyState === video.HAVE_ENOUGH_DATA) {
       const canvas = document.createElement("canvas");
@@ -129,7 +130,7 @@ export default function ZonaHerramientasClientPage() {
       }
     }
     scanLoopRef.current = requestAnimationFrame(scanLoop);
-  }, [handleSuccessfulScan]);
+  }, [handleSuccessfulScan, step]);
 
   const startCamera = async () => {
     setCameraError(false);
@@ -145,7 +146,9 @@ export default function ZonaHerramientasClientPage() {
       if (videoRef.current) {
         videoRef.current.srcObject = mediaStream;
       }
-      scanLoopRef.current = requestAnimationFrame(scanLoop);
+      if (step === "scanning") {
+        scanLoopRef.current = requestAnimationFrame(scanLoop);
+      }
     } catch (err) {
       console.error("Camera access error:", err);
       setCameraError(true);
@@ -176,6 +179,20 @@ export default function ZonaHerramientasClientPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isCameraActive]);
 
+  // Start/stop scanning loop based on step without restarting camera stream
+  useEffect(() => {
+    if (step === "scanning" && streamRef.current) {
+      if (!scanLoopRef.current) {
+        scanLoopRef.current = requestAnimationFrame(scanLoop);
+      }
+    } else {
+      if (scanLoopRef.current) {
+        cancelAnimationFrame(scanLoopRef.current);
+        scanLoopRef.current = null;
+      }
+    }
+  }, [step, scanLoop]);
+
   // Cleanup on unmount
   useEffect(() => {
     return () => {
@@ -186,9 +203,9 @@ export default function ZonaHerramientasClientPage() {
   const progressPercentage = Math.round((discoveredCount / 5) * 100);
 
   return (
-    <div className="flex flex-col min-h-dvh bg-slate-950 text-slate-100 dot-grid relative overflow-x-hidden">
+    <div className={`flex flex-col min-h-dvh text-slate-100 dot-grid relative overflow-x-hidden transition-colors duration-500 ${isCameraActive ? "bg-slate-950/20" : "bg-slate-950"}`}>
       
-      {/* BACKGROUND CAMERA (Active during scanning) */}
+      {/* BACKGROUND CAMERA (Active during scanning & viewing) */}
       <AnimatePresence>
         {isCameraActive && (
           <motion.div
@@ -203,7 +220,7 @@ export default function ZonaHerramientasClientPage() {
                 autoPlay
                 playsInline
                 muted
-                className="w-full h-full object-cover opacity-45"
+                className={`w-full h-full object-cover transition-opacity duration-500 ${step === "viewing" ? "opacity-85" : "opacity-45"}`}
               />
             ) : (
               <div className="w-full h-full flex flex-col items-center justify-center text-center p-6 text-slate-400 bg-slate-950">
@@ -234,7 +251,7 @@ export default function ZonaHerramientasClientPage() {
                 )}
               </div>
             )}
-            <div className="absolute inset-0 bg-gradient-to-b from-[#020617]/80 via-transparent to-[#020617]/95" />
+            <div className={`absolute inset-0 bg-gradient-to-b transition-colors duration-500 ${step === "viewing" ? "from-[#020617]/30 via-transparent to-[#020617]/70" : "from-[#020617]/80 via-transparent to-[#020617]/95"}`} />
           </motion.div>
         )}
       </AnimatePresence>
@@ -448,7 +465,7 @@ export default function ZonaHerramientasClientPage() {
               className="flex-grow flex flex-col justify-between pt-24 pb-6 w-full max-w-md mx-auto px-6 h-full min-h-[500px]"
             >
               {/* Inline 3D Model Box */}
-              <div className="relative w-full aspect-square max-w-sm mx-auto rounded-3xl border border-slate-800/80 bg-slate-950/70 overflow-hidden shadow-2xl flex items-center justify-center min-h-[280px] my-4">
+              <div className="relative w-full aspect-square max-w-sm mx-auto overflow-visible flex items-center justify-center min-h-[280px] my-4 bg-transparent">
                 {activeToolId !== 4 && (
                   <span className="absolute top-4 left-4 z-20 bg-yellow-500/90 text-slate-950 font-black text-[9px] px-2 py-0.5 rounded-full shadow-md animate-pulse">
                     🧪 Modo Demo (Estación Total)
