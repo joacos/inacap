@@ -166,10 +166,10 @@ export default function MindARViewer({
         <a-entity mindar-image-target="targetIndex: 0">
           <a-gltf-model
             src="#model-0"
-            position="0 0 0.1"
+            position="0 0 0"
             rotation="90 0 0"
-            scale="0.25 0.25 0.25"
-            animation="property: rotation; to: 90 360 0; loop: true; dur: 12000; easing: linear"
+            scale="6 6 6"
+            animation="property: rotation; to: 90 0 360; loop: true; dur: 12000; easing: linear"
           ></a-gltf-model>
         </a-entity>
 
@@ -177,10 +177,10 @@ export default function MindARViewer({
         <a-entity mindar-image-target="targetIndex: 1">
           <a-gltf-model
             src="#model-1"
-            position="0 0 0.1"
+            position="0 0 0"
             rotation="90 0 0"
-            scale="0.2 0.2 0.2"
-            animation="property: rotation; to: 90 360 0; loop: true; dur: 12000; easing: linear"
+            scale="5 5 5"
+            animation="property: rotation; to: 90 0 360; loop: true; dur: 12000; easing: linear"
           ></a-gltf-model>
         </a-entity>
 
@@ -188,10 +188,10 @@ export default function MindARViewer({
         <a-entity mindar-image-target="targetIndex: 2">
           <a-gltf-model
             src="#model-2"
-            position="0 0 0.1"
+            position="0 0 0"
             rotation="90 0 0"
-            scale="0.18 0.18 0.18"
-            animation="property: rotation; to: 90 360 0; loop: true; dur: 12000; easing: linear"
+            scale="4.5 4.5 4.5"
+            animation="property: rotation; to: 90 0 360; loop: true; dur: 12000; easing: linear"
           ></a-gltf-model>
         </a-entity>
 
@@ -199,10 +199,10 @@ export default function MindARViewer({
         <a-entity mindar-image-target="targetIndex: 3">
           <a-gltf-model
             src="#model-3"
-            position="0 0 0.1"
+            position="0 0 0"
             rotation="90 0 0"
-            scale="0.25 0.25 0.25"
-            animation="property: rotation; to: 90 360 0; loop: true; dur: 12000; easing: linear"
+            scale="6 6 6"
+            animation="property: rotation; to: 90 0 360; loop: true; dur: 12000; easing: linear"
           ></a-gltf-model>
         </a-entity>
 
@@ -210,10 +210,10 @@ export default function MindARViewer({
         <a-entity mindar-image-target="targetIndex: 4">
           <a-gltf-model
             src="#model-4"
-            position="0 0 0.1"
+            position="0 0 0"
             rotation="90 0 0"
-            scale="0.22 0.22 0.22"
-            animation="property: rotation; to: 90 360 0; loop: true; dur: 12000; easing: linear"
+            scale="5 5 5"
+            animation="property: rotation; to: 90 0 360; loop: true; dur: 12000; easing: linear"
           ></a-gltf-model>
         </a-entity>
       </a-scene>
