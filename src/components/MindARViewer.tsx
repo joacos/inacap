@@ -62,6 +62,78 @@ export default function MindARViewer({
         });
       }
 
+      // Register drag-rotate component
+      if ((window as any).AFRAME && !(window as any).AFRAME.components["drag-rotate-component"]) {
+        (window as any).AFRAME.registerComponent("drag-rotate-component", {
+          schema: { speed: { default: 2.0 } },
+          init: function () {
+            this.ifMouseDown = false;
+            this.x_cord = 0;
+            this.y_cord = 0;
+            
+            this.OnDocumentMouseDown = this.OnDocumentMouseDown.bind(this);
+            this.OnDocumentMouseUp = this.OnDocumentMouseUp.bind(this);
+            this.OnDocumentMouseMove = this.OnDocumentMouseMove.bind(this);
+            this.OnDocumentTouchStart = this.OnDocumentTouchStart.bind(this);
+            this.OnDocumentTouchEnd = this.OnDocumentTouchEnd.bind(this);
+            this.OnDocumentTouchMove = this.OnDocumentTouchMove.bind(this);
+
+            document.addEventListener("mousedown", this.OnDocumentMouseDown);
+            document.addEventListener("mouseup", this.OnDocumentMouseUp);
+            document.addEventListener("mousemove", this.OnDocumentMouseMove);
+            document.addEventListener("touchstart", this.OnDocumentTouchStart);
+            document.addEventListener("touchend", this.OnDocumentTouchEnd);
+            document.addEventListener("touchmove", this.OnDocumentTouchMove);
+          },
+          remove: function () {
+            document.removeEventListener("mousedown", this.OnDocumentMouseDown);
+            document.removeEventListener("mouseup", this.OnDocumentMouseUp);
+            document.removeEventListener("mousemove", this.OnDocumentMouseMove);
+            document.removeEventListener("touchstart", this.OnDocumentTouchStart);
+            document.removeEventListener("touchend", this.OnDocumentTouchEnd);
+            document.removeEventListener("touchmove", this.OnDocumentTouchMove);
+          },
+          OnDocumentMouseDown: function (event: any) {
+            this.ifMouseDown = true;
+            this.x_cord = event.clientX;
+            this.y_cord = event.clientY;
+          },
+          OnDocumentMouseUp: function () {
+            this.ifMouseDown = false;
+          },
+          OnDocumentMouseMove: function (event: any) {
+            if (this.ifMouseDown) {
+              const temp_x = event.clientX - this.x_cord;
+              const temp_y = event.clientY - this.y_cord;
+              this.el.object3D.rotation.y += (temp_x * this.data.speed) / 100;
+              this.el.object3D.rotation.x += (temp_y * this.data.speed) / 100;
+              this.x_cord = event.clientX;
+              this.y_cord = event.clientY;
+            }
+          },
+          OnDocumentTouchStart: function (event: any) {
+            if (event.touches.length > 0) {
+              this.ifMouseDown = true;
+              this.x_cord = event.touches[0].clientX;
+              this.y_cord = event.touches[0].clientY;
+            }
+          },
+          OnDocumentTouchEnd: function () {
+            this.ifMouseDown = false;
+          },
+          OnDocumentTouchMove: function (event: any) {
+            if (this.ifMouseDown && event.touches.length > 0) {
+              const temp_x = event.touches[0].clientX - this.x_cord;
+              const temp_y = event.touches[0].clientY - this.y_cord;
+              this.el.object3D.rotation.y += (temp_x * this.data.speed) / 100;
+              this.el.object3D.rotation.x += (temp_y * this.data.speed) / 100;
+              this.x_cord = event.touches[0].clientX;
+              this.y_cord = event.touches[0].clientY;
+            }
+          },
+        });
+      }
+
       if (active) setLoaded(true);
     };
 
@@ -169,7 +241,7 @@ export default function MindARViewer({
             position="0 0 0"
             rotation="90 0 0"
             scale="6 6 6"
-            animation="property: rotation; to: 90 0 360; loop: true; dur: 12000; easing: linear"
+            drag-rotate-component=""
           ></a-gltf-model>
         </a-entity>
 
@@ -180,7 +252,7 @@ export default function MindARViewer({
             position="0 0 0"
             rotation="90 0 0"
             scale="5 5 5"
-            animation="property: rotation; to: 90 0 360; loop: true; dur: 12000; easing: linear"
+            drag-rotate-component=""
           ></a-gltf-model>
         </a-entity>
 
@@ -191,7 +263,7 @@ export default function MindARViewer({
             position="0 0 0"
             rotation="90 0 0"
             scale="4.5 4.5 4.5"
-            animation="property: rotation; to: 90 0 360; loop: true; dur: 12000; easing: linear"
+            drag-rotate-component=""
           ></a-gltf-model>
         </a-entity>
 
@@ -202,7 +274,7 @@ export default function MindARViewer({
             position="0 0 0"
             rotation="90 0 0"
             scale="6 6 6"
-            animation="property: rotation; to: 90 0 360; loop: true; dur: 12000; easing: linear"
+            drag-rotate-component=""
           ></a-gltf-model>
         </a-entity>
 
@@ -213,7 +285,7 @@ export default function MindARViewer({
             position="0 0 0"
             rotation="90 0 0"
             scale="5 5 5"
-            animation="property: rotation; to: 90 0 360; loop: true; dur: 12000; easing: linear"
+            drag-rotate-component=""
           ></a-gltf-model>
         </a-entity>
       </a-scene>
