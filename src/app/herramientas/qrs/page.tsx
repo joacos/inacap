@@ -11,11 +11,38 @@ const FAMILIAS_HERRAMIENTAS = [
   { id: 5, nombre: "Familia de la Unión y Estructura", detalle: "Las Soldadoras" },
 ];
 
+const DISTINCT_HASHES = [
+  "A1B2C3D4E5F6G7H8",
+  "Z9Y8X7W6V5U4T3S2",
+  "M1N2O3P4Q5R6S7T8",
+  "L9K8J7I6H5G4F3E2",
+  "U1V2W3X4Y5Z6A7B8"
+];
+
 export default function QRGeneratorPage() {
   const [domain, setDomain] = useState("https://inacap60.todovirtual.cl");
 
   const handlePrint = () => {
     window.print();
+  };
+
+  const handleDownload = async (url: string, filename: string) => {
+    try {
+      const response = await fetch(url);
+      const blob = await response.blob();
+      const blobUrl = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = blobUrl;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(blobUrl);
+    } catch (e) {
+      console.error("Error downloading image", e);
+      // Fallback
+      window.open(url, "_blank");
+    }
   };
 
   return (
@@ -69,11 +96,12 @@ export default function QRGeneratorPage() {
 
       {/* Grid of QR Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl print:grid-cols-2 print:gap-6 print:max-w-none print:w-full z-10">
-        {FAMILIAS_HERRAMIENTAS.map((fam) => {
-          const scanUrl = `${domain}/herramientas?scan=${fam.id}`;
+        {FAMILIAS_HERRAMIENTAS.map((fam, index) => {
+          const hash = DISTINCT_HASHES[index];
+          const scanUrl = `${domain}/herramientas?scan=${fam.id}&hash=${hash}`;
           const qrCodeSrc = `https://quickchart.io/qr?text=${encodeURIComponent(
             scanUrl
-          )}&dotStyle=rounded&finderStyle=rounded&ecLevel=H&dark=1e40af&size=250`;
+          )}&dotStyle=rounded&finderStyle=rounded&ecLevel=H&dark=1e40af&size=1000`;
 
           return (
             <div
@@ -130,9 +158,20 @@ export default function QRGeneratorPage() {
                 Escanea para proyectar en AR
               </span>
               
-              <span className="mt-1 text-[8px] text-slate-600 print:text-slate-400">
+              <span className="mt-1 text-[8px] text-slate-600 print:text-slate-400 mb-4">
                 INACAP · Exposición 60 Años
               </span>
+
+              {/* Download Button */}
+              <button
+                onClick={() => handleDownload(qrCodeSrc, `qr_estacion_${fam.id}.png`)}
+                className="w-full mt-auto py-2.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 hover:border-slate-600 rounded-xl text-xs font-bold transition-all print:hidden flex items-center justify-center gap-2"
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" />
+                </svg>
+                Descargar QR
+              </button>
             </div>
           );
         })}
