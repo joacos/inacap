@@ -111,7 +111,7 @@ export default function NextCategoryCard({
     playBeep();
     stopCamera();
     setIsScanning(false);
-    window.location.href = `/zona/${targetZone}`;
+    window.location.href = `/${targetZone}`;
   };
 
   const handleSimulateScan = () => {
@@ -138,9 +138,9 @@ export default function NextCategoryCard({
           if (code) {
             const url = code.data;
             let detectedZone: ZonaKey | null = null;
-            if (url.includes("/zona/inacap")) detectedZone = "inacap";
-            else if (url.includes("/zona/construccion")) detectedZone = "construccion";
-            else if (url.includes("/zona/herramientas")) detectedZone = "herramientas";
+            if (url.includes("/inacap")) detectedZone = "inacap";
+            else if (url.includes("/construccion")) detectedZone = "construccion";
+            else if (url.includes("/herramientas")) detectedZone = "herramientas";
             
             // Allow redirect only to a different zone than the current one
             if (detectedZone && detectedZone !== zona) {

@@ -24,7 +24,7 @@ export default function QRGeneratorPage() {
       <div className="w-full max-w-4xl flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-10 print:hidden z-10">
         <div>
           <div className="flex items-center gap-3">
-            <Link href="/zona/herramientas" className="text-slate-400 hover:text-slate-100 transition-colors">
+            <Link href="/herramientas" className="text-slate-400 hover:text-slate-100 transition-colors">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M19 12H5M12 19l-7-7 7-7" />
               </svg>
@@ -70,45 +70,63 @@ export default function QRGeneratorPage() {
       {/* Grid of QR Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl print:grid-cols-2 print:gap-6 print:max-w-none print:w-full z-10">
         {FAMILIAS_HERRAMIENTAS.map((fam) => {
-          const scanUrl = `${domain}/zona/herramientas?scan=${fam.id}`;
-          const qrCodeSrc = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(
+          const scanUrl = `${domain}/herramientas?scan=${fam.id}`;
+          const qrCodeSrc = `https://quickchart.io/qr?text=${encodeURIComponent(
             scanUrl
-          )}`;
+          )}&dotStyle=rounded&finderStyle=rounded&ecLevel=H&dark=1e40af&size=250`;
 
           return (
             <div
               key={fam.id}
-              className="bg-slate-900/60 border border-slate-800/80 rounded-3xl p-6 md:p-8 flex flex-col items-center justify-center text-center shadow-lg relative print:bg-white print:border-slate-300 print:text-slate-900 print:shadow-none print:rounded-2xl print:page-break-inside-avoid print:p-4"
+              className="bg-slate-900/60 border border-slate-800/80 rounded-3xl p-6 md:p-8 flex flex-col items-center justify-center text-center shadow-lg relative overflow-hidden print:bg-white print:border-2 print:border-slate-200 print:text-slate-900 print:shadow-none print:rounded-3xl print:page-break-inside-avoid print:p-6"
             >
-              {/* Badge */}
-              <span className="bg-slate-950 border border-slate-800 text-[10px] font-bold text-slate-400 px-3 py-1 rounded-full mb-4 print:border-slate-300 print:bg-slate-100 print:text-slate-700">
+              {/* Institution Branding Red Top Bar */}
+              <div className="absolute top-0 left-0 right-0 h-1.5 bg-[#dc2626]" />
+
+              {/* Institution Logo Header */}
+              <img
+                src="/inacap60.png"
+                alt="Logo INACAP"
+                className="h-5 w-auto object-contain mb-3 opacity-90 print:mix-blend-multiply"
+              />
+
+              {/* Station Branded Badge */}
+              <span className="bg-inacap-blue/15 border border-inacap-blue-light/30 text-inacap-blue-light text-[9px] font-black uppercase tracking-widest px-3 py-1 rounded-full mb-3 print:bg-[#1e40af]/10 print:border-[#1e40af]/30 print:text-[#1e40af]">
                 Estación {fam.id}
               </span>
 
               {/* Title & Detail */}
-              <h3 className="text-sm font-extrabold text-slate-100 mb-1 max-w-[280px] print:text-slate-950">
+              <h3 className="text-sm font-extrabold text-slate-150 mb-1 max-w-[280px] print:text-slate-950 leading-snug">
                 {fam.nombre}
               </h3>
-              <p className="text-xs text-slate-400 font-medium mb-6 print:text-slate-650">
+              <p className="text-[11px] text-slate-400 font-semibold mb-5 print:text-slate-600">
                 {fam.detalle}
               </p>
 
-              {/* QR Image Wrapper */}
-              <div className="relative w-44 h-44 bg-slate-950 border border-slate-800/60 rounded-2xl flex items-center justify-center p-4 shadow-inner print:bg-white print:border-slate-200 print:shadow-none">
+              {/* QR Image Wrapper with Inacap blue accent borders */}
+              <div className="relative w-44 h-44 bg-slate-950 border border-slate-800/60 rounded-2xl flex items-center justify-center p-4 shadow-inner transition-transform hover:scale-[1.02] duration-300 print:bg-white print:border-2 print:border-slate-200 print:shadow-none">
                 <img
                   src={qrCodeSrc}
                   alt={`QR Estación ${fam.id}`}
                   className="w-full h-full object-contain print:mix-blend-multiply"
                 />
+                {/* Logo overlay in center */}
+                <div className="absolute w-9 h-9 bg-white rounded-lg p-1.5 flex items-center justify-center shadow-md border border-slate-100">
+                  <img
+                    src="/logo_inacap.png"
+                    alt="Logo INACAP"
+                    className="w-full h-full object-contain"
+                  />
+                </div>
               </div>
 
               {/* URL String */}
-              <span className="mt-5 text-[9px] font-mono text-slate-500 max-w-[260px] truncate print:text-slate-450 block">
+              <span className="mt-5 text-[8px] font-mono text-slate-500 max-w-[260px] truncate print:text-slate-450 block">
                 {scanUrl}
               </span>
 
               {/* Instruction */}
-              <span className="mt-3 text-[10px] font-bold text-inacap-blue-light uppercase tracking-wider print:text-slate-600">
+              <span className="mt-3 text-[10px] font-black text-inacap-blue-light uppercase tracking-wider print:text-[#1e40af]">
                 Escanea para proyectar en AR
               </span>
               

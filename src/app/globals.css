@@ -161,3 +161,28 @@ model-viewer {
   background-image: radial-gradient(circle, rgba(100, 116, 139, 0.15) 1px, transparent 1px);
   background-size: 24px 24px;
 }
+
+/* Force MindAR video feed and canvas to be centered and fill the screen */
+.mindar-viewer-container video,
+body > video[style*="position: absolute"] {
+  max-width: none !important;
+  max-height: none !important;
+  width: auto !important;
+  height: auto !important;
+  min-width: 100% !important;
+  min-height: 100% !important;
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  object-fit: cover !important;
+}
+
+.mindar-viewer-container .a-canvas {
+  width: 100% !important;
+  height: 100% !important;
+  left: 0 !important;
+  top: 0 !important;
+  position: absolute !important;
+}
+

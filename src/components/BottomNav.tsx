@@ -57,7 +57,7 @@ export default function BottomNav() {
           return (
             <Link
               key={zone.key}
-              href={`/zona/${zone.key}`}
+              href={`/${zone.key}`}
               className={`
                 relative flex flex-col items-center justify-center gap-1 px-4 py-2
                 transition-colors duration-300

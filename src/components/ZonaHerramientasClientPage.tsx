@@ -1,36 +1,31 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { exposicionData } from "@/data/exposicion";
 import { useProgress } from "@/hooks/useProgress";
-import ARViewer from "@/components/ARViewer";
 import AudioPlayer from "@/components/AudioPlayer";
+import dynamic from "next/dynamic";
 
-type FlowStep = "instructions" | "scanning" | "viewing";
+const MindARViewer = dynamic(() => import("@/components/MindARViewer"), {
+  ssr: false,
+});
+
+type FlowStep = "instructions" | "scanning";
 
 export default function ZonaHerramientasClientPage() {
   const hitos = exposicionData.herramientas;
   const [step, setStep] = useState<FlowStep>("instructions");
   
-  // Selected and viewing states
   const [activeToolId, setActiveToolId] = useState<number | null>(null);
   const [playingAudioId, setPlayingAudioId] = useState<number | null>(null);
-  const [cameraError, setCameraError] = useState(false);
-
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const streamRef = useRef<MediaStream | null>(null);
-  const scanLoopRef = useRef<number | null>(null);
 
   const { markVisited, isVisited } = useProgress();
 
   const discoveredTools = hitos.filter((h) => isVisited("herramientas", h.id));
   const discoveredCount = discoveredTools.length;
-  const allDiscovered = discoveredCount === 5;
-
-  // Camera should be active during "scanning" and "viewing" steps
-  const isCameraActive = step === "scanning" || step === "viewing";
+  const progressPercentage = Math.round((discoveredCount / 5) * 100);
 
   // Process query parameter (?scan=ID) on page load
   useEffect(() => {
@@ -42,7 +37,7 @@ export default function ZonaHerramientasClientPage() {
         if (idNum >= 1 && idNum <= 5) {
           markVisited("herramientas", idNum);
           setActiveToolId(idNum);
-          setStep("viewing");
+          setStep("scanning");
           // Clean URL
           const newUrl = window.location.pathname;
           window.history.replaceState({}, document.title, newUrl);
@@ -50,11 +45,6 @@ export default function ZonaHerramientasClientPage() {
       }
     }
   }, [markVisited]);
-
-  const handleOpenAR = (toolId: number) => {
-    setActiveToolId(toolId);
-    setStep("viewing");
-  };
 
   const handlePlayAudio = (toolId: number) => {
     if (playingAudioId === toolId) {
@@ -85,185 +75,20 @@ export default function ZonaHerramientasClientPage() {
     playBeep();
     markVisited("herramientas", toolId);
     setActiveToolId(toolId);
-    setStep("viewing");
   }, [markVisited]);
 
-  // QR Scanning Loop using jsQR loaded from layout
-  const scanLoop = useCallback(() => {
-    if (step !== "scanning") return;
-    const video = videoRef.current;
-    if (video && video.readyState === video.HAVE_ENOUGH_DATA) {
-      const canvas = document.createElement("canvas");
-      canvas.width = video.videoWidth;
-      canvas.height = video.videoHeight;
-      const context = canvas.getContext("2d");
-      if (context) {
-        context.drawImage(video, 0, 0, canvas.width, canvas.height);
-        const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-        
-        const jsQR = (window as any).jsQR;
-        if (jsQR) {
-          const code = jsQR(imageData.data, imageData.width, imageData.height, {
-            inversionAttempts: "dontInvert",
-          });
-          if (code) {
-            const decodedData = code.data;
-            try {
-              const parsedUrl = new URL(decodedData);
-              const scanId = parsedUrl.searchParams.get("scan");
-              if (scanId) {
-                const idNum = parseInt(scanId, 10);
-                if (idNum >= 1 && idNum <= 5) {
-                  handleSuccessfulScan(idNum);
-                  return;
-                }
-              }
-            } catch (e) {
-              const idNum = parseInt(decodedData, 10);
-              if (idNum >= 1 && idNum <= 5) {
-                handleSuccessfulScan(idNum);
-                return;
-              }
-            }
-          }
-        }
-      }
-    }
-    scanLoopRef.current = requestAnimationFrame(scanLoop);
-  }, [handleSuccessfulScan, step]);
-
-  const startCamera = async () => {
-    setCameraError(false);
-    try {
-      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-        throw new Error("Camera not supported or context is insecure");
-      }
-      const mediaStream = await navigator.mediaDevices.getUserMedia({
-        video: { facingMode: "environment" },
-        audio: false,
-      });
-      streamRef.current = mediaStream;
-      if (videoRef.current) {
-        videoRef.current.srcObject = mediaStream;
-      }
-      if (step === "scanning") {
-        scanLoopRef.current = requestAnimationFrame(scanLoop);
-      }
-    } catch (err) {
-      console.error("Camera access error:", err);
-      setCameraError(true);
-    }
-  };
-
-  const stopCamera = () => {
-    if (scanLoopRef.current) {
-      cancelAnimationFrame(scanLoopRef.current);
-      scanLoopRef.current = null;
-    }
-    if (streamRef.current) {
-      streamRef.current.getTracks().forEach((track) => track.stop());
-      streamRef.current = null;
-    }
-  };
-
-  // Sync camera state with view status
-  useEffect(() => {
-    if (isCameraActive) {
-      startCamera();
-      return () => {
-        stopCamera();
-      };
-    } else {
-      stopCamera();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isCameraActive]);
-
-  // Start/stop scanning loop based on step without restarting camera stream
-  useEffect(() => {
-    if (step === "scanning" && streamRef.current) {
-      if (!scanLoopRef.current) {
-        scanLoopRef.current = requestAnimationFrame(scanLoop);
-      }
-    } else {
-      if (scanLoopRef.current) {
-        cancelAnimationFrame(scanLoopRef.current);
-        scanLoopRef.current = null;
-      }
-    }
-  }, [step, scanLoop]);
-
-  // Cleanup on unmount
-  useEffect(() => {
-    return () => {
-      stopCamera();
-    };
-  }, []);
-
-  const progressPercentage = Math.round((discoveredCount / 5) * 100);
-
   return (
-    <div className={`flex flex-col min-h-dvh text-slate-100 dot-grid relative overflow-x-hidden transition-colors duration-500 ${isCameraActive ? "bg-slate-950/20" : "bg-slate-950"}`}>
+    <div className="flex flex-col min-h-dvh bg-slate-950 text-slate-100 dot-grid relative overflow-x-hidden">
       
-      {/* BACKGROUND CAMERA (Active during scanning & viewing) */}
-      <AnimatePresence>
-        {isCameraActive && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-0 bg-slate-950 pointer-events-none"
-          >
-            {!cameraError ? (
-              <video
-                ref={videoRef}
-                autoPlay
-                playsInline
-                muted
-                className={`w-full h-full object-cover transition-opacity duration-500 ${step === "viewing" ? "opacity-85" : "opacity-45"}`}
-              />
-            ) : (
-              <div className="w-full h-full flex flex-col items-center justify-center text-center p-6 text-slate-400 bg-slate-950">
-                <div className="w-12 h-12 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-500 mb-3">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                    <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
-                    <line x1="1" y1="1" x2="23" y2="23" />
-                  </svg>
-                </div>
-                {typeof window !== "undefined" && !window.isSecureContext ? (
-                  <div className="max-w-xs">
-                    <span className="text-xs font-bold text-yellow-500 block mb-1">
-                      ⚠️ Contexto Inseguro (HTTP)
-                    </span>
-                    <p className="text-[9px] text-slate-500 leading-relaxed">
-                      El navegador bloquea la cámara sobre HTTP. Accede desde <code className="bg-slate-900 px-1.5 py-0.5 rounded text-[8px]">localhost</code> o usa un túnel HTTPS (ej. Vercel) para probar el escaneo real en tu teléfono.
-                    </p>
-                  </div>
-                ) : (
-                  <div className="max-w-xs">
-                    <span className="text-xs font-bold text-slate-350 block mb-1">
-                      📷 Cámara no disponible
-                    </span>
-                    <p className="text-[9px] text-slate-500 leading-relaxed">
-                      Concede permisos en tu navegador o conecta una cámara. Puedes usar los botones de simulación de abajo para testear.
-                    </p>
-                  </div>
-                )}
-              </div>
-            )}
-            <div className={`absolute inset-0 bg-gradient-to-b transition-colors duration-500 ${step === "viewing" ? "from-[#020617]/30 via-transparent to-[#020617]/70" : "from-[#020617]/80 via-transparent to-[#020617]/95"}`} />
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* FIXED HEADER (Visible during scanning and viewing) */}
+      {/* FIXED HEADER (Visible during scanning) */}
       {step !== "instructions" && (
-        <header className="fixed top-0 left-0 right-0 z-40 px-6 pt-6 pb-4 bg-gradient-to-b from-slate-950 via-slate-950/80 to-transparent flex items-center justify-between">
-          <div className="flex items-center gap-3">
+        <header className="fixed top-0 left-0 right-0 z-40 px-6 pt-6 pb-4 bg-gradient-to-b from-slate-950 via-slate-950/80 to-transparent flex items-center justify-between pointer-events-none">
+          <div className="flex items-center gap-3 pointer-events-auto">
             <button
               onClick={() => {
                 setStep("instructions");
                 setActiveToolId(null);
+                setPlayingAudioId(null);
               }}
               className="text-slate-400 hover:text-slate-100 transition-colors w-8 h-8 rounded-xl bg-slate-900/60 border border-slate-800/40 flex items-center justify-center active:scale-95"
             >
@@ -285,7 +110,7 @@ export default function ZonaHerramientasClientPage() {
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="flex items-center gap-2.5 glass bg-slate-950/80 rounded-full px-3.5 py-1.5 border border-slate-800 shadow-lg"
+            className="flex items-center gap-2.5 glass bg-slate-950/80 rounded-full px-3.5 py-1.5 border border-slate-800 shadow-lg pointer-events-auto"
           >
             <div className="relative w-6 h-6 flex-shrink-0">
               <svg viewBox="0 0 36 36" className="w-full h-full -rotate-90">
@@ -343,10 +168,10 @@ export default function ZonaHerramientasClientPage() {
                 </div>
 
                 <h2 className="text-2xl font-black text-slate-100 tracking-tight">
-                  Instrucciones de Escaneo
+                  Realidad Aumentada
                 </h2>
                 <p className="text-xs text-slate-450 mt-2 max-w-xs leading-relaxed">
-                  Sigue estos simples pasos para desbloquear los modelos 3D y completar tu recorrido.
+                  Apunta tu cámara al código QR de la estación física para ver el modelo 3D directamente sobre él.
                 </p>
               </div>
 
@@ -357,9 +182,9 @@ export default function ZonaHerramientasClientPage() {
                     1
                   </div>
                   <div>
-                    <h3 className="text-xs font-bold text-slate-200">Busca los Códigos QR</h3>
+                    <h3 className="text-xs font-bold text-slate-200">Ubica la estación</h3>
                     <p className="text-[10px] text-slate-450 mt-1 leading-relaxed">
-                      Ubica los paneles con códigos QR de cada una de las 5 estaciones físicas en la exposición.
+                      Busca los paneles con códigos QR de cada una de las 5 estaciones físicas.
                     </p>
                   </div>
                 </div>
@@ -369,9 +194,9 @@ export default function ZonaHerramientasClientPage() {
                     2
                   </div>
                   <div>
-                    <h3 className="text-xs font-bold text-slate-200">Apunta con tu Cámara</h3>
+                    <h3 className="text-xs font-bold text-slate-200">Apunta el QR</h3>
                     <p className="text-[10px] text-slate-450 mt-1 leading-relaxed">
-                      Abre la cámara web integrada de la app y apunta al código QR para registrar tu avance.
+                      Alinea el código QR en el visor de la cámara. El modelo 3D aparecerá sobre el papel.
                     </p>
                   </div>
                 </div>
@@ -381,9 +206,9 @@ export default function ZonaHerramientasClientPage() {
                     3
                   </div>
                   <div>
-                    <h3 className="text-xs font-bold text-slate-200">Interactúa en AR</h3>
+                    <h3 className="text-xs font-bold text-slate-200">Escucha la guía</h3>
                     <p className="text-[10px] text-slate-450 mt-1 leading-relaxed">
-                      El modelo 3D aparecerá de inmediato en pantalla. Proyéctalo en Realidad Aumentada sobre tu entorno.
+                      Presiona el botón de audio para reproducir la audioguía histórica del hito.
                     </p>
                   </div>
                 </div>
@@ -398,42 +223,37 @@ export default function ZonaHerramientasClientPage() {
                   <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
                   <circle cx="12" cy="13" r="4" />
                 </svg>
-                Abrir Cámara
+                Iniciar Cámara AR
               </button>
             </motion.div>
           )}
 
-          {/* STEP 2: SCANNING VIEW (Completely Clean Full-Screen Camera) */}
+          {/* STEP 2: SCANNING & AR VIEW (MindAR Full Screen) */}
           {step === "scanning" && (
             <motion.div
               key="scanning"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="flex-grow flex flex-col justify-between pt-24 pb-6 w-full max-w-md mx-auto px-6 h-full min-h-[450px]"
+              className="absolute inset-0 z-0 flex flex-col justify-between"
             >
-              {/* Center Reticle Scope */}
-              <div className="flex-grow flex flex-col items-center justify-center my-auto">
-                <div className="relative w-52 h-52 border-2 border-dashed border-inacap-blue-light/70 rounded-3xl flex items-center justify-center">
-                  <motion.div
-                    initial={{ top: 0 }}
-                    animate={{ top: "100%" }}
-                    transition={{ duration: 1.8, repeat: Infinity, ease: "linear" }}
-                    className="absolute left-0 right-0 h-0.5 bg-inacap-blue-light shadow-[0_0_12px_rgba(59,130,246,0.6)] z-25"
-                  />
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="opacity-20 text-slate-100 animate-pulse">
-                    <path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2" />
-                  </svg>
-                </div>
-                
-                <span className="text-[10px] text-slate-350 bg-slate-950/80 px-4 py-2 rounded-full border border-slate-900 shadow-md mt-6 text-center font-bold tracking-wide">
-                  Apunta tu cámara al código QR de la estación
-                </span>
-              </div>
+              <MindARViewer
+                targetsUrl="/targets.mind"
+                onTargetFound={(index) => {
+                  const toolId = index + 1;
+                  handleSuccessfulScan(toolId);
+                }}
+                onTargetLost={() => {}}
+                onClose={() => {
+                  setStep("instructions");
+                  setActiveToolId(null);
+                  setPlayingAudioId(null);
+                }}
+              />
 
-              {/* Minimal bottom simulator trigger panel */}
-              <div className="mt-auto bg-slate-950/85 border border-slate-900/60 p-2.5 rounded-2xl flex items-center justify-between gap-3 shadow-2xl backdrop-blur-sm">
-                <span className="text-[8px] font-black text-slate-500 uppercase tracking-widest leading-none flex-shrink-0">
+              {/* Demo / Simulation trigger overlay for browser preview */}
+              <div className="absolute top-20 left-6 right-6 z-55 bg-slate-950/80 border border-slate-800 p-2.5 rounded-2xl flex items-center justify-between gap-3 shadow-2xl backdrop-blur-sm pointer-events-auto max-w-sm mx-auto">
+                <span className="text-[8px] font-black text-slate-400 uppercase tracking-widest leading-none flex-shrink-0">
                   Simular QR:
                 </span>
                 <div className="flex gap-1.5 flex-1 justify-end">
@@ -442,9 +262,9 @@ export default function ZonaHerramientasClientPage() {
                       key={id}
                       onClick={() => handleSuccessfulScan(id)}
                       className={`w-7 h-7 flex items-center justify-center rounded-lg border text-[10px] font-black transition-all active:scale-95 cursor-pointer ${
-                        isVisited("herramientas", id)
-                          ? "bg-emerald-500/10 border-emerald-500/35 text-emerald-400"
-                          : "bg-slate-900 border-slate-850 text-slate-400 hover:bg-slate-800"
+                        activeToolId === id
+                          ? "bg-inacap-blue/20 border-inacap-blue-light/50 text-inacap-blue-light"
+                          : "bg-slate-900 border-slate-800 text-slate-400 hover:bg-slate-850"
                       }`}
                     >
                       {id}
@@ -452,106 +272,74 @@ export default function ZonaHerramientasClientPage() {
                   ))}
                 </div>
               </div>
-            </motion.div>
-          )}
 
-          {/* STEP 3: VIEWING THE 3D MODEL INLINE (Fixed on Screen) */}
-          {step === "viewing" && activeToolId !== null && (
-            <motion.div
-              key="viewing"
-              initial={{ opacity: 0, scale: 0.98 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.98 }}
-              className="flex-grow flex flex-col justify-between pt-24 pb-6 w-full max-w-md mx-auto px-6 h-full min-h-[500px]"
-            >
-              {/* Inline 3D Model Box */}
-              <div className="relative w-full aspect-square max-w-sm mx-auto overflow-visible flex items-center justify-center min-h-[280px] my-4 bg-transparent">
-                {activeToolId !== 4 && (
-                  <span className="absolute top-4 left-4 z-20 bg-yellow-500/90 text-slate-950 font-black text-[9px] px-2 py-0.5 rounded-full shadow-md animate-pulse">
-                    🧪 Modo Demo (Estación Total)
-                  </span>
-                )}
-                
-                {/* Embedded direct model-viewer to show model immediately */}
-                <div className="w-full h-full relative">
-                  <model-viewer
-                    src={hitos[activeToolId - 1].modelo3dUrl || "/estacion_total.glb"}
-                    alt={hitos[activeToolId - 1].titulo}
-                    ar
-                    ar-modes="webxr scene-viewer quick-look"
-                    camera-controls
-                    auto-rotate
-                    shadow-intensity="1"
-                    loading="lazy"
-                    style={{ width: "100%", height: "100%", background: "transparent" }}
-                  >
-                    <button
-                      slot="ar-button"
-                      className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 bg-inacap-blue hover:bg-inacap-blue-light text-white font-extrabold text-[10px] rounded-full px-4 py-2.5 glow-blue transition-all duration-300 active:scale-95 flex items-center gap-1.5 shadow-lg border border-inacap-blue-light/25 cursor-pointer"
-                    >
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                        <path d="M12 2L2 7l10 5 10-5-10-5z" />
-                        <path d="M2 17l10 5 10-5" />
-                        <path d="M2 12l10 5 10-5" />
-                      </svg>
-                      Proyectar en AR 🚀
-                    </button>
-                  </model-viewer>
+              {/* HUD detail card overlay when target QR code is tracked */}
+              {activeToolId !== null && (
+                <div className="absolute bottom-6 left-6 right-6 z-55 max-w-sm mx-auto pointer-events-auto">
+                  <div className="bg-slate-900/90 border border-slate-850 p-5 rounded-3xl shadow-2xl flex flex-col backdrop-blur-md">
+                    <div className="flex items-center justify-between gap-3 mb-2">
+                      <span className="bg-inacap-blue text-white font-extrabold text-[9px] px-2 py-0.5 rounded-full border border-inacap-blue-light/20">
+                        Hito {activeToolId} · {hitos[activeToolId - 1].anio}
+                      </span>
+
+                      {/* Audio Guide trigger */}
+                      <button
+                        onClick={() => handlePlayAudio(activeToolId)}
+                        className={`flex items-center justify-center w-8 h-8 rounded-lg border transition-all duration-300 active:scale-95 cursor-pointer ${
+                          playingAudioId === activeToolId
+                            ? "bg-emerald-500/20 text-emerald-400 border-emerald-500/40"
+                            : "bg-slate-950 border-slate-800 text-slate-400 hover:text-slate-200"
+                        }`}
+                      >
+                        {playingAudioId === activeToolId ? (
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="animate-pulse">
+                            <path d="M11 5L6 9H2v6h4l5 4V5z" />
+                            <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+                            <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+                          </svg>
+                        ) : (
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <path d="M11 5L6 9H2v6h4l5 4V5z" />
+                            <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+                          </svg>
+                        )}
+                      </button>
+                    </div>
+
+                    <h3 className="text-base font-extrabold text-slate-100 mb-1 leading-snug">
+                      {hitos[activeToolId - 1].titulo}
+                    </h3>
+                    <p className="text-xs text-slate-400 leading-relaxed">
+                      {hitos[activeToolId - 1].descripcion}
+                    </p>
+
+                    <div className="flex gap-2.5 mt-4">
+                      {/* Button to clear current active hito */}
+                      <button
+                        onClick={() => {
+                          setActiveToolId(null);
+                          setPlayingAudioId(null);
+                        }}
+                        className="flex-1 py-2.5 rounded-xl bg-slate-950 hover:bg-slate-900 text-slate-450 hover:text-slate-200 text-[10px] font-bold border border-slate-850 transition-all active:scale-95 cursor-pointer"
+                      >
+                        Ocultar Detalle
+                      </button>
+                      <button
+                        onClick={() => {
+                          setActiveToolId(null);
+                          setPlayingAudioId(null);
+                        }}
+                        className="flex-1 py-2.5 rounded-xl bg-inacap-blue hover:bg-inacap-blue-light text-slate-50 text-[10px] font-extrabold border border-inacap-blue-light/20 transition-all active:scale-95 cursor-pointer flex items-center justify-center gap-1"
+                      >
+                        <span>Escanear Otro</span>
+                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className="animate-pulse">
+                          <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
                 </div>
-              </div>
-
-              {/* Description Card */}
-              <div className="bg-slate-900/90 border border-slate-850 p-5 rounded-3xl shadow-xl flex flex-col">
-                <div className="flex items-center justify-between gap-3 mb-2">
-                  <span className="bg-inacap-blue text-white font-extrabold text-[9px] px-2 py-0.5 rounded-full border border-inacap-blue-light/20">
-                    Hito {activeToolId} · {hitos[activeToolId - 1].anio}
-                  </span>
-
-                  {/* Audio Guide trigger */}
-                  <button
-                    onClick={() => handlePlayAudio(activeToolId)}
-                    className={`flex items-center justify-center w-8 h-8 rounded-lg border transition-all duration-300 active:scale-95 cursor-pointer ${
-                      playingAudioId === activeToolId
-                        ? "bg-emerald-500/20 text-emerald-400 border-emerald-500/40"
-                        : "bg-slate-950 border-slate-800 text-slate-400 hover:text-slate-200"
-                    }`}
-                  >
-                    {playingAudioId === activeToolId ? (
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="animate-pulse">
-                        <path d="M11 5L6 9H2v6h4l5 4V5z" />
-                        <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
-                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
-                      </svg>
-                    ) : (
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M11 5L6 9H2v6h4l5 4V5z" />
-                        <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
-                      </svg>
-                    )}
-                  </button>
-                </div>
-
-                <h3 className="text-base font-extrabold text-slate-100 mb-1 leading-snug">
-                  {hitos[activeToolId - 1].titulo}
-                </h3>
-                <p className="text-xs text-slate-400 leading-relaxed">
-                  {hitos[activeToolId - 1].descripcion}
-                </p>
-
-                {/* Continue button inviting to scan the next one */}
-                <button
-                  onClick={() => {
-                    setStep("scanning");
-                    setActiveToolId(null);
-                  }}
-                  className="mt-5 w-full py-3.5 rounded-xl bg-inacap-blue hover:bg-inacap-blue-light text-slate-50 text-xs font-extrabold transition-all duration-300 active:scale-95 glow-blue shadow-lg border border-inacap-blue-light/20 flex items-center justify-center gap-2 cursor-pointer"
-                >
-                  <span>Cerrar 3D y Escanear Siguiente</span>
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="animate-bounce-horizontal">
-                    <path d="M5 12h14M12 5l7 7-7 7" />
-                  </svg>
-                </button>
-              </div>
+              )}
             </motion.div>
           )}
 

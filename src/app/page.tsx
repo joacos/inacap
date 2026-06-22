@@ -23,7 +23,7 @@ export default function Home() {
       {/* Zone Cards */}
       <div className="flex flex-col gap-4 w-full max-w-sm">
         <Link
-          href="/zona/inacap"
+          href="/inacap"
           className="group relative glass-elevated rounded-2xl p-5 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
           id="zone-link-inacap"
         >
@@ -50,7 +50,7 @@ export default function Home() {
         </Link>
 
         <Link
-          href="/zona/construccion"
+          href="/construccion"
           className="group relative glass-elevated rounded-2xl p-5 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
           id="zone-link-construccion"
         >
@@ -80,7 +80,7 @@ export default function Home() {
         </Link>
 
         <Link
-          href="/zona/herramientas"
+          href="/herramientas"
           className="group relative glass-elevated rounded-2xl p-5 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
           id="zone-link-herramientas"
         >
