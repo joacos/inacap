@@ -19,6 +19,7 @@ export default function ZonaHerramientasClientPage() {
   
   const [activeToolId, setActiveToolId] = useState<number | null>(null);
   const [showToolDetail, setShowToolDetail] = useState(false);
+  const [showHistoryDrawer, setShowHistoryDrawer] = useState(false);
 
   const { markVisited, isVisited } = useProgress();
 
@@ -72,10 +73,10 @@ export default function ZonaHerramientasClientPage() {
   return (
     <div className="flex flex-col min-h-dvh bg-slate-950 text-slate-100 dot-grid relative overflow-x-hidden">
       
-      {/* FIXED HEADER (Visible during scanning) */}
-      {step !== "instructions" && (
-        <header className="fixed top-0 left-0 right-0 z-40 px-6 pt-6 pb-4 bg-gradient-to-b from-slate-950 via-slate-950/80 to-transparent flex items-center justify-between pointer-events-none">
-          <div className="flex items-center gap-3 pointer-events-auto">
+      {/* FIXED HEADER (Always Visible) */}
+      <header className="fixed top-0 left-0 right-0 z-40 px-6 pt-6 pb-4 bg-gradient-to-b from-slate-950 via-slate-950/80 to-transparent flex items-center justify-between pointer-events-none">
+        <div className="flex items-center gap-3 pointer-events-auto">
+          {step === "scanning" ? (
             <button
               onClick={() => {
                 setStep("instructions");
@@ -87,56 +88,66 @@ export default function ZonaHerramientasClientPage() {
                 <path d="M19 12H5M12 19l-7-7 7-7" />
               </svg>
             </button>
-            <div>
-              <h1 className="text-xs font-black text-slate-200 leading-none">
-                Zona Herramientas
-              </h1>
-              <span className="text-[9px] text-slate-500 font-bold uppercase tracking-widest mt-0.5 block">
-                Exposición 60 Años
-              </span>
-            </div>
-          </div>
-
-          {/* Tools Circular Progress Indicator */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="flex items-center gap-2.5 glass bg-slate-950/80 rounded-full px-3.5 py-1.5 border border-slate-800 shadow-lg pointer-events-auto"
-          >
-            <div className="relative w-6 h-6 flex-shrink-0">
-              <svg viewBox="0 0 36 36" className="w-full h-full -rotate-90">
-                <circle
-                  cx="18"
-                  cy="18"
-                  r="15"
-                  fill="none"
-                  stroke="rgba(100, 116, 139, 0.15)"
-                  strokeWidth="4"
-                />
-                <motion.circle
-                  cx="18"
-                  cy="18"
-                  r="15"
-                  fill="none"
-                  stroke="#3b82f6"
-                  strokeWidth="4"
-                  strokeLinecap="round"
-                  strokeDasharray={`${progressPercentage * 0.942} 100`}
-                  initial={{ strokeDasharray: "0 100" }}
-                  animate={{ strokeDasharray: `${progressPercentage * 0.942} 100` }}
-                  transition={{ duration: 0.8, ease: "easeOut" }}
-                />
+          ) : (
+            <Link
+              href="/"
+              className="text-slate-400 hover:text-slate-100 transition-colors w-8 h-8 rounded-xl bg-slate-900/60 border border-slate-800/40 flex items-center justify-center active:scale-95"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <path d="M19 12H5M12 19l-7-7 7-7" />
               </svg>
-              <span className="absolute inset-0 flex items-center justify-center text-[7px] font-black text-slate-350">
-                {discoveredCount}
-              </span>
-            </div>
-            <span className="text-[10px] font-black text-slate-250">
-              {discoveredCount} / 5
+            </Link>
+          )}
+          <div>
+            <h1 className="text-xs font-black text-slate-200 leading-none">
+              Zona Herramientas
+            </h1>
+            <span className="text-[9px] text-slate-500 font-bold uppercase tracking-widest mt-0.5 block">
+              Exposición 60 Años
             </span>
-          </motion.div>
-        </header>
-      )}
+          </div>
+        </div>
+
+        {/* Tools Circular Progress Indicator */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          onClick={() => setShowHistoryDrawer(true)}
+          className="flex items-center gap-2.5 glass bg-slate-950/80 rounded-full px-3.5 py-1.5 border border-slate-800 hover:border-slate-700 shadow-lg pointer-events-auto cursor-pointer active:scale-95 transition-all"
+        >
+          <div className="relative w-6 h-6 flex-shrink-0">
+            <svg viewBox="0 0 36 36" className="w-full h-full -rotate-90">
+              <circle
+                cx="18"
+                cy="18"
+                r="15"
+                fill="none"
+                stroke="rgba(100, 116, 139, 0.15)"
+                strokeWidth="4"
+              />
+              <motion.circle
+                cx="18"
+                cy="18"
+                r="15"
+                fill="none"
+                stroke="#3b82f6"
+                strokeWidth="4"
+                strokeLinecap="round"
+                strokeDasharray={`${progressPercentage * 0.942} 100`}
+                initial={{ strokeDasharray: "0 100" }}
+                animate={{ strokeDasharray: `${progressPercentage * 0.942} 100` }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+              />
+            </svg>
+            <span className="absolute inset-0 flex items-center justify-center text-[7px] font-black text-slate-350">
+              {discoveredCount}
+            </span>
+          </div>
+          <span className="text-[10px] font-black text-slate-250">
+            {discoveredCount} / 5
+          </span>
+        </motion.div>
+      </header>
 
       {/* VIEWPORT CONTROLLER */}
       <div className="relative z-10 flex-grow flex flex-col">
@@ -149,7 +160,7 @@ export default function ZonaHerramientasClientPage() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -15 }}
-              className="flex-grow flex flex-col justify-between px-6 py-10 max-w-sm mx-auto w-full"
+              className="flex-grow flex flex-col justify-between px-6 pt-24 pb-10 max-w-sm mx-auto w-full"
             >
               <div className="flex flex-col items-center text-center mt-6">
                 <div className="relative flex items-center justify-center w-20 h-20 rounded-2xl mb-6 border border-inacap-blue-light/35 bg-inacap-blue/15 shadow-[0_0_20px_rgba(59,130,246,0.3)]">
@@ -399,6 +410,112 @@ export default function ZonaHerramientasClientPage() {
             </motion.div>
           )}
 
+        </AnimatePresence>
+
+        {/* Scanned Tools History Drawer */}
+        <AnimatePresence>
+          {showHistoryDrawer && (
+            <>
+              {/* Backdrop */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setShowHistoryDrawer(false)}
+                className="fixed inset-0 z-[75] bg-slate-950/70 backdrop-blur-sm cursor-pointer"
+              />
+              
+              {/* Drawer */}
+              <motion.div
+                initial={{ y: "100%" }}
+                animate={{ y: 0 }}
+                exit={{ y: "100%" }}
+                transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                className="fixed inset-x-0 bottom-0 z-[80] max-h-[80vh] w-full max-w-lg mx-auto flex flex-col rounded-t-[2rem] bg-slate-900 border-x border-t border-slate-700/50 shadow-[0_-10px_40px_rgba(0,0,0,0.5)] overflow-hidden"
+              >
+                {/* Header */}
+                <div className="flex-shrink-0 pt-3 pb-4 px-6 bg-slate-900 sticky top-0 z-10 border-b border-slate-800/80">
+                  <div className="w-12 h-1.5 mx-auto bg-slate-700 rounded-full mb-4" />
+                  <div className="flex justify-between items-center">
+                    <div>
+                      <h3 className="text-base font-extrabold text-slate-100">
+                        Estaciones Escaneadas
+                      </h3>
+                      <p className="text-[10px] text-slate-450 mt-0.5 font-bold uppercase tracking-wider">
+                        Progreso: {discoveredCount} de 5 completadas
+                      </p>
+                    </div>
+                    <button 
+                      onClick={() => setShowHistoryDrawer(false)}
+                      className="p-2 rounded-full bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700 transition-colors cursor-pointer active:scale-95"
+                    >
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                        <path d="M18 6L6 18M6 6l12 12" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div className="flex-1 overflow-y-auto px-6 py-6 pb-12 space-y-4 scrollbar-hide">
+                  {hitos.map((tool) => {
+                    const visited = isVisited("herramientas", tool.id);
+                    return (
+                      <div 
+                        key={tool.id}
+                        className={`p-4 rounded-2xl border transition-all ${
+                          visited 
+                            ? "bg-slate-850/60 border-slate-800/80" 
+                            : "bg-slate-900/30 border-slate-900/50 opacity-60"
+                        }`}
+                      >
+                        <div className="flex justify-between items-start gap-4">
+                          <div className="min-w-0">
+                            <span className={`text-[9px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full mb-1.5 inline-block ${
+                              visited 
+                                ? "bg-inacap-blue/20 text-inacap-blue-light border border-inacap-blue-light/20" 
+                                : "bg-slate-950 text-slate-500 border border-slate-900"
+                            }`}>
+                              Estación {tool.id}
+                            </span>
+                            <h4 className={`text-xs font-bold truncate ${visited ? "text-slate-200" : "text-slate-500"}`}>
+                              {visited ? tool.titulo : "Estación Bloqueada"}
+                            </h4>
+                            <p className="text-[10px] text-slate-450 mt-0.5 truncate">
+                              {visited ? tool.descripcion : "Escanea el código QR de esta estación física para desbloquear."}
+                            </p>
+                          </div>
+
+                          <div className="flex-shrink-0">
+                            {visited ? (
+                              <button
+                                onClick={() => {
+                                  setShowHistoryDrawer(false);
+                                  setActiveToolId(tool.id);
+                                  setStep("scanning");
+                                  setShowToolDetail(true);
+                                }}
+                                className="px-3 py-1.5 rounded-lg bg-inacap-blue hover:bg-inacap-blue-light text-slate-50 text-[10px] font-black transition-all active:scale-95 cursor-pointer flex items-center gap-1 shadow-md border border-inacap-blue-light/15"
+                              >
+                                Ver AR 🚀
+                              </button>
+                            ) : (
+                              <div className="p-2 rounded-lg bg-slate-950 border border-slate-900 text-slate-650 flex items-center justify-center">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                                  <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                                </svg>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </motion.div>
+            </>
+          )}
         </AnimatePresence>
       </div>
     </div>
