@@ -79,6 +79,9 @@ export default function ARViewer({ src, alt, poster }: ARViewerProps) {
 
   const playBeep = () => {
     try {
+      if (typeof window !== "undefined" && localStorage.getItem("inacap60_audio_muted") === "true") {
+        return;
+      }
       const AudioCtx = window.AudioContext || (window as any).webkitAudioContext;
       if (!AudioCtx) return;
       const audioCtx = new AudioCtx();

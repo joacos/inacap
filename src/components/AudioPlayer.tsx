@@ -23,9 +23,11 @@ export default function AudioPlayer({ audioUrl, title, autoPlay = false }: Audio
     currentTime,
     duration,
     isLoading,
+    isMuted,
     loadTrack,
     togglePlay,
     seek,
+    toggleMute,
   } = useAudioPlayer(autoPlay);
 
   useEffect(() => {
@@ -129,6 +131,28 @@ export default function AudioPlayer({ audioUrl, title, autoPlay = false }: Audio
               </span>
             </div>
           </div>
+
+          {/* Mute button */}
+          <button
+            onClick={toggleMute}
+            className="flex-shrink-0 w-9 h-9 rounded-full bg-slate-900 border border-slate-800 text-slate-400 hover:text-slate-200 flex items-center justify-center transition-all active:scale-95 cursor-pointer"
+            aria-label={isMuted ? "Activar sonido" : "Mutear sonido"}
+            id="audio-mute-btn"
+          >
+            {isMuted ? (
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                <line x1="23" y1="9" x2="17" y2="15" />
+                <line x1="17" y1="9" x2="23" y2="15" />
+              </svg>
+            ) : (
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+                <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+              </svg>
+            )}
+          </button>
         </div>
       </motion.div>
     </AnimatePresence>

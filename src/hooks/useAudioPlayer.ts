@@ -9,10 +9,14 @@ export function useAudioPlayer(autoPlay: boolean = false) {
   const [duration, setDuration] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [currentUrl, setCurrentUrl] = useState<string | null>(null);
+  const [isMuted, setIsMuted] = useState(false);
 
   useEffect(() => {
     const audio = new Audio();
     audio.preload = "metadata";
+    const storedMute = typeof window !== "undefined" && localStorage.getItem("inacap60_audio_muted") === "true";
+    audio.muted = storedMute;
+    setIsMuted(storedMute);
     audioRef.current = audio;
 
     const onTimeUpdate = () => setCurrentTime(audio.currentTime);
@@ -54,6 +58,9 @@ export function useAudioPlayer(autoPlay: boolean = false) {
     setCurrentUrl(url);
 
     audio.src = url;
+    const storedMute = typeof window !== "undefined" && localStorage.getItem("inacap60_audio_muted") === "true";
+    audio.muted = storedMute;
+    setIsMuted(storedMute);
     audio.load();
 
     if (autoPlay) {
@@ -99,16 +106,31 @@ export function useAudioPlayer(autoPlay: boolean = false) {
     }
   }, [isPlaying, pause, play]);
 
+  const toggleMute = useCallback(() => {
+    setIsMuted((prev) => {
+      const next = !prev;
+      if (typeof window !== "undefined") {
+        localStorage.setItem("inacap60_audio_muted", String(next));
+      }
+      if (audioRef.current) {
+        audioRef.current.muted = next;
+      }
+      return next;
+    });
+  }, []);
+
   return {
     isPlaying,
     currentTime,
     duration,
     isLoading,
     currentUrl,
+    isMuted,
     loadTrack,
     play,
     pause,
     seek,
     togglePlay,
+    toggleMute,
   };
 }
