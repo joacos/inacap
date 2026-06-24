@@ -191,29 +191,11 @@ export default function ZonaClientPage({ zona }: ZonaClientPageProps) {
           )}
 
           {/* Audio Player */}
-          {activeId !== 11 && (
-            (() => {
-              let audioUrl = activeHito.audioUrl;
-              let title = activeHito.titulo;
-              
-              if (viewMode === "local" && activeHito.local) {
-                audioUrl = activeHito.local.audioUrl || "";
-                title = activeHito.local.titulo;
-              } else if (viewMode === "carreras" && activeHito.carreras) {
-                // Carreras doesn't have audioUrl by default, fallback to general if any or empty
-                audioUrl = ""; 
-                title = activeHito.carreras.titulo;
-              }
-
-              if (!audioUrl) return null;
-
-              return (
-                <AudioPlayer
-                  audioUrl={audioUrl}
-                  title={title}
-                />
-              );
-            })()
+          {activeId !== 11 && activeHito.audioUrl && (
+            <AudioPlayer
+              audioUrl={activeHito.audioUrl}
+              title={activeHito.titulo}
+            />
           )}
 
           {/* Onboarding Interactive Guide Overlay */}
