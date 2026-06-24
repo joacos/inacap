@@ -1,7 +1,7 @@
 const ftp = require("basic-ftp");
 
 async function deploy() {
-  const host = process.env.FTP_SERVER;
+  let host = process.env.FTP_SERVER;
   const user = process.env.FTP_USERNAME;
   const password = process.env.FTP_PASSWORD;
 
@@ -10,13 +10,30 @@ async function deploy() {
     process.exit(1);
   }
 
+  let defaultPort = 21;
+  // Strip protocol prefix if any
+  const protoMatch = host.match(/^(ftp|ftps):\/\/(.*)$/i);
+  if (protoMatch) {
+    host = protoMatch[2];
+  }
+  // Extract port if specified
+  const portMatch = host.match(/^(.*):(\d+)$/);
+  if (portMatch) {
+    host = portMatch[1];
+    defaultPort = parseInt(portMatch[2], 10);
+  }
+  // Strip trailing paths
+  host = host.split("/")[0].trim();
+
+  console.log(`Parsed FTP server: ${host} on default port ${defaultPort}`);
+
   // Try multiple connection strategies in order
   const strategies = [
     {
-      name: "Explicit FTPS (AUTH TLS on port 21)",
+      name: `Explicit FTPS (AUTH TLS on port ${defaultPort})`,
       options: {
         host,
-        port: 21,
+        port: defaultPort,
         user,
         password,
         secure: true,
@@ -24,10 +41,10 @@ async function deploy() {
       },
     },
     {
-      name: "Plain FTP (no TLS on port 21)",
+      name: `Plain FTP (no TLS on port ${defaultPort})`,
       options: {
         host,
-        port: 21,
+        port: defaultPort,
         user,
         password,
         secure: false,

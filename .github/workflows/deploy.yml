@@ -24,6 +24,19 @@ jobs:
       - name: Build Next.js
         run: npm run build
 
+      - name: Debug FTP Connection
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+        run: |
+          CLEAN_HOST=$(echo "$FTP_SERVER" | sed -E 's|^(ftp\|ftps)://||' | cut -d'/' -f1 | cut -d':' -f1)
+          echo "Cleaned host is: $CLEAN_HOST"
+          echo "=== DNS Lookup ==="
+          nslookup "$CLEAN_HOST" || echo "DNS lookup failed"
+          echo "=== Check Port 21 (FTP/Explicit FTPS) ==="
+          nc -zvw10 "$CLEAN_HOST" 21 || echo "Port 21 is blocked or closed"
+          echo "=== Check Port 990 (Implicit FTPS) ==="
+          nc -zvw10 "$CLEAN_HOST" 990 || echo "Port 990 is blocked or closed"
+
       - name: Deploy via basic-ftp
         env:
           FTP_SERVER: ${{ secrets.FTP_SERVER }}
