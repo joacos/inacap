@@ -269,111 +269,71 @@ export default function HitoContent({ hito, zona, direction, viewMode = "naciona
       </AnimatePresence>
       </div>
       
-      {/* Related project modal */}
+      {/* Bottom Sheet Drawer for Obras */}
       <AnimatePresence>
         {showObra && obrasArray.length > 0 && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-6 bg-slate-950/80 backdrop-blur-md"
-          >
+          <>
+            {/* Backdrop */}
             <motion.div
-              initial={{ scale: 0.95, y: 20, opacity: 0 }}
-              animate={{ scale: 1, y: 0, opacity: 1 }}
-              exit={{ scale: 0.95, y: 20, opacity: 0 }}
-              transition={{ type: "spring", damping: 25, stiffness: 350 }}
-              className="relative w-full max-w-sm rounded-3xl glass-elevated border border-slate-700/40 overflow-hidden shadow-2xl"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setShowObra(false)}
+              className="fixed inset-0 z-40 bg-slate-950/70 backdrop-blur-sm cursor-pointer"
+            />
+            
+            {/* Drawer */}
+            <motion.div
+              initial={{ y: "100%" }}
+              animate={{ y: 0 }}
+              exit={{ y: "100%" }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              className="fixed inset-x-0 bottom-0 z-50 max-h-[85vh] flex flex-col rounded-t-[2rem] bg-slate-900 border-t border-slate-700/50 shadow-[0_-10px_40px_rgba(0,0,0,0.5)] overflow-hidden"
             >
-              {/* Image banner */}
-              <div className="relative w-full h-40 overflow-hidden bg-slate-900 group">
-                <AnimatePresence mode="wait">
-                  <motion.img
-                    key={obraIndex}
-                    src={obrasArray[obraIndex].imagenUrl}
-                    alt={obrasArray[obraIndex].nombre}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="w-full h-full object-cover absolute inset-0"
-                  />
-                </AnimatePresence>
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent z-10" />
-                
-                {/* Carousel Controls */}
-                {obrasArray.length > 1 && (
-                  <>
-                    <button
-                      onClick={() => setObraIndex((prev) => (prev - 1 + obrasArray.length) % obrasArray.length)}
-                      className="absolute left-2 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-slate-950/70 border border-slate-800 text-slate-350 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:text-white hover:bg-slate-900 active:scale-95 z-20"
-                    >
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                        <path d="M15 19l-7-7 7-7" />
-                      </svg>
-                    </button>
-                    <button
-                      onClick={() => setObraIndex((prev) => (prev + 1) % obrasArray.length)}
-                      className="absolute right-2 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-slate-950/70 border border-slate-800 text-slate-350 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:text-white hover:bg-slate-900 active:scale-95 z-20"
-                    >
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                        <path d="M9 5l7 7-7 7" />
-                      </svg>
-                    </button>
-                  </>
-                )}
-                
-                {/* Year badge on top of image */}
-                <div className="absolute top-4 left-4 z-20 bg-inacap-red/90 text-white font-bold text-xs px-2.5 py-1 rounded-full border border-inacap-red-light/30 shadow-lg">
-                  {obrasArray[obraIndex].anio}
+              {/* Drag Handle & Header */}
+              <div className="flex-shrink-0 pt-3 pb-4 px-6 bg-slate-900 sticky top-0 z-10 border-b border-slate-800/80">
+                <div className="w-12 h-1.5 mx-auto bg-slate-700 rounded-full mb-4" />
+                <div className="flex justify-between items-center">
+                  <h3 className="text-lg font-bold text-slate-100">Obras Emblemáticas</h3>
+                  <button 
+                    onClick={() => setShowObra(false)}
+                    className="p-2 rounded-full bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700 transition-colors cursor-pointer"
+                  >
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                      <path d="M18 6L6 18M6 6l12 12" />
+                    </svg>
+                  </button>
                 </div>
               </div>
 
-              {/* Content */}
-              <div className="p-6">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={obraIndex}
-                    initial={{ opacity: 0, y: 5 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -5 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <h4 className="text-base font-extrabold text-slate-100 mb-2 leading-snug">
-                      {obrasArray[obraIndex].nombre}
-                    </h4>
-                    <p className="text-xs text-slate-400 leading-relaxed mb-6">
-                      {obrasArray[obraIndex].descripcion}
-                    </p>
-                  </motion.div>
-                </AnimatePresence>
-
-                {/* Pagination Indicators */}
-                {obrasArray.length > 1 && (
-                  <div className="flex justify-center gap-1.5 mb-4">
-                    {obrasArray.map((_, i) => (
-                      <button
-                        key={i}
-                        onClick={() => setObraIndex(i)}
-                        className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
-                          i === obraIndex
-                            ? "bg-inacap-red-light w-3.5"
-                            : "bg-slate-700 hover:bg-slate-500"
-                        }`}
+              {/* Scrollable Content */}
+              <div className="flex-1 overflow-y-auto px-6 py-6 pb-12 space-y-8 scrollbar-hide">
+                {obrasArray.map((obra, idx) => (
+                  <div key={idx} className="flex flex-col gap-4">
+                    <div className="relative w-full h-48 rounded-2xl overflow-hidden bg-slate-800 shadow-lg">
+                      <img
+                        src={obra.imagenUrl}
+                        alt={obra.nombre}
+                        className="w-full h-full object-cover"
                       />
-                    ))}
+                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
+                      <div className="absolute top-3 left-3 bg-inacap-red/90 text-white font-bold text-[11px] px-2.5 py-1 rounded-full shadow-lg">
+                        {obra.anio}
+                      </div>
+                    </div>
+                    <div>
+                      <h4 className="text-base font-extrabold text-slate-100 mb-2 leading-snug">
+                        {obra.nombre}
+                      </h4>
+                      <p className="text-sm text-slate-400 leading-relaxed">
+                        {obra.descripcion}
+                      </p>
+                    </div>
                   </div>
-                )}
-
-                <button
-                  onClick={() => setShowObra(false)}
-                  className="w-full py-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-200 hover:text-white text-xs font-bold transition-all duration-300 active:scale-95 shadow-inner cursor-pointer mt-auto"
-                >
-                  Cerrar Detalles
-                </button>
+                ))}
               </div>
             </motion.div>
-          </motion.div>
+          </>
         )}
       </AnimatePresence>
     </div>
