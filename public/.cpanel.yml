@@ -1,4 +1,5 @@
 ---
 deployment:
   tasks:
-    - echo "Deployment complete (Git pull updated files directly)."
+    - export DEPLOYPATH=$HOME/inacap60.todovirtual.cl
+    - /bin/rsync -admq --exclude='.git' . $DEPLOYPATH
