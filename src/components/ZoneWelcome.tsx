@@ -33,19 +33,19 @@ const zoneConfig: Record<ZonaKey, ZoneDetails> = {
     ),
     features: [
       {
+        emoji: "🏛️",
+        title: "Bienvenido a INACAP Chronos",
+        desc: "Estás ingresando a una exposición inmersiva. Usa este dispositivo como tu guía interactiva a través del tiempo."
+      },
+      {
         emoji: "📅",
-        title: "Línea del Tiempo Histórica",
-        desc: "Explora 10 hitos trascendentales desde nuestra fundación en 1966 hasta el 2026."
+        title: "Línea del Tiempo",
+        desc: "Explora 10 hitos trascendentales desde nuestra fundación en 1966 hasta hoy, con contenido Nacional y local (Valdivia)."
       },
       {
-        emoji: "🔄",
-        title: "Contenido Nacional y Local",
-        desc: "Usa el switch para alternar entre el hito a nivel Nacional y su equivalente local en Valdivia."
-      },
-      {
-        emoji: "🔊",
-        title: "Relatos en Audio",
-        desc: "Escucha grabaciones narrativas adaptadas para cada hito nacional o local seleccionado."
+        emoji: "🎧",
+        title: "Relatos Inmersivos",
+        desc: "Te recomendamos usar audífonos o subir el volumen para escuchar la narración especial de cada época."
       }
     ]
   },
@@ -65,19 +65,19 @@ const zoneConfig: Record<ZonaKey, ZoneDetails> = {
     ),
     features: [
       {
-        emoji: "🏗️",
-        title: "Evolución de la Industria",
-        desc: "Aprende cómo Chile pasó de la albañilería artesanal al hormigón y la impresión 3D robótica."
+        emoji: "🏛️",
+        title: "Bienvenido a INACAP Chronos",
+        desc: "Estás ingresando a una exposición inmersiva. Usa este dispositivo como tu guía interactiva a través de esta estación."
       },
       {
-        emoji: "🏛️",
-        title: "Obras Emblemáticas",
-        desc: "Descubre grandes proyectos constructivos reales que representan la ingeniería nacional."
+        emoji: "🏗️",
+        title: "Evolución de la Industria",
+        desc: "Descubre en esta zona cómo Chile pasó de la albañilería artesanal al hormigón y la impresión robótica 3D."
       },
       {
         emoji: "🎧",
-        title: "Narración Especializada",
-        desc: "Audio-guías que explican los hitos normativos y los avances tecnológicos de cada periodo."
+        title: "Obras y Relatos",
+        desc: "Explora grandes proyectos constructivos reales y asegúrate de activar el audio para escuchar su impacto."
       }
     ]
   },
@@ -93,19 +93,19 @@ const zoneConfig: Record<ZonaKey, ZoneDetails> = {
     ),
     features: [
       {
+        emoji: "🏛️",
+        title: "Bienvenido a INACAP Chronos",
+        desc: "Estás ingresando a una exposición inmersiva. Usa este dispositivo como tu guía interactiva a través de esta estación."
+      },
+      {
         emoji: "🛠️",
         title: "Evolución Instrumental",
-        desc: "De herramientas manuales clásicas a la digitalización con estaciones totales y escáneres 3D."
+        desc: "Descubre en esta zona la transformación desde las herramientas manuales clásicas hasta la digitalización y los escáneres 3D."
       },
       {
-        emoji: "🕶️",
-        title: "Realidad Aumentada (AR)",
-        desc: "Interactúa con modelos 3D y proyéctalos directamente en el espacio físico a tu alrededor."
-      },
-      {
-        emoji: "🗣️",
-        title: "Audio Guía Interactiva",
-        desc: "Escucha la historia y utilidad de cada herramienta narrada paso a paso."
+        emoji: "🎧",
+        title: "Modelos 3D y Narración",
+        desc: "Interactúa arrastrando los modelos 3D y activa tu audio para escuchar cómo revolucionaron la industria."
       }
     ]
   }
@@ -177,10 +177,10 @@ export default function ZoneWelcome({ zona, onStart }: ZoneWelcomeProps) {
       <div className="flex flex-col items-center text-center mt-6 z-10">
         <motion.div
           variants={itemVariants}
-          className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider mb-6 bg-slate-900/60 border border-slate-700/35"
+          className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-semibold uppercase tracking-wider mb-6 bg-slate-900/80 border border-slate-700/50 shadow-md backdrop-blur-sm"
         >
-          <span className={`w-2 h-2 rounded-full animate-pulse ${config.themeColor === "red" ? "bg-inacap-red-light" : "bg-inacap-blue-light"}`} />
-          Exposición Interactiva
+          <span className={`w-2 h-2 rounded-full animate-pulse ${config.themeColor === "red" ? "bg-inacap-red-light shadow-[0_0_8px_rgba(239,68,68,0.8)]" : "bg-inacap-blue-light shadow-[0_0_8px_rgba(59,130,246,0.8)]"}`} />
+          INACAP Chronos | Exposición
         </motion.div>
 
         {/* Floating Halo and Icon */}
