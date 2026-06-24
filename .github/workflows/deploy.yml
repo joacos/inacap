@@ -51,6 +51,9 @@ jobs:
                     client.ftp.ignorePasvAddress = true; 
 
                     await client.ensureDir('/');
+                    console.log('Clearing remote directory to ensure a clean deploy...');
+                    await client.clearWorkingDir();
+                    console.log('Uploading fresh out/ directory...');
                     await client.uploadFromDir('out', '/');
                     console.log('Upload complete!');
                 } catch(err) {

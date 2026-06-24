@@ -70,7 +70,7 @@ export default function MindARViewer({
             this.ifMouseDown = false;
             this.x_cord = 0;
             this.y_cord = 0;
-            
+
             this.OnDocumentMouseDown = this.OnDocumentMouseDown.bind(this);
             this.OnDocumentMouseUp = this.OnDocumentMouseUp.bind(this);
             this.OnDocumentMouseMove = this.OnDocumentMouseMove.bind(this);
@@ -228,7 +228,7 @@ export default function MindARViewer({
             src="#model-0"
             position="0 0 0"
             rotation="90 0 0"
-            scale="6 6 6"
+            scale="5 5 5"
             drag-rotate-component=""
           ></a-gltf-model>
         </a-entity>
@@ -261,7 +261,7 @@ export default function MindARViewer({
             src="#model-3"
             position="0 -5 0"
             rotation="90 0 0"
-            scale="2 2 2"
+            scale="1 1 1"
             drag-rotate-component=""
           ></a-gltf-model>
         </a-entity>
@@ -272,7 +272,7 @@ export default function MindARViewer({
             src="#model-4"
             position="0 0 0"
             rotation="90 0 0"
-            scale="2 2 2"
+            scale="0.5 0.5 0.5"
             drag-rotate-component=""
           ></a-gltf-model>
         </a-entity>
