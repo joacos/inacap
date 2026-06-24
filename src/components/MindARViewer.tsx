@@ -207,6 +207,7 @@ export default function MindARViewer({
         mindar-image={`imageTargetSrc: ${targetsUrl}; autoStart: true; maxTrack: 1; filterMinCF: 0.0001; filterBeta: 0.001`}
         color-space="sRGB"
         renderer="colorManagement: true, physicallyCorrectLights: true"
+        gltf-model="dracoDecoderPath: https://www.gstatic.com/draco/versioned/decoders/1.5.6/;"
         vr-mode-ui="enabled: false"
         device-orientation-permission-ui="enabled: false"
         style={{ width: "100%", height: "100%" }}
@@ -260,7 +261,7 @@ export default function MindARViewer({
             src="#model-3"
             position="0 0 0"
             rotation="90 0 0"
-            scale="6 6 6"
+            scale="3.5 3.5 3.5"
             drag-rotate-component=""
           ></a-gltf-model>
         </a-entity>
@@ -271,7 +272,7 @@ export default function MindARViewer({
             src="#model-4"
             position="0 0 0"
             rotation="90 0 0"
-            scale="5 5 5"
+            scale="2 2 2"
             drag-rotate-component=""
           ></a-gltf-model>
         </a-entity>
