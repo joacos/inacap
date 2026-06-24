@@ -33,8 +33,15 @@ jobs:
           sudo apt-get update -qq
           sudo apt-get install -qq -y lftp
           lftp -c "
+            set ftp:passive-mode yes;
+            set ftp:ssl-allow yes;
+            set ftp:ssl-force no;
+            set ftp:ssl-protect-data yes;
             set ssl:verify-certificate no;
+            set net:timeout 30;
+            set net:max-retries 3;
+            set net:reconnect-interval-base 5;
             open -u \"$FTP_USERNAME\",\"$FTP_PASSWORD\" $FTP_SERVER;
-            mirror -R ./out/ / --parallel=10 --verbose;
+            mirror -R ./out/ / --parallel=5 --verbose --no-perms;
             quit;
           "
