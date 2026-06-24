@@ -250,7 +250,7 @@ export default function MindARViewer({
             src="#model-2"
             position="0 0 0"
             rotation="90 0 0"
-            scale="4.5 4.5 4.5"
+            scale="3 3 3"
             drag-rotate-component=""
           ></a-gltf-model>
         </a-entity>
@@ -259,9 +259,9 @@ export default function MindARViewer({
         <a-entity mindar-image-target="targetIndex: 3">
           <a-gltf-model
             src="#model-3"
-            position="0 0 0"
+            position="0.02 0.01 -0.16"
             rotation="90 0 0"
-            scale="1 1 1"
+            scale="0.03 0.03 0.03"
             drag-rotate-component=""
           ></a-gltf-model>
         </a-entity>
