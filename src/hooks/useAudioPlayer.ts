@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback } from "react";
 
-export function useAudioPlayer() {
+export function useAudioPlayer(autoPlay: boolean = false) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
@@ -55,7 +55,16 @@ export function useAudioPlayer() {
 
     audio.src = url;
     audio.load();
-  }, []);
+
+    if (autoPlay) {
+      // Small timeout ensures the browser has registered user interaction from the swipe/click
+      setTimeout(() => {
+        audio.play().then(() => setIsPlaying(true)).catch(() => {
+          // Autoplay blocked by browser policy
+        });
+      }, 50);
+    }
+  }, [autoPlay]);
 
   const play = useCallback(async () => {
     const audio = audioRef.current;

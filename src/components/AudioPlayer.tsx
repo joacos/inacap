@@ -7,6 +7,7 @@ import { useAudioPlayer } from "@/hooks/useAudioPlayer";
 interface AudioPlayerProps {
   audioUrl: string;
   title: string;
+  autoPlay?: boolean;
 }
 
 function formatTime(seconds: number): string {
@@ -16,7 +17,7 @@ function formatTime(seconds: number): string {
   return `${m}:${s.toString().padStart(2, "0")}`;
 }
 
-export default function AudioPlayer({ audioUrl, title }: AudioPlayerProps) {
+export default function AudioPlayer({ audioUrl, title, autoPlay = false }: AudioPlayerProps) {
   const {
     isPlaying,
     currentTime,
@@ -25,7 +26,7 @@ export default function AudioPlayer({ audioUrl, title }: AudioPlayerProps) {
     loadTrack,
     togglePlay,
     seek,
-  } = useAudioPlayer();
+  } = useAudioPlayer(autoPlay);
 
   useEffect(() => {
     if (audioUrl) {

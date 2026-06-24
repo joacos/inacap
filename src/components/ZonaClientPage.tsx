@@ -195,6 +195,7 @@ export default function ZonaClientPage({ zona }: ZonaClientPageProps) {
             <AudioPlayer
               audioUrl={activeHito.audioUrl}
               title={activeHito.titulo}
+              autoPlay={true}
             />
           )}
 
