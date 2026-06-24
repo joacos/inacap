@@ -214,7 +214,7 @@ export default function ZonaHerramientasClientPage() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="absolute inset-0 z-0 flex flex-col justify-between"
+              className="absolute inset-0 z-[55] flex flex-col justify-between"
             >
               <MindARViewer
                 targetsUrl="/targets.mind"
@@ -230,7 +230,7 @@ export default function ZonaHerramientasClientPage() {
               />
 
               {/* AR View Instructions & Simulator */}
-              <div className="absolute top-[88px] left-6 right-6 z-55 flex flex-col items-center gap-3 pointer-events-auto">
+              <div className="absolute top-[88px] left-6 right-6 z-[55] flex flex-col items-center gap-3 pointer-events-auto">
                 <span className="bg-slate-950/80 text-slate-200 font-extrabold text-[10px] px-3.5 py-2 rounded-full border border-slate-800 backdrop-blur-sm shadow-xl text-center">
                   Apunta al código QR / Panel físico 🔍
                 </span>
