@@ -1,0 +1,242 @@
+[
+  {
+    "id": 1,
+    "anio": 1960,
+    "titulo": "Ingenier\u00eda de emergencias en el \"Ri\u00f1ihuazo\"",
+    "descripcion": "En 1960, el mayor terremoto de la historia sacudi\u00f3 el sur de Chile, detonando una crisis sin precedentes. Este hito marc\u00f3 el desarrollo de la ingenier\u00eda de emergencia y consolid\u00f3 grandes obras de hormig\u00f3n en la zona central y el sur del pa\u00eds.",
+    "audioUrl": "/assets/audio/construccion/construccion_1.mp3",
+    "obrasRelacionadas": [
+      {
+        "nombre": "Arquitectura Alemana en la Isla Teja",
+        "descripcion": "Construida por Gustavo Prochelle en la Isla Teja de Valdivia, representa la influencia de la colonizaci\u00f3n alemana en el sur de Chile. Destaca por su arquitectura en maderas nativas adaptada al clima lluvioso regional y fue declarada Monumento Hist\u00f3rico Nacional en 1985.",
+        "anio": "1902",
+        "imagenUrl": "https://media.base44.com/images/public/6a2f887897a0fffe436f42fe/c3b091813_image.png"
+      },
+      {
+        "nombre": "Vanguardia en Hormig\u00f3n Visto",
+        "descripcion": "Dise\u00f1ado en Santiago por el arquitecto Emilio Duhart, constituye un referente \u00edcono de la arquitectura moderna latinoamericana y sede de la CEPAL. Su dise\u00f1o innovador en hormig\u00f3n armado fue adaptado metodol\u00f3gicamente a las exigentes condiciones s\u00edsmicas de Chile, destacando por su estructura horizontal y caracol central.",
+        "anio": "1963\u20131966",
+        "imagenUrl": "https://media.base44.com/images/public/6a2d230dc1aabbc72c3e524e/3378bf3f0_WA_1781340472818.jpg"
+      },
+      {
+        "nombre": "La Catedral del B\u00e1squetbol Chileno",
+        "descripcion": "Dise\u00f1ado por Mario Record\u00f3n y Alberto Sartori, el pabell\u00f3n techado se transform\u00f3 en la 'Catedral del b\u00e1squetbol chileno'. El proyecto optimiz\u00f3 el uso p\u00fablico mediante soluciones de techado continuo de gran envergadura y grader\u00edas de hormig\u00f3n armado para guarecerse de las intensas lluvias locales.",
+        "anio": "1966",
+        "imagenUrl": "https://media.base44.com/images/public/6a2f887897a0fffe436f42fe/38e1ca4f6_image.png"
+      },
+      {
+        "nombre": "Haza\u00f1a de la Ingenier\u00eda de Emergencia",
+        "descripcion": "Tras el terremoto del 22 de mayo de 1960, tres gigantescos deslizamientos bloquearon el r\u00edo San Pedro creando un embalse peligroso en el lago Ri\u00f1ihue. Ante la falla de maquinarias por el lodo, cientos de obreros y voluntarios construyeron manualmente canales de evacuaci\u00f3n durante 63 d\u00edas, evitando una catastr\u00f3fica inundaci\u00f3n sobre Valdivia.",
+        "anio": "1960",
+        "imagenUrl": "https://media.base44.com/images/public/6a2d230dc1aabbc72c3e524e/8f2782708_rinihue2.jpg"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "anio": 1969,
+    "titulo": "Finalizaci\u00f3n de la Ruta 5 Sur",
+    "descripcion": "La integraci\u00f3n territorial avanz\u00f3 exponencialmente con la pavimentaci\u00f3n y finalizaci\u00f3n de grandes tramos de la Ruta 5. Estas obras viales permitieron acortar distancias log\u00edsticas vitales y fueron acompa\u00f1adas por grandes proezas de c\u00e1lculo estructural en la cordillera.",
+    "audioUrl": "/assets/audio/construccion/construccion_2.mp3",
+    "obrasRelacionadas": [
+      {
+        "nombre": "Red Vial de m\u00e1s de 3.000 Kil\u00f3metros",
+        "descripcion": "Obra de infraestructura vial que consolid\u00f3 una red de m\u00e1s de 3.000 kil\u00f3metros pavimentados continuos entre Arica y Puerto Montt. Su unificaci\u00f3n territorial progres\u00f3 decisivamente con el Decreto N.\u00ba 150 de 1967 del Ministerio de Obras P\u00fablicas, articulando el territorio nacional de norte a sur.",
+        "anio": "1969",
+        "imagenUrl": "https://media.base44.com/images/public/6a2d230dc1aabbc72c3e524e/f93aede64_img-ruta5_julio1980.png"
+      },
+      {
+        "nombre": "Hidroel\u00e9ctrica y C\u00e1lculo Estructural",
+        "descripcion": "Central de pasada en la cuenca del r\u00edo Laja iniciada por ENDESA en 1972 e inaugurada en octubre de 1981. Destaca por excavaciones masivas en roca cordillerana y t\u00faneles subterr\u00e1neos blindados de hormig\u00f3n y acero que reutilizan en cascada las descargas de las plantas El Toro y Abanico.",
+        "anio": "1972",
+        "imagenUrl": "https://media.base44.com/images/public/6a2f887897a0fffe436f42fe/88f384f82_IMG-20260615-WA0001.jpg"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "anio": 1974,
+    "titulo": "Desarrollo de la industria naval (ASENAV)",
+    "descripcion": "El sur de Chile consolida su tradici\u00f3n mar\u00edtima con la fundaci\u00f3n de ASENAV en Valdivia, convirtiendo a la ciudad en la capital de la industria naval privada. En paralelo, en la capital, se inauguraban megainfraestructuras que revolucionar\u00edan las telecomunicaciones nacionales.",
+    "audioUrl": "/assets/audio/construccion/construccion_3.mp3",
+    "obrasRelacionadas": [
+      {
+        "nombre": "Principal Astillero Privado del Pac\u00edfico Sur",
+        "descripcion": "Astilleros y Servicios Navales S.A. fue fundada en Valdivia por el ingeniero naval alem\u00e1n Eberhard Kossmann. Naci\u00f3 como un peque\u00f1o taller en la ribera del r\u00edo Calle-Calle y evolucion\u00f3 hasta convertirse en el principal astillero privado del Pac\u00edfico sudamericano.",
+        "anio": "1974",
+        "imagenUrl": "https://media.base44.com/images/public/6a2f887897a0fffe436f42fe/112d3f86e_image.png"
+      },
+      {
+        "nombre": "Modernizaci\u00f3n Radical de las Telecomunicaciones",
+        "descripcion": "Emplazada como parte estrat\u00e9gica del Centro Nacional de Telecomunicaciones a partir del 1 de julio de 1970, moderniz\u00f3 de forma radical la conectividad de larga distancia de Chile. Integr\u00f3 los flujos de telefon\u00eda, televisi\u00f3n y radio, consolid\u00e1ndose como un hito urbano en Santiago y resistiendo impecablemente los terremotos de 1985 y 2010.",
+        "anio": "1970\u20131974",
+        "imagenUrl": "https://media.base44.com/images/public/6a2d230dc1aabbc72c3e524e/7c7028814_EDOziOcWsAAbsbr.jpg"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "anio": 1976,
+    "titulo": "Ley General de Urbanismo y Construcciones",
+    "descripcion": "La promulgaci\u00f3n de la LGUC estableci\u00f3 un marco normativo moderno para el desarrollo territorial chileno. Al mismo tiempo, se iniciaron colosales obras de infraestructura destinadas a conectar los rincones m\u00e1s aislados de la Patagonia mediante explosiones y tajos en la roca viva.",
+    "audioUrl": "/assets/audio/construccion/construccion_4.mp3",
+    "obrasRelacionadas": [
+      {
+        "nombre": "Ley de Urbanismo y Ruta al Fin del Mundo",
+        "descripcion": "En diciembre de 1975 se promulg\u00f3 la Ley General de Urbanismo y Construcciones (LGUC), fijando un moderno marco normativo territorial. En paralelo, en 1976 el MOP y el Cuerpo Militar del Trabajo iniciaron la construcci\u00f3n de la Carretera Austral (Ruta 7) para romper el aislamiento patag\u00f3nico.",
+        "anio": "1975\u20131976",
+        "imagenUrl": "https://media.base44.com/images/public/6a2f887897a0fffe436f42fe/749e042e0_image.png"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "anio": 1985,
+    "titulo": "Modernizaci\u00f3n portuaria y conectividad costera",
+    "descripcion": "Los puertos chilenos comenzaron una transformaci\u00f3n log\u00edstica radical mediante la contenerizaci\u00f3n. En Valdivia, este impulso se reflej\u00f3 en infraestructuras viales y puentes que lograron romper el aislamiento hist\u00f3rico de las zonas costeras como Corral y Niebla.",
+    "audioUrl": "/assets/audio/construccion/construccion_5.mp3",
+    "obrasRelacionadas": [
+      {
+        "nombre": "Viaducto Clave de la Costa Valdiviana",
+        "descripcion": "Desarrollo vial costero fundamental que permiti\u00f3 asegurar la continuidad de la ruta terrestre permanente entre Valdivia y Corral. La infraestructura del puente contribuy\u00f3 significativamente a mitigar el aislamiento hist\u00f3rico de Corral, potenciando la integraci\u00f3n de la provincia.",
+        "anio": "1984\u20131985",
+        "imagenUrl": "https://media.base44.com/images/public/6a2f887897a0fffe436f42fe/129e96188_image.png"
+      },
+      {
+        "nombre": "Revoluci\u00f3n Log\u00edstica del Comercio Exterior",
+        "descripcion": "Proceso de mejoramiento de los puertos de San Antonio y Valpara\u00edso mediante incorporaci\u00f3n masiva de sistemas de carga en contenedores, muelles ampliados y gr\u00faas de alto tonelaje. Esta revoluci\u00f3n log\u00edstica aceler\u00f3 sustancialmente los tiempos operativos del comercio exterior chileno.",
+        "anio": "1980\u20131990",
+        "imagenUrl": "https://media.base44.com/images/public/6a2f887897a0fffe436f42fe/cec8c1d82_IMG-20260615-WA0000.jpg"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "anio": 1982,
+    "titulo": "Transformaci\u00f3n digital con AutoCAD",
+    "descripcion": "La llegada del dise\u00f1o digital reemplaz\u00f3 al tablero de dibujo manual, permitiendo niveles de precisi\u00f3n in\u00e9ditos en los planos estructurales. Esto facilit\u00f3 el redise\u00f1o s\u00edsmico de centros c\u00edvicos, normalizaciones hospitalarias y el alzamiento de grandes viaductos interurbanos.",
+    "audioUrl": "/assets/audio/construccion/construccion_6.mp3",
+    "obrasRelacionadas": [
+      {
+        "nombre": "El Dibujo T\u00e9cnico Digital en Chile",
+        "descripcion": "La llegada de AutoCAD en 1982 revoluciona las oficinas t\u00e9cnicas de ingenier\u00eda y arquitectura en Chile, reemplazando el dibujo manual en tablero por el dise\u00f1o asistido por computadora. Este cambio tecnol\u00f3gico optimiz\u00f3 cubicaciones, precisi\u00f3n en planos estructurales y productividad, marcando un antes y despu\u00e9s en la forma de proyectar y ejecutar infraestructura en el pa\u00eds.",
+        "anio": "1982",
+        "imagenUrl": "https://media.base44.com/images/public/6a2f887897a0fffe436f42fe/134a6033f_WA_1781501247777.jpeg"
+      },
+      {
+        "nombre": "Ingenier\u00eda S\u00edsmica en el Centro C\u00edvico",
+        "descripcion": "Desaf\u00edo log\u00edstico y estructural en pleno centro c\u00edvico para subsanar los da\u00f1os del terremoto de 1960. Emple\u00f3 criterios s\u00edsmicos modernos: losa de fundaci\u00f3n tipo 'balsa', z\u00f3calo r\u00edgido subterr\u00e1neo de hormig\u00f3n y una torre de campanario calada de 50 metros dise\u00f1ada para reducir la resistencia aerodin\u00e1mica y la masa s\u00edsmica.",
+        "anio": "1988\u20131998",
+        "imagenUrl": "https://media.base44.com/images/public/6a2f887897a0fffe436f42fe/07ff24a25_image.png"
+      },
+      {
+        "nombre": "Mayor Intervenci\u00f3n Hospitalaria desde 1960",
+        "descripcion": "Mega obra de modernizaci\u00f3n hospitalaria que se transform\u00f3 en la mayor intervenci\u00f3n edilicia del recinto asistencial desde el terremoto de 1960. El proyecto de normalizaci\u00f3n arquitect\u00f3nica unific\u00f3 m\u00faltiples unidades y servicios de alta complejidad dispersos en la zona sur austral.",
+        "anio": "1992\u20131996",
+        "imagenUrl": "https://media.base44.com/images/public/6a2f887897a0fffe436f42fe/78583163e_image.png"
+      },
+      {
+        "nombre": "Ampliaci\u00f3n Vial para el Crecimiento Urbano",
+        "descripcion": "Obra vial planificada para ampliar y complementar el puente original de arcos de hormig\u00f3n inaugurado en 1945, respondiendo al acelerado crecimiento automotriz e inmobiliario. Su edificaci\u00f3n permiti\u00f3 separar flujos vehiculares por sentidos de tr\u00e1nsito, optimizando la fluidez vial entre el centro y el acceso por Las \u00c1nimas.",
+        "anio": "1994",
+        "imagenUrl": "https://media.base44.com/images/public/6a2f887897a0fffe436f42fe/eafd18717_image.png"
+      },
+      {
+        "nombre": "Gran Viaducto sobre el Biob\u00edo",
+        "descripcion": "Viaducto estrat\u00e9gico iniciado en 1998 como eje fundamental del plan maestro de recuperaci\u00f3n de la ribera norte del r\u00edo Biob\u00edo. Con m\u00e1s de dos kil\u00f3metros de extensi\u00f3n, optimiz\u00f3 la movilidad vial metropolitana uniendo Concepci\u00f3n y San Pedro de la Paz desde su apertura en el a\u00f1o 2000.",
+        "anio": "1998",
+        "imagenUrl": "https://media.base44.com/images/public/6a2f887897a0fffe436f42fe/8a4671b69_WA_1781501051743.jpeg"
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "anio": 2011,
+    "titulo": "Hormigones de Alta Resistencia y Cirug\u00eda Urbana",
+    "descripcion": "El nuevo milenio trajo desaf\u00edos en altura y en tierra. Mientras se desarrollaban las tecnolog\u00edas para bombear hormig\u00f3n a m\u00e1s de 300 metros, en Valdivia se ejecutaban complejas cirug\u00edas urbanas para ensanchar avenidas y soterrar de manera masiva el cableado el\u00e9ctrico.",
+    "audioUrl": "/assets/audio/construccion/construccion_7.mp3",
+    "obrasRelacionadas": [
+      {
+        "nombre": "Hormigones H60 a 300 Metros de Altura",
+        "descripcion": "Proyecto inmobiliario de gran escala en Providencia iniciado el 3 de marzo de 2006. Integr\u00f3 la Gran Torre Santiago (300 metros, 62 pisos), el rascacielos m\u00e1s alto de Sudam\u00e9rica, gracias al bombeo vertical de hormig\u00f3n H-60 a 300 metros de altura y un muro cortina inteligente antis\u00edsmico.",
+        "anio": "2006\u20132012",
+        "imagenUrl": "https://media.base44.com/images/public/6a2f887897a0fffe436f42fe/fb7ba79a6_IMG-20260615-WA0003.jpg"
+      },
+      {
+        "nombre": "Cirug\u00eda Urbana de 3,5 km en Las \u00c1nimas",
+        "descripcion": "Cirug\u00eda urbana de 3,5 km en Las \u00c1nimas con inversi\u00f3n de $9.293 millones de pesos. Contempl\u00f3 8.000 metros de calzada de hormig\u00f3n en doble v\u00eda, un muro de contenci\u00f3n de 400 metros, ciclov\u00edas, soterramiento de cables y 2.000 metros de colectores pluviales subterr\u00e1neos.",
+        "anio": "2011",
+        "imagenUrl": "https://media.base44.com/images/public/6a2f887897a0fffe436f42fe/b9ee113d2_image.png"
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "anio": 2014,
+    "titulo": "Contratos Globales y Expansi\u00f3n Comercial",
+    "descripcion": "El Ministerio de Obras P\u00fablicas impuls\u00f3 pavimentaciones integrales y la renovaci\u00f3n de puentes bajo los modernos Contratos Globales de Conservaci\u00f3n. Estas mejoras en la accesibilidad catalizaron el desarrollo de los primeros centros comerciales de gran escala en la regi\u00f3n.",
+    "audioUrl": "/assets/audio/construccion/construccion_8.mp3",
+    "obrasRelacionadas": [
+      {
+        "nombre": "Pavimentaci\u00f3n Integral de 28 km Bajo Contratos Globales MOP",
+        "descripcion": "Mejoramiento integral de 28 km de la Ruta T-35/T-204, transformando un camino de ripio rural en una v\u00eda pavimentada segura. Incluy\u00f3 paraderos, drenaje y la reposici\u00f3n estructural completa de los puentes Cuiculelfu, Pishuinco y Arique, obra pionera bajo Contratos Globales de Conservaci\u00f3n del MOP.",
+        "anio": "2011\u20132014",
+        "imagenUrl": "https://media.base44.com/images/public/6a2f887897a0fffe436f42fe/3fed780cc_IMG-20260615-WA0002.jpg"
+      },
+      {
+        "nombre": "El Puente m\u00e1s Largo sobre el R\u00edo Calle-Calle",
+        "descripcion": "Concebido de forma mixta (acero y hormig\u00f3n armado) entre septiembre de 2013 y diciembre de 2015, se convirti\u00f3 con sus 328 metros en el puente m\u00e1s largo sobre el r\u00edo Calle-Calle. Hinc\u00f3 pilotes de acero a 44 metros de profundidad y utiliz\u00f3 sistemas de cerchas modulares de alta carga izados mediante barcazas fluviales.",
+        "anio": "2013\u20132015",
+        "imagenUrl": "https://media.base44.com/images/public/6a2f887897a0fffe436f42fe/dc0e3c616_image.png"
+      },
+      {
+        "nombre": "Primer Gran Centro Comercial de Los R\u00edos",
+        "descripcion": "El inicio de la construcci\u00f3n represent\u00f3 un hito urbano sustancial al alzarse como el primer gran centro comercial moderno en la Regi\u00f3n de Los R\u00edos. El desarrollo concentr\u00f3 de manera hist\u00f3rica la actividad comercial e institucional, diversificando la experiencia y h\u00e1bitos de consumo local.",
+        "anio": "2014\u20132015",
+        "imagenUrl": "https://media.base44.com/images/public/6a2f887897a0fffe436f42fe/5c20d7f61_image.png"
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "anio": 2018,
+    "titulo": "Implementaci\u00f3n de la Metodolog\u00eda BIM",
+    "descripcion": "La adopci\u00f3n de modelos tridimensionales interactivos (BIM) revolucion\u00f3 la edificaci\u00f3n p\u00fablica y aeroportuaria, permitiendo detectar choques estructurales en tiempo real. Esta eficiencia precedi\u00f3 a colosales desaf\u00edos constructivos como el trazado de puentes colgantes sobre canales marinos.",
+    "audioUrl": "/assets/audio/construccion/construccion_9.mp3",
+    "obrasRelacionadas": [
+      {
+        "nombre": "Primero en Utilizar Metodolog\u00eda BIM en Chile",
+        "descripcion": "Caso referencial y pionero en la edificaci\u00f3n p\u00fablica chilena impulsado por el MOP y Planbim. Mediante modelos tridimensionales virtuales integrales se aplic\u00f3 Clash Detection coordinando anticipadamente las redes estructurales y sanitarias, eliminando planos de papel e incorporando tabletas digitales de control en faena.",
+        "anio": "2018\u20132022",
+        "imagenUrl": "https://media.base44.com/images/public/6a2f887897a0fffe436f42fe/eef01794a_WA_1781500806068.jpeg"
+      },
+      {
+        "nombre": "Mayor Expansi\u00f3n Aeroportuaria en la Historia de Chile",
+        "descripcion": "Considerada la mayor expansi\u00f3n aeroportuaria en la historia del pa\u00eds, la obra de seis a\u00f1os contempl\u00f3 la construcci\u00f3n del nuevo Terminal Internacional T2, inaugurado en febrero de 2022. Ampli\u00f3 la capacidad de atenci\u00f3n anual de 13 millones a 38 millones de pasajeros con tecnolog\u00edas de operaci\u00f3n de vanguardia.",
+        "anio": "2015\u20132022",
+        "imagenUrl": "https://media.base44.com/images/public/6a2f887897a0fffe436f42fe/1ba26c67b_WA_1781502049688.jpeg"
+      },
+      {
+        "nombre": "El Puente Colgante m\u00e1s Largo de Latinoam\u00e9rica",
+        "descripcion": "Iniciado el 15 de febrero de 2018, es uno de los proyectos colgantes m\u00e1s ambiciosos del siglo XXI, uniendo Chilo\u00e9 con el continente a trav\u00e9s de 2,75 km. Emplea pilotes de gran di\u00e1metro anclados al suelo marino y hormig\u00f3n de alta resistencia capaz de tolerar la severa corrosi\u00f3n marina y corrientes implacables del canal.",
+        "anio": "2018",
+        "imagenUrl": "https://media.base44.com/images/public/6a2f887897a0fffe436f42fe/30c2c2d6b_WA_1781502070872.jpeg"
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "anio": 2024,
+    "titulo": "Traslado Patrimonial e Infraestructura Futura",
+    "descripcion": "En una haza\u00f1a log\u00edstica in\u00e9dita, monumentales casonas patrimoniales en Valdivia fueron desplazadas \u00edntegramente sobre rieles hidr\u00e1ulicos. Esta obra de precisi\u00f3n quir\u00fargica permiti\u00f3 entrelazar el respeto por la arquitectura hist\u00f3rica con la apertura de modernas fajas constructivas para futuros puentes.",
+    "audioUrl": "/assets/audio/construccion/construccion_10.mp3",
+    "obrasRelacionadas": [
+      {
+        "nombre": "In\u00e9dito Traslado Patrimonial de 80 Metros",
+        "descripcion": "Extraordinario hito de conservaci\u00f3n patrimonial e ingenier\u00eda estructural llevado a cabo en febrero de 2024. Para permitir la faja constructiva del futuro Puente Cochrane sin destruir el inmueble hist\u00f3rico de madera, la antigua estructura fue desplazada \u00edntegramente 80 metros mediante un sofisticado sistema de gatas hidr\u00e1ulicas y rieles met\u00e1licos de precisi\u00f3n.",
+        "anio": "2024",
+        "imagenUrl": "https://media.base44.com/images/public/6a2f887897a0fffe436f42fe/97db24bfe_image.png"
+      }
+    ]
+  }
+]

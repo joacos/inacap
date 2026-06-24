@@ -1,0 +1,146 @@
+[
+  {
+    "id": 1,
+    "year": 1966,
+    "title": "Fundación de INACAP: La Universidad Laboral",
+    "era": "Orígenes y Consolidación Estatal (1966-1980)",
+    "description": "Se crea el Instituto Nacional de Capacitación Profesional por Decreto Supremo N°2541 del Ministerio de Justicia bajo el gobierno de Eduardo Frei Montalva. Inicia con carreras técnicas para obreros con apoyo de CORFO, SERCOTEC y universidades estatales, adoptando el lema 'Aprender Haciendo'. Paralelamente, abre sus primeras aulas en la región de Valdivia (Sede Av. España) para capacitar a los técnicos encargados de reconstruir el sur de Chile tras el terremoto de 1960.",
+    "tags": ["Institucional", "Estatutos", "Valdivia"],
+    "image": "/images/hito1_fundacion.jpg"
+  },
+  {
+    "id": 2,
+    "year": 1967,
+    "title": "Inauguración de la Sede Renca",
+    "era": "Orígenes y Consolidación Estatal (1966-1980)",
+    "description": "Se habilitan las primeras aulas de la sede Renca en Santiago, destacando por un diseño arquitectónico vanguardista optimizado para la enseñanza técnico-industrial. Sus talleres se equiparon con tecnología avanzada gracias a la cooperación de especialistas europeos en áreas de metalmecánica, electricidad y electrónica.",
+    "tags": ["Infraestructura", "Académico"],
+    "image": "/images/hito2_renca.jpg"
+  },
+  {
+    "id": 3,
+    "year": 1968,
+    "title": "Visita Histórica de la Reina Isabel II",
+    "era": "Orígenes y Consolidación Estatal (1966-1980)",
+    "description": "En su gira oficial por Chile, la Monarca del Reino Unido visita la sede Renca. El hito marca la inauguración del Centro Anglo-chileno y la entrega de equipamiento industrial británico financiado parcialmente por su gobierno, impulsando la preparación de la primera generación de estudiantes de mecánica industrial.",
+    "tags": ["Internacional", "Vinculación"],
+    "image": "/images/hito3_reina_isabel.jpg"
+  },
+  {
+    "id": 4,
+    "year": 1977,
+    "title": "Nace el Primer OTEC de Chile",
+    "era": "Orígenes y Consolidación Estatal (1966-1980)",
+    "description": "La Corporación INACAP se convierte en el primer Organismo Técnico de Capacitación (OTEC) registrado oficialmente ante el Servicio Nacional de Capacitación. Esto le permite comercializar programas educativos masivos bajo el beneficio de la Franquicia Tributaria, combinando capacitación laboral con educación superior.",
+    "tags": ["Institucional", "Financiamiento"],
+    "image": "/images/hito4_otec.jpg"
+  },
+  {
+    "id": 5,
+    "year": 1981,
+    "title": "Reforma Universitaria y Nueva Categoría Legal",
+    "era": "Transición y Autonomía Superior (1981-2000)",
+    "description": "En el contexto de las reformas educacionales de la época, INACAP se incorpora formalmente al sistema de educación superior chileno obteniendo de forma oficial la calidad legal de Instituto Profesional (IP) y Centro de Formación Técnica (CFT).",
+    "tags": ["Institucional", "Estatutos"],
+    "image": "/images/hito5_reforma.jpg"
+  },
+  {
+    "id": 6,
+    "year": 1989,
+    "title": "Traspaso Administrativo a la CPC (Privatización)",
+    "era": "Transición y Autonomía Superior (1981-2000)",
+    "description": "CORFO transfiere la administración de la institución a la Confederación de la Producción y el Comercio (CPC). INACAP cesa su rol como corporación de derecho público adoptando un modelo de gestión empresarial y descentralización operativa mediante sociedades anónimas por sedes.",
+    "tags": ["Institucional", "Gobernanza"],
+    "image": "/images/hito6_privatizacion.jpg"
+  },
+  {
+    "id": 7,
+    "year": 1995,
+    "title": "Autonomía del IP y Lanzamiento de la Beca Empresario",
+    "era": "Transición y Autonomía Superior (1981-2000)",
+    "description": "El Instituto Profesional alcanza la plena autonomía académica y administrativa frente al Estado. Bajo la administración de la CPC, se instaura la 'Beca Empresario', un programa estandarte enfocado en alumnos con destacado rendimiento académico y un fuerte perfil emprendedor y de negocios.",
+    "tags": ["Académico", "Financiamiento"],
+    "image": "/images/hito7_beca_empresario.jpg"
+  },
+  {
+    "id": 8,
+    "year": 1997,
+    "title": "Autonomía del CFT y Modernización Curricular",
+    "era": "Transición y Autonomía Superior (1981-2000)",
+    "description": "El Centro de Formación Técnica logra su plena autonomía tras exigentes auditorías del MINEDUC que evaluaron la solvencia financiera, idoneidad docente y transparencia. La autonomía acelera la creación de carreras de informática, telecomunicaciones y automatización industrial demandadas por el mercado.",
+    "tags": ["Académico", "Institucional"],
+    "image": "/images/hito8_autonomia_cft.jpg"
+  },
+  {
+    "id": 9,
+    "year": 2001,
+    "title": "Pioneros en Calidad: Certificación ISO 9001",
+    "era": "Calidad, Expansión Universitaria e Innovación (2001-Presente)",
+    "description": "INACAP se convierte en la primera institución de educación superior en Chile en certificar todo su sistema académico bajo la norma internacional ISO 9001:2000, estructurando su gestión mediante el Ciclo PHVA tras una rigurosa auditoría de la firma suiza SGS.",
+    "tags": ["Calidad", "Institucional"],
+    "image": "/images/hito9_iso.jpg"
+  },
+  {
+    "id": 10,
+    "year": 2006,
+    "title": "Creación de la Universidad Tecnológica de Chile",
+    "era": "Calidad, Expansión Universitaria e Innovación (2001-Presente)",
+    "description": "Fundación de la Universidad Tecnológica de Chile INACAP, completando un sistema integrado (CFT, IP y Universidad) único en el país. NOTA WEB: A fines de 2020 se inició su plan de cierre programado (proyectado al 2030) para reenfocar el 100% de los recursos institucionales exclusivamente en el IP y CFT.",
+    "tags": ["Institucional", "Académico"],
+    "image": "/images/hito10_universidad.jpg"
+  },
+  {
+    "id": 11,
+    "year": 2012,
+    "title": "Primera Acreditación Institucional del CFT",
+    "era": "Calidad, Expansión Universitaria e Innovación (2001-Presente)",
+    "description": "El CFT INACAP se somete voluntariamente al proceso de evaluación de la CNA-Chile, obteniendo su primera acreditación institucional. Este hito validó públicamente la gestión institucional, la docencia de pregrado y la vinculación con el medio.",
+    "tags": ["Calidad"],
+    "image": "/images/hito11_acreditacion2012.jpg"
+  },
+  {
+    "id": 12,
+    "year": 2016,
+    "title": "Implementación de la Gratuidad",
+    "era": "Calidad, Expansión Universitaria e Innovación (2001-Presente)",
+    "description": "Primer año de la implementación de la política pública de Gratuidad impulsada por el Estado para familias de los primeros 5 deciles de menores ingresos. Funciona como el catalizador de inclusión que transforma el acceso de miles de estudiantes a las aulas técnicas.",
+    "tags": ["Financiamiento", "Vinculación"],
+    "image": "/images/hito12_gratuidad.jpg"
+  },
+  {
+    "id": 13,
+    "year": 2017,
+    "title": "Inauguración de la Sede Valdivia (Las Ánimas)",
+    "era": "Calidad, Expansión Universitaria e Innovación (2001-Presente)",
+    "description": "Se concreta el mayor hito de modernización en la Región de Los Ríos con la mudanza del antiguo recinto tradicional hacia el nuevo complejo tecnológico de alta eficiencia energética en Las Ánimas (Av. Pedro Aguirre Cerda). Una obra de 15.896 m² con 55 salas y 44 laboratorios de especialidad.",
+    "tags": ["Infraestructura", "Valdivia"],
+    "image": "/images/hito13_sede_valdivia.jpg"
+  },
+  {
+    "id": 14,
+    "year": 2020,
+    "title": "Modernidad Digital e Industria 4.0",
+    "era": "Calidad, Expansión Universitaria e Innovación (2001-Presente)",
+    "description": "Aceleración de la transformación digital institucional. Se firma una importante alianza estratégica con Huawei para capacitar y certificar a profesores y estudiantes en Cloud Computing, Big Data, Inteligencia Artificial y 5G, junto con la masificación de simuladores y entornos virtuales 360°.",
+    "tags": ["Académico", "Internacional"],
+    "image": "/images/hito14_digital.jpg"
+  },
+  {
+    "id": 15,
+    "year": 2025,
+    "title": "Máxima Acreditación Institucional (7 Años)",
+    "era": "Calidad, Expansión Universitaria e Innovación (2001-Presente)",
+    "description": "Tanto el Instituto Profesional como el Centro de Formación Técnica logran la acreditación por el periodo máximo de 7 años por parte de la CNA. Es la máxima distinción de calidad posible en el sistema de educación superior chileno.",
+    "tags": ["Calidad"],
+    "image": "/images/hito15_acreditacion7anos.jpg"
+  },
+  {
+    "id": 16,
+    "year": 2026,
+    "title": "Hito 60 Años: Fusión IP-CFT y Nuevas Becas Dorada y Plateada",
+    "era": "Calidad, Expansión Universitaria e Innovación (2001-Presente)",
+    "description": "Coincidiendo con el aniversario 60, se concreta la unificación legal definitiva del CFT y el IP bajo la entidad 'Instituto Profesional INACAP' para agilizar mallas curriculares y asegurar la articulación sin alterar los beneficios de los alumnos. Simultáneamente, el rector Lucas Palacios lanza las Becas Plateada y Dorada, otorgando coberturas de arancel de un 50% y 100% para la reinvención laboral de adultos mayores.",
+    "tags": ["Institucional", "Financiamiento", "Estatutos"],
+    "image": "/images/hito16_sesentanos.jpg"
+  }
+]
