@@ -41,6 +41,9 @@ export default function HitoContent({ hito, zona, direction, viewMode = "naciona
   const isBlueAccent = zona === "inacap" || zona === "herramientas";
   const [imgIndex, setImgIndex] = useState(0);
   const [showObra, setShowObra] = useState(false);
+  const [obraIndex, setObraIndex] = useState(0);
+
+  const obrasArray = hito.obrasRelacionadas || (hito.obraRelacionada ? [hito.obraRelacionada] : []);
 
   const isLocalActive = viewMode === "local" && !!hito.local;
   const isCarrerasActive = viewMode === "carreras" && !!hito.carreras;
@@ -72,6 +75,7 @@ export default function HitoContent({ hito, zona, direction, viewMode = "naciona
   useEffect(() => {
     setImgIndex(0);
     setShowObra(false);
+    setObraIndex(0);
   }, [hito.id, viewMode]);
 
   return (
@@ -203,7 +207,7 @@ export default function HitoContent({ hito, zona, direction, viewMode = "naciona
             <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-8 z-10 bg-gradient-to-t from-[#020617] to-transparent" />
 
             {/* Floating button on top of header (only for construccion zone) */}
-            {zona === "construccion" && hito.obraRelacionada && (
+            {zona === "construccion" && obrasArray.length > 0 && (
               <button
                 onClick={() => setShowObra(true)}
                 className="absolute top-4 left-4 z-30 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-950/85 hover:bg-slate-900 border border-slate-800/80 text-slate-200 hover:text-white text-[10px] font-bold transition-all duration-300 hover:scale-[1.03] active:scale-[0.97] cursor-pointer shadow-lg backdrop-blur-sm"
@@ -211,7 +215,7 @@ export default function HitoContent({ hito, zona, direction, viewMode = "naciona
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-inacap-red-light">
                   <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                 </svg>
-                <span>Obra Emblemática</span>
+                <span>{obrasArray.length > 1 ? `Ver Obras (${obrasArray.length})` : "Obra Emblemática"}</span>
               </button>
             )}
           </motion.div>
@@ -267,7 +271,7 @@ export default function HitoContent({ hito, zona, direction, viewMode = "naciona
       
       {/* Related project modal */}
       <AnimatePresence>
-        {showObra && hito.obraRelacionada && (
+        {showObra && obrasArray.length > 0 && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -282,33 +286,88 @@ export default function HitoContent({ hito, zona, direction, viewMode = "naciona
               className="relative w-full max-w-sm rounded-3xl glass-elevated border border-slate-700/40 overflow-hidden shadow-2xl"
             >
               {/* Image banner */}
-              <div className="relative w-full h-40 overflow-hidden bg-slate-900">
-                <img
-                  src={hito.obraRelacionada.imagenUrl}
-                  alt={hito.obraRelacionada.nombre}
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent" />
+              <div className="relative w-full h-40 overflow-hidden bg-slate-900 group">
+                <AnimatePresence mode="wait">
+                  <motion.img
+                    key={obraIndex}
+                    src={obrasArray[obraIndex].imagenUrl}
+                    alt={obrasArray[obraIndex].nombre}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="w-full h-full object-cover absolute inset-0"
+                  />
+                </AnimatePresence>
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent z-10" />
+                
+                {/* Carousel Controls */}
+                {obrasArray.length > 1 && (
+                  <>
+                    <button
+                      onClick={() => setObraIndex((prev) => (prev - 1 + obrasArray.length) % obrasArray.length)}
+                      className="absolute left-2 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-slate-950/70 border border-slate-800 text-slate-350 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:text-white hover:bg-slate-900 active:scale-95 z-20"
+                    >
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                        <path d="M15 19l-7-7 7-7" />
+                      </svg>
+                    </button>
+                    <button
+                      onClick={() => setObraIndex((prev) => (prev + 1) % obrasArray.length)}
+                      className="absolute right-2 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-slate-950/70 border border-slate-800 text-slate-350 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:text-white hover:bg-slate-900 active:scale-95 z-20"
+                    >
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                        <path d="M9 5l7 7-7 7" />
+                      </svg>
+                    </button>
+                  </>
+                )}
                 
                 {/* Year badge on top of image */}
-                <div className="absolute top-4 left-4 bg-inacap-red/90 text-white font-bold text-xs px-2.5 py-1 rounded-full border border-inacap-red-light/30 shadow-lg">
-                  {hito.obraRelacionada.anio}
+                <div className="absolute top-4 left-4 z-20 bg-inacap-red/90 text-white font-bold text-xs px-2.5 py-1 rounded-full border border-inacap-red-light/30 shadow-lg">
+                  {obrasArray[obraIndex].anio}
                 </div>
               </div>
 
               {/* Content */}
               <div className="p-6">
-                <h4 className="text-base font-extrabold text-slate-100 mb-2 leading-snug">
-                  {hito.obraRelacionada.nombre}
-                </h4>
-                
-                <p className="text-xs text-slate-400 leading-relaxed mb-6">
-                  {hito.obraRelacionada.descripcion}
-                </p>
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={obraIndex}
+                    initial={{ opacity: 0, y: 5 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -5 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <h4 className="text-base font-extrabold text-slate-100 mb-2 leading-snug">
+                      {obrasArray[obraIndex].nombre}
+                    </h4>
+                    <p className="text-xs text-slate-400 leading-relaxed mb-6">
+                      {obrasArray[obraIndex].descripcion}
+                    </p>
+                  </motion.div>
+                </AnimatePresence>
+
+                {/* Pagination Indicators */}
+                {obrasArray.length > 1 && (
+                  <div className="flex justify-center gap-1.5 mb-4">
+                    {obrasArray.map((_, i) => (
+                      <button
+                        key={i}
+                        onClick={() => setObraIndex(i)}
+                        className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
+                          i === obraIndex
+                            ? "bg-inacap-red-light w-3.5"
+                            : "bg-slate-700 hover:bg-slate-500"
+                        }`}
+                      />
+                    ))}
+                  </div>
+                )}
 
                 <button
                   onClick={() => setShowObra(false)}
-                  className="w-full py-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-200 hover:text-white text-xs font-bold transition-all duration-300 active:scale-95 shadow-inner cursor-pointer"
+                  className="w-full py-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-200 hover:text-white text-xs font-bold transition-all duration-300 active:scale-95 shadow-inner cursor-pointer mt-auto"
                 >
                   Cerrar Detalles
                 </button>
