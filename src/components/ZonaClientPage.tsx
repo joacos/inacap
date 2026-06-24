@@ -60,9 +60,11 @@ export default function ZonaClientPage({ zona }: ZonaClientPageProps) {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5 }}
-          className="flex flex-col min-h-dvh pb-28 dot-grid"
+          className="flex flex-col h-dvh overflow-hidden dot-grid"
         >
-          {/* Header */}
+          {/* --- FIXED TOP SECTION --- */}
+          <div className="flex-shrink-0 bg-slate-950/90 backdrop-blur-xl border-b border-slate-800/60 z-40 relative pt-1 pb-3">
+            {/* Header */}
           <header className="px-6 pt-6 pb-2 flex items-center justify-between">
             <Link href="/">
               <img
@@ -140,7 +142,10 @@ export default function ZonaClientPage({ zona }: ZonaClientPageProps) {
               </div>
             </div>
           )}
+          </div> {/* END FIXED TOP SECTION */}
 
+          {/* --- SCROLLABLE CONTENT SECTION --- */}
+          <div className="flex-1 overflow-y-auto overflow-x-hidden relative pb-32">
           {/* Content */}
           <motion.div
             className="flex-1 mt-4 touch-pan-y"
@@ -198,6 +203,8 @@ export default function ZonaClientPage({ zona }: ZonaClientPageProps) {
               autoPlay={true}
             />
           )}
+
+          </div> {/* END SCROLLABLE CONTENT SECTION */}
 
           {/* Onboarding Interactive Guide Overlay */}
           <AnimatePresence>
