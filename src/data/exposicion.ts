@@ -8,7 +8,13 @@ export type ObraRelacionada = {
 export type LocalHito = {
   titulo: string;
   descripcion: string;
-  audioUrl: string;
+  audioUrl?: string;
+  imagenes?: string[];
+};
+
+export type CarreraHito = {
+  titulo: string;
+  descripcion: string;
   imagenes?: string[];
 };
 
@@ -22,6 +28,9 @@ export type Hito = {
   imagenes?: string[];
   obraRelacionada?: ObraRelacionada;
   local?: LocalHito;
+  carreras?: CarreraHito;
+  era?: string;
+  tags?: string[];
 };
 
 export type ZonaKey = "inacap" | "construccion" | "herramientas";
@@ -43,139 +52,97 @@ export const exposicionData: Record<ZonaKey, Hito[]> = {
     {
       id: 1,
       anio: 1966,
-      titulo: "Fundación de INACAP",
-      descripcion:
-        "El Instituto Nacional de Capacitación Profesional nace como una respuesta a la necesidad de formar técnicos calificados para el desarrollo industrial de Chile. Con sedes iniciales en Santiago, comienza una misión que transformará la educación técnica del país.",
+      titulo: "Orígenes y Primeros Oficios (1966 - 1970)",
+      descripcion: "Fundación de INACAP como Universidad Laboral y establecimiento de la primera sede en Valdivia. El 21 de octubre de 1966 se crea el Instituto Nacional de Capacitación Profesional por Decreto Supremo N°2541 bajo el gobierno de Eduardo Frei Montalva, inaugurando su primera sede nacional como una \"Universidad Laboral\".",
       audioUrl: "/assets/audio/inacap/inacap_1.mp3",
-      imagenes: [
-        "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&auto=format&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=600&auto=format&fit=crop&q=80"
-      ],
-      local: {
-        titulo: "Inicios en Valdivia",
-        descripcion: "INACAP inicia sus primeras actividades formativas y de capacitación en la Región de Los Ríos, respondiendo a la necesidad de operarios técnicos calificados para el sector fluvial y de manufactura local.",
-        audioUrl: "/assets/audio/inacap/inacap_local_1.mp3",
-        imagenes: [
-          "https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?w=600&auto=format&fit=crop&q=80"
-        ]
-      }
+      imagenes: ["https://media.base44.com/images/public/6a2bd8c2d4630f55705365a9/96a8f64b9_Screenshot_20260611_232656_PDFMaker.jpg"],
+      carreras: {"titulo": "Primeros Cursos de Capacitación en Oficios", "descripcion": "En sus primeros años, INACAP no impartía carreras sino cursos de capacitación en oficios industriales como Tornería, Soldadura, Mecánica y Confección. Estos programas estaban orientados a la formación rápida de mano de obra calificada para el sector productivo, sentando las bases de la educación técnica en Chile.", "imagenes": ["https://media.base44.com/images/public/6a32f160faa893c373a980f6/5cb9c1889_Capturadepantalla164.png"]},
+      local: {"titulo": "Inauguración de la Primera Sede INACAP Valdivia", "descripcion": "La Sede Valdivia de INACAP fue inaugurada en 1970, como parte de la expansión nacional del Instituto Nacional de Capacitación Profesional (INACAP), fundado en 1966 por el Estado de Chile. Su creación respondía al necesario impulso en educación técnico-profesional, en un momento en que Chile experimentaba un proceso de industrialización acelerado, requiriendo mano de obra calificada y habilidades aplicadas a la industria y servicios locales.", "imagenes": ["https://media.base44.com/images/public/6a3303b6d623a23befeecf48/6fe1b5712_image.png"]},
     },
     {
       id: 2,
-      anio: 1972,
-      titulo: "Expansión Nacional",
-      descripcion:
-        "INACAP amplía su cobertura a regiones, abriendo sedes en Valparaíso, Concepción y Antofagasta. La formación técnica llega a miles de jóvenes que antes no tenían acceso a educación especializada.",
+      anio: 1977,
+      titulo: "Consolidación como OTEC (1977)",
+      descripcion: "La Corporación INACAP se convierte oficialmente en la OTEC más grande y antigua registrada en Chile, permitiendo comercializar programas bajo el beneficio de la Franquicia Tributaria de la época.",
       audioUrl: "/assets/audio/inacap/inacap_2.mp3",
-      local: {
-        titulo: "Talleres Pioneros",
-        descripcion: "Se habilitan dependencias locales adaptadas a la geografía y al quehacer industrial del sur. Se imparten los primeros talleres prácticos orientados a mecánica naval y carpintería de ribera.",
-        audioUrl: "/assets/audio/inacap/inacap_local_2.mp3"
-      }
+      imagenes: ["https://media.base44.com/images/public/6a3303b6d623a23befeecf48/15298b2cc_image.png"],
+      local: {"titulo": "Primeros Talleres Valdivianos", "descripcion": "Se habilitan dependencias locales adaptadas a la geografía y al quehacer industrial del sur, orientadas a mecánica naval y carpintería de ribera.", "audioUrl": "/assets/audio/inacap/inacap_local_2.mp3"},
     },
     {
       id: 3,
-      anio: 1978,
-      titulo: "Reconocimiento Institucional",
-      descripcion:
-        "Se consolida como la principal institución de formación técnica del país, con programas reconocidos por la industria y un cuerpo docente de excelencia proveniente del mundo profesional.",
+      anio: 1981,
+      titulo: "Reforma Universitaria y Títulos Técnicos (1981 - 1982)",
+      descripcion: "En el contexto de la reforma introducida durante la Dictadura Militar, se privatiza la institución y adopta formalmente la calidad legal de Instituto Profesional (IP) y Centro de Formación Técnica (CFT).",
       audioUrl: "/assets/audio/inacap/inacap_3.mp3",
-      local: {
-        titulo: "Aporte al Sector Maderero",
-        descripcion: "INACAP consolida su presencia regional capacitando a técnicos en operaciones forestales y aserraderos, aportando al motor de crecimiento más relevante del Valdivia de la época.",
-        audioUrl: "/assets/audio/inacap/inacap_local_3.mp3"
-      }
+      imagenes: ["https://media.base44.com/images/public/6a2bf121331e0303a1ce364c/16c88f0dd_WA_1781265174273.jpg"],
+      carreras: {"titulo": "Primeros Títulos Técnicos de Nivel Superior", "descripcion": "Con la transformación de INACAP en CFT e IP, nacen los primeros programas con título técnico de nivel superior de 2 años de duración. Se pasa de la simple capacitación en oficios a la formación técnica profesional acreditada, un salto cualitativo que marca el inicio de la educación superior técnica en la institución.", "imagenes": ["https://media.base44.com/images/public/6a32f160faa893c373a980f6/df9c57a08_Capturadepantalla163.png"]},
+      local: {"titulo": "Llegada de la Computación", "descripcion": "Llegan los primeros computadores personales a la sede. Se abre un moderno laboratorio informático facilitando el acceso a herramientas tecnológicas.", "audioUrl": "/assets/audio/inacap/inacap_local_5.mp3"},
     },
     {
       id: 4,
-      anio: 1985,
-      titulo: "Modernización Curricular",
-      descripcion:
-        "Se actualizan los planes de estudio para incorporar nuevas tecnologías y metodologías de enseñanza. Los talleres se equipan con maquinaria de última generación importada especialmente para la formación práctica.",
+      anio: 1995,
+      titulo: "Autonomía y Era Digital Temprana (1995 - 1997)",
+      descripcion: "El Instituto Profesional alcanza la plena autonomía académica y administrativa respecto al Estado. Además, se impulsa la Beca Empresario orientada a estudiantes con destacado rendimiento y perfil emprendedor. Mediante el Decreto 534 del Ministerio de Educación, se declara la plena autonomía del Centro de Formación Técnica tras exhaustivas auditorías de solvencia financiera, idoneidad docente y transparencia evaluativa.",
       audioUrl: "/assets/audio/inacap/inacap_4.mp3",
-      local: {
-        titulo: "Nuevos Talleres Mecánicos",
-        descripcion: "Pese a las dificultades económicas nacionales, la sede Valdivia inaugura talleres equipados con tornos y soldadura eléctrica para simular de forma realista el trabajo en los astilleros locales.",
-        audioUrl: "/assets/audio/inacap/inacap_local_4.mp3"
-      }
+      imagenes: ["https://media.base44.com/images/public/6a2bf121331e0303a1ce364c/d87fcdd9b_WA_1781264816464.jpeg", "https://media.base44.com/images/public/6a3303b6d623a23befeecf48/c3c5e4aac_image.png"],
+      carreras: {"titulo": "Llegada de la Informática: Analista Programador", "descripcion": "INACAP se posiciona como pionera en automatización y tecnología digital a mediados de los 90, incorporando la carrera de Analista Programador. Este hito demuestra que la sede fue vanguardista en informática, con ya 30 años de trayectoria formando profesionales del área tecnológica.", "imagenes": ["https://media.base44.com/images/public/6a32f160faa893c373a980f6/a0ba9c038_Capturadepantalla1631.png"]},
+      local: {"titulo": "Acreditación y Vinculación", "descripcion": "La sede local celebra la acreditación con alta vinculación al medio, colaborando de cerca con el ecosistema de astilleros y el comercio regional para mejorar la empleabilidad de sus egresados.", "audioUrl": "/assets/audio/inacap/inacap_local_7.mp3"},
     },
     {
       id: 5,
-      anio: 1992,
-      titulo: "Era Digital Comienza",
-      descripcion:
-        "Los primeros laboratorios de computación se instalan en las sedes principales. INACAP lidera la integración tecnológica en la educación técnica, preparing a sus estudiantes para la revolución digital.",
+      anio: 2001,
+      titulo: "Pioneros en Calidad (2001 - 2005)",
+      descripcion: "INACAP se convierte en la primera institución de educación superior en Chile en certificar todo su sistema académico bajo la norma internacional ISO 9001:2000, auditada por la firma suiza SGS. El Centro de Formación Técnica se somete voluntariamente al proceso de evaluación externa ante la CNA-Chile, obteniendo su primera acreditación institucional en las áreas de Gestión, Docencia y Vinculación con el Medio.",
       audioUrl: "/assets/audio/inacap/inacap_5.mp3",
-      local: {
-        titulo: "Conectividad Austral",
-        descripcion: "Llegan los primeros computadores personales a la sede. Se abre un moderno laboratorio informático facilitando el acceso a herramientas de contabilidad e informática para jóvenes valdivianos.",
-        audioUrl: "/assets/audio/inacap/inacap_local_5.mp3"
-      }
+      imagenes: ["https://media.base44.com/images/public/6a2bf121331e0303a1ce364c/ada12d0f7_WA_1781265215003.jpeg", "https://media.base44.com/images/public/6a2bf121331e0303a1ce364c/8fbfe9990_WA_1781266487785.jpeg"],
+      local: {"titulo": "Laboratorios de Especialidad", "descripcion": "El Aprendizaje Basado en Competencias se afianza en Valdivia con laboratorios rediseñados y metodologías activas orientadas a proyectos prácticos en áreas forestales, acuícolas y de servicios."},
     },
     {
       id: 6,
-      anio: 1999,
-      titulo: "Universidad Tecnológica",
-      descripcion:
-        "INACAP da un salto cualitativo al obtener el reconocimiento como Universidad Tecnológica, ampliando su oferta académica con carreras profesionales e ingenierías aplicadas.",
+      anio: 2006,
+      titulo: "Sistema Integrado e Ingenierías (2002 - 2006)",
+      descripcion: "Se funda la Universidad Tecnológica de Chile INACAP, incorporando el grado universitario a su oferta y completando un modelo integrado único (CFT, IP y Universidad). Nota: En 2020 inició un plan de cierre programado de la rama universitaria para focalizarse enteramente en el CFT e IP hacia el 2030.",
       audioUrl: "/assets/audio/inacap/inacap_6.mp3",
-      local: {
-        titulo: "Sello Profesional e Ingeniería",
-        descripcion: "Con la transformación de INACAP en Universidad Tecnológica, la sede Valdivia amplía su oferta integrando ingenierías aplicadas que apoyen la naciente industria pesquera y logística de la Región.",
-        audioUrl: "/assets/audio/inacap/inacap_local_6.mp3"
-      }
+      imagenes: ["https://media.base44.com/images/public/6a2bf121331e0303a1ce364c/896bf9ed8_WA_1781265238856.jpeg"],
+      carreras: {"titulo": "Llegada de las Ingenierías", "descripcion": "Con la creación de la Universidad Tecnológica de Chile INACAP en 2005, se incorporan las primeras carreras de ingeniería al catálogo de oferta académica. Este período marca la consolidación de INACAP como una institución de educación superior integral, capaz de ofrecer desde títulos técnicos hasta grados universitarios de ingeniería.", "imagenes": ["https://media.base44.com/images/public/6a32f160faa893c373a980f6/fa3615e68_007907318_1-b4fdfe638430eac401b807e35ce5b768-768x994.png"]},
+      local: {"titulo": "Sello Profesional e Ingeniería", "descripcion": "La sede Valdivia amplía su oferta integrando ingenierías aplicadas que apoyen la naciente industria pesquera y logística de la Región."},
     },
     {
       id: 7,
-      anio: 2005,
-      titulo: "Acreditación y Calidad",
-      descripcion:
-        "Se obtienen las primeras acreditaciones institucionales, validando la calidad educativa ante organismos nacionales e internacionales. Los egresados son reconocidos por su preparación práctica.",
+      anio: 2016,
+      titulo: "Gratuidad e Inclusión (2016)",
+      descripcion: "Se expone el contexto de la implementación de la política pública de Gratuidad universal en la educación superior chilena bajo el gobierno de Michelle Bachelet, detallando los requisitos socioeconómicos y académicos exigidos.",
       audioUrl: "/assets/audio/inacap/inacap_7.mp3",
-      local: {
-        titulo: "Acreditación y Vinculación",
-        descripcion: "La sede local celebra la acreditación con alta vinculación al medio, colaborando de cerca con el ecosistema de astilleros y el comercio regional para mejorar la empleabilidad de sus egresados.",
-        audioUrl: "/assets/audio/inacap/inacap_local_7.mp3"
-      }
+      imagenes: ["https://media.base44.com/images/public/6a2bf121331e0303a1ce364c/89700e8b9_WA_1781266348266.jpeg"],
+      local: {"titulo": "Innovación Educativa contra la Pobreza", "descripcion": "Estudiantes de Psicopedagogía de la sede desarrollaron y donaron materiales multimedia educativos a la Fundación para la Superación de la Pobreza de Los Ríos. Bajo la guía de los docentes Patricia Oportus y Rodrigo Cabrera, los alumnos crearon cuentos interactivos, trabalenguas, adivinanzas y un set de estimulación para fortalecer habilidades cognitivas en niños de sectores vulnerables. Además de apoyar la inclusión social, la iniciativa sirvió como retribución a la Fundación por recibir a estudiantes de la sede en sus prácticas profesionales.", "imagenes": ["https://media.base44.com/images/public/6a3303b6d623a23befeecf48/3d9950a06_image.png"]},
     },
     {
       id: 8,
-      anio: 2012,
-      titulo: "Innovación Pedagógica",
-      descripcion:
-        "Se implementa el modelo de Aprendizaje Basado en Competencias (ABC), revolucionando la forma de enseñar y evaluar. Los estudiantes aprenden haciendo, en entornos que simulan el mundo laboral real.",
+      anio: 2017,
+      titulo: "Crecimiento Regional y Vanguardia Tecnológica (2017 - 2019)",
+      descripcion: "Se marca un antes y un después para la educación técnica en la Región de Los Ríos con el histórico traslado hacia el nuevo complejo tecnológico en Avenida Pedro Aguirre Cerda (sector Las Ánimas). La infraestructura de 15.800 m² integró sistemas de vanguardia para albergar a más de 5.000 estudiantes.",
       audioUrl: "/assets/audio/inacap/inacap_8.mp3",
-      local: {
-        titulo: "Laboratorio de Especialidad",
-        descripcion: "El Aprendizaje Basado en Competencias se afianza en Valdivia con laboratorios rediseñados y metodologías activas orientadas a proyectos prácticos en áreas forestales, acuícolas y de servicios.",
-        audioUrl: "/assets/audio/inacap/inacap_local_8.mp3"
-      }
+      imagenes: ["https://media.base44.com/images/public/6a2bd8c2d4630f55705365a9/63651fedf_ap_sede_inacap_valdivia.jpg"],
+      carreras: {"titulo": "Carreras de Vanguardia Tecnológica", "descripcion": "Se incorporan carreras de última generación como Ciberseguridad, Automatización y Robótica Industrial, respondiendo a las demandas de la Industria 4.0. Estas nuevas ofertas académicas justifican la implementación de laboratorios de Realidad Virtual y equipamiento tecnológico de punta en las sedes a nivel nacional.", "imagenes": ["https://media.base44.com/images/public/6a32f160faa893c373a980f6/c5d0b2627_Capturadepantalla165.png"]},
+      local: {"titulo": "Epicentro de Innovación Docente y Inclusión Femenina Temprana en STEM", "descripcion": "La sede se convirtió en el punto de encuentro nacional al albergar la segunda versión del Congreso Tecnológico Docente de Informática y Telecomunicaciones. El encuentro reunió a académicos de distintas sedes de Chile y a expositores internacionales de Ecuador y Francia. Se presentaron ocho proyectos de vanguardia enfocados en internet de las cosas (IoT), robótica, programación, análisis de datos y aprendizaje inmersivo, incluyendo talleres prácticos con tecnología Arduino aplicados a la educación. En conjunto con la Seremi de la Mujer y la Equidad de Género de Los Ríos, la sede organizó el primer concurso regional de robótica y programación exclusivo para alumnas de enseñanza media, marcando un claro hito precursor de la actual Beca Mujeres STEM. Convocó a jóvenes de cinco establecimientos: Liceo Comercial de Valdivia, Colegio Laico, Colegio Santa Marta, Liceo Rodulfo Armando Philippi de Paillaco y el Colegio Teniente Merino, que se coronó campeón. Las estudiantes pasaron por talleres intensivos con robots MBOT dictados por docentes de la institución antes de medirse en desafíos prácticos de velocidad y precisión.", "imagenes": ["https://media.base44.com/images/public/6a3303b6d623a23befeecf48/ea65b73e6_image.png", "https://media.base44.com/images/public/6a3303b6d623a23befeecf48/5f7d0d0c6_image.png"]},
     },
     {
       id: 9,
       anio: 2020,
-      titulo: "Transformación Digital Total",
-      descripcion:
-        "La pandemia acelera la transformación digital de INACAP. Se desarrollan plataformas de aprendizaje virtual, laboratorios remotos y nuevas metodologías híbridas que permanecen hasta hoy.",
+      titulo: "Modernidad Digital (2020 - 2023)",
+      descripcion: "Se acelera la transformación digital debido a la contingencia, destacando un convenio estratégico con Huawei para capacitar en tecnologías de la Industria 4.0 (IA, Big Data, 5G) e intensificando la educación virtual.",
       audioUrl: "/assets/audio/inacap/inacap_9.mp3",
-      local: {
-        titulo: "Innovación en Pandemia",
-        descripcion: "La sede Valdivia adapta sus aulas al formato online y mixto. Los laboratorios de mecánica y electricidad continúan operando de forma semipresencial bajo estrictos resguardos sanitarios.",
-        audioUrl: "/assets/audio/inacap/inacap_local_9.mp3"
-      }
+      imagenes: ["https://media.base44.com/images/public/6a2bf121331e0303a1ce364c/4c6d5b5b2_IMG-20260612-WA0007.jpg"],
+      local: {"titulo": "Conmemoración Académica 80 Años TP / Red de Exalumnos Destacados", "descripcion": "La sede se convirtió en el epicentro regional de la conmemoración de los 80 años de la Educación Técnico Profesional (TP) en Chile. Durante este hito se lideraron seminarios clave que reunieron a autoridades públicas y a destacados empresarios de la zona para discutir el futuro técnico de la región. Además, Se realizó el lanzamiento oficial de la Red de Exalumnos Destacados de Valdivia. Esta iniciativa fue diseñada con el objetivo de posicionar estratégicamente a los graduados del campus como mentores y líderes de opinión en sectores críticos para la zona, tales como la informática y la gestión de riesgos frente a desastres.", "imagenes": ["https://media.base44.com/images/public/6a3303b6d623a23befeecf48/3878c4dc5_image.png", "https://media.base44.com/images/public/6a3303b6d623a23befeecf48/c279eb488_image.png"]},
     },
     {
       id: 10,
       anio: 2026,
-      titulo: "60 Años de Excelencia",
-      descripcion:
-        "INACAP celebra 6 décadas de compromiso con la educación técnica y profesional de Chile. Con más de 26 sedes a nivel nacional y miles de egresados, mira al futuro con la misma pasión del primer día.",
+      titulo: "Máxima Acreditación y 60 Años (2024 - 2026)",
+      descripcion: "Tanto el Instituto Profesional como el Centro de Formación Técnica alcanzan la excelencia con la obtención de la acreditación máxima de 7 años por parte de la Comisión Nacional de Acreditación (CNA). Coincidiendo con su 60º aniversario, se lanzan beneficios arancelarios (50% y 100% de descuento) para estudiantes nuevos mayores de 50 y 60 años, fomentando el aprendizaje a lo largo de la vida. Se concreta la integración estratégica y legal del CFT y el IP bajo una única entidad: el Instituto Profesional INACAP, actuando este como continuador legal para dar un paso más ágil en la articulación de carreras técnicas y profesionales.",
       audioUrl: "/assets/audio/inacap/inacap_10.mp3",
-      local: {
-        titulo: "Sede del Futuro",
-        descripcion: "INACAP Valdivia conmemora 60 años formando profesionales con foco en sustentabilidad, digitalización industrial e innovación aplicada en alianza con el desarrollo fluvial de la Región de Los Ríos.",
-        audioUrl: "/assets/audio/inacap/inacap_local_10.mp3"
-      }
+      imagenes: ["https://media.base44.com/images/public/6a2bf121331e0303a1ce364c/7722f9e9f_WA_1781266502073.jpeg", "https://media.base44.com/images/public/6a2bf121331e0303a1ce364c/db46bd78e_WA_1781266832356.jpeg", "https://media.base44.com/images/public/6a2bf121331e0303a1ce364c/779eb5920_IMG-20260612-WA0020.jpg"],
+      local: {"titulo": "Récord de Titulados Sede Valdivia y Alianzas Estratégicas", "descripcion": "Un total de 483 nuevos técnicos y profesionales de todas las áreas académicas recibieron sus títulos. Este acontecimiento se consolidó como un récord histórico para el campus, celebrándose en una masiva e inédita ceremonia presencial que impactó directamente en la fuerza laboral local. Comenzó la alianza con la icónica Cervecería Kunstmann, dictando cátedras especializadas en análisis de aguas y estilos tradicionales de cerveza para productores locales. Este hito fue el puntapié inicial que unió la academia con el sector productivo más característico de la Región de Los Ríos. El alumno de Ingeniería en Telecomunicaciones de la sede, Francisco Loncomilla, alcanzó un histórico 3.º lugar mundial en el track de Network de la \"Huawei ICT Competition\" celebrada en Shenzhen, China. Este logro internacional posicionó la calidad de la formación técnica y tecnológica de la sede a nivel global.", "imagenes": ["https://media.base44.com/images/public/6a3303b6d623a23befeecf48/2ed125b7d_image.png", "https://media.base44.com/images/public/6a3303b6d623a23befeecf48/9615f7a58_image.png", "https://media.base44.com/images/public/6a3303b6d623a23befeecf48/69591ccd3_image.png"]},
     },
   ],
 

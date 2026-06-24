@@ -9,7 +9,7 @@ interface HitoContentProps {
   hito: Hito;
   zona: ZonaKey;
   direction: number; // 1 = forward, -1 = backward
-  viewMode?: "nacional" | "local";
+  viewMode?: "nacional" | "local" | "carreras";
 }
 
 const variants = {
@@ -43,9 +43,21 @@ export default function HitoContent({ hito, zona, direction, viewMode = "naciona
   const [showObra, setShowObra] = useState(false);
 
   const isLocalActive = viewMode === "local" && !!hito.local;
-  const currentTitle = isLocalActive ? hito.local!.titulo : hito.titulo;
-  const currentDesc = isLocalActive ? hito.local!.descripcion : hito.descripcion;
-  const currentImages = isLocalActive && hito.local?.imagenes ? hito.local.imagenes : hito.imagenes;
+  const isCarrerasActive = viewMode === "carreras" && !!hito.carreras;
+  
+  let currentTitle = hito.titulo;
+  let currentDesc = hito.descripcion;
+  let currentImages = hito.imagenes;
+
+  if (isLocalActive && hito.local) {
+    currentTitle = hito.local.titulo;
+    currentDesc = hito.local.descripcion;
+    currentImages = hito.local.imagenes || hito.imagenes;
+  } else if (isCarrerasActive && hito.carreras) {
+    currentTitle = hito.carreras.titulo;
+    currentDesc = hito.carreras.descripcion;
+    currentImages = hito.carreras.imagenes || hito.imagenes;
+  }
 
   // Auto-play slideshow every 4 seconds
   useEffect(() => {

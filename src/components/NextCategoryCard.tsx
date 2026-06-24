@@ -196,7 +196,7 @@ export default function NextCategoryCard({
           </h3>
 
           <p className="text-sm text-slate-350 mb-6 leading-relaxed max-w-xs mx-auto">
-            Has completado el <strong>100% de la exposición</strong> (los 30 hitos históricos). Agradecemos tu participación en este recorrido conmemorativo de los 60 Años de INACAP.
+            Has completado el <strong>100% de la exposición</strong> (los 25 hitos históricos). Agradecemos tu participación en este recorrido conmemorativo de los 60 Años de INACAP.
           </p>
 
           <div className="flex flex-col gap-3">
