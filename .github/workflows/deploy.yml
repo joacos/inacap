@@ -36,19 +36,25 @@ jobs:
             async function deploy() {
                 const client = new ftp.Client();
                 client.ftp.verbose = true;
+                client.ftp.timeout = 60000; // 60 seconds timeout
                 try {
                     await client.access({
                         host: process.env.FTP_SERVER,
                         user: process.env.FTP_USERNAME,
                         password: process.env.FTP_PASSWORD,
-                        secure: 'control',
-                        secureOptions: { rejectUnauthorized: false }
+                        secure: false // Trying plain FTP to bypass strict cPanel TLS NAT issues
                     });
                     console.log('Connected to FTP server.');
+                    
+                    // Force the client to ignore PASV IP and use the host IP
+                    // This is a common fix for cPanel NAT issues
+                    client.ftp.ignorePasvAddress = true; 
+
+                    await client.ensureDir('/');
                     await client.uploadFromDir('out', '/');
                     console.log('Upload complete!');
                 } catch(err) {
-                    console.error(err);
+                    console.error('Deployment failed:', err);
                     process.exit(1);
                 }
                 client.close();
