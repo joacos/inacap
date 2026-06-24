@@ -206,18 +206,7 @@ export default function HitoContent({ hito, zona, direction, viewMode = "naciona
             <div className="pointer-events-none absolute top-0 left-0 right-0 h-6 z-10 bg-gradient-to-b from-[#020617] to-transparent" />
             <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-8 z-10 bg-gradient-to-t from-[#020617] to-transparent" />
 
-            {/* Floating button on top of header (only for construccion zone) */}
-            {zona === "construccion" && obrasArray.length > 0 && (
-              <button
-                onClick={() => setShowObra(true)}
-                className="absolute top-4 left-4 z-30 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-950/85 hover:bg-slate-900 border border-slate-800/80 text-slate-200 hover:text-white text-[10px] font-bold transition-all duration-300 hover:scale-[1.03] active:scale-[0.97] cursor-pointer shadow-lg backdrop-blur-sm"
-              >
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-inacap-red-light">
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                </svg>
-                <span>{obrasArray.length > 1 ? `Ver Obras (${obrasArray.length})` : "Obra Emblemática"}</span>
-              </button>
-            )}
+
           </motion.div>
 
           {/* Title */}
@@ -265,6 +254,34 @@ export default function HitoContent({ hito, zona, direction, viewMode = "naciona
             <span className="h-px flex-1 bg-slate-800" />
           </motion.div>
 
+          {/* Obras Drawer Trigger */}
+          {zona === "construccion" && obrasArray.length > 0 && (
+            <motion.button
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.3 }}
+              onClick={() => setShowObra(true)}
+              className="mt-8 w-full py-3.5 px-4 bg-slate-900 border border-slate-700/60 rounded-2xl flex items-center justify-between text-slate-300 hover:text-white hover:bg-slate-800 transition-all active:scale-[0.98] shadow-lg group cursor-pointer"
+            >
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-full bg-inacap-red/20 flex items-center justify-center text-inacap-red-light group-hover:bg-inacap-red/30 transition-colors">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                  </svg>
+                </div>
+                <div className="flex flex-col items-start">
+                  <span className="text-sm font-bold">{obrasArray.length > 1 ? `Ver Obras Asociadas` : "Ver Obra Emblemática"}</span>
+                  <span className="text-[10px] text-slate-500 font-medium">{obrasArray.length} {obrasArray.length === 1 ? 'elemento' : 'elementos'}</span>
+                </div>
+              </div>
+              <div className="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 group-hover:text-white group-hover:bg-slate-700 transition-colors">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <path d="M18 15l-6-6-6 6" />
+                </svg>
+              </div>
+            </motion.button>
+          )}
+
         </motion.div>
       </AnimatePresence>
       </div>
@@ -284,11 +301,17 @@ export default function HitoContent({ hito, zona, direction, viewMode = "naciona
             
             {/* Drawer */}
             <motion.div
+              drag="y"
+              dragConstraints={{ top: 0 }}
+              dragElastic={0.2}
+              onDragEnd={(e, info) => {
+                if (info.offset.y > 100) setShowObra(false);
+              }}
               initial={{ y: "100%" }}
               animate={{ y: 0 }}
               exit={{ y: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="fixed inset-x-0 bottom-0 z-50 max-h-[85vh] flex flex-col rounded-t-[2rem] bg-slate-900 border-t border-slate-700/50 shadow-[0_-10px_40px_rgba(0,0,0,0.5)] overflow-hidden"
+              className="fixed inset-x-0 bottom-0 z-50 max-h-[85vh] w-full max-w-lg mx-auto flex flex-col rounded-t-[2rem] bg-slate-900 border-x border-t border-slate-700/50 shadow-[0_-10px_40px_rgba(0,0,0,0.5)] overflow-hidden"
             >
               {/* Drag Handle & Header */}
               <div className="flex-shrink-0 pt-3 pb-4 px-6 bg-slate-900 sticky top-0 z-10 border-b border-slate-800/80">
