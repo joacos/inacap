@@ -63,21 +63,20 @@ export default function ZonaClientPage({ zona }: ZonaClientPageProps) {
           className="flex flex-col h-dvh overflow-hidden dot-grid"
         >
           {/* --- FIXED TOP SECTION --- */}
-          <div className="flex-shrink-0 bg-slate-950/90 backdrop-blur-xl border-b border-slate-800/60 z-40 relative pt-1 pb-3">
-            {/* Header */}
-          <header className="px-6 pt-6 pb-2 flex items-center justify-between">
-            <Link href="/">
-              <img
-                src="/inacap60.png"
-                alt="Logo INACAP 60"
-                className="h-7 w-auto object-contain cursor-pointer hover:opacity-80 transition-opacity"
-              />
-            </Link>
-            <ProgressTracker totalVisited={totalVisited} />
-          </header>
+          <div className="flex-shrink-0 z-40 relative pt-1 pb-0 bg-slate-950">
+            {/* Header bar */}
+            <header className="px-5 pt-3 pb-1 flex items-center justify-between">
+              <Link href="/">
+                <img
+                  src="/inacap60.png"
+                  alt="Logo INACAP 60"
+                  className="h-6 w-auto object-contain cursor-pointer hover:opacity-80 transition-opacity"
+                />
+              </Link>
+              <ProgressTracker totalVisited={totalVisited} />
+            </header>
 
-          {/* Timeline */}
-          <div className="mt-2">
+            {/* Timeline */}
             <TimelineSelector
               hitos={hitos}
               activeId={activeId}
@@ -85,70 +84,72 @@ export default function ZonaClientPage({ zona }: ZonaClientPageProps) {
               zona={zona}
               isVisited={isVisited}
             />
-          </div>
 
-          {/* Switch Toggle (Nacional vs Valdivia) - Only in INACAP zone when not on "Siguiente Categoría" */}
-          {zona === "inacap" && activeId !== 11 && (
-            <div className="flex justify-center mt-4 mb-2 z-20">
-              <div className="inline-flex p-1 bg-slate-950/60 rounded-full border border-slate-800/80 shadow-inner">
-                <button
-                  onClick={() => setViewMode("nacional")}
-                  className={`relative px-5 py-1.5 rounded-full text-xs font-bold transition-colors duration-300 cursor-pointer ${
-                    viewMode === "nacional" ? "text-slate-50" : "text-slate-400 hover:text-slate-200"
-                  }`}
-                >
-                  {viewMode === "nacional" && (
-                    <motion.span
-                      layoutId="viewmode-pill"
-                      className="absolute inset-0 rounded-full bg-inacap-blue shadow-md"
-                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                    />
-                  )}
-                  <span className="relative z-10">Nacional</span>
-                </button>
-                <button
-                  onClick={() => setViewMode("local")}
-                  className={`relative px-5 py-1.5 rounded-full text-xs font-bold transition-colors duration-300 cursor-pointer ${
-                    viewMode === "local" ? "text-slate-50" : "text-slate-400 hover:text-slate-200"
-                  }`}
-                >
-                  {viewMode === "local" && (
-                    <motion.span
-                      layoutId="viewmode-pill"
-                      className="absolute inset-0 rounded-full bg-inacap-blue shadow-md"
-                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                    />
-                  )}
-                  <span className="relative z-10">Valdivia</span>
-                </button>
-                <button
-                  onClick={() => activeHito.carreras && setViewMode("carreras")}
-                  className={`relative px-5 py-1.5 rounded-full text-xs font-bold transition-colors duration-300 ${
-                    !activeHito.carreras ? "opacity-30 cursor-not-allowed" : "cursor-pointer"
-                  } ${
-                    viewMode === "carreras" ? "text-slate-50" : "text-slate-400 hover:text-slate-200"
-                  }`}
-                  disabled={!activeHito.carreras}
-                >
-                  {viewMode === "carreras" && (
-                    <motion.span
-                      layoutId="viewmode-pill"
-                      className="absolute inset-0 rounded-full bg-inacap-blue shadow-md"
-                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                    />
-                  )}
-                  <span className="relative z-10">Carreras</span>
-                </button>
+            {/* Gradient fade extending below the header */}
+            <div className="absolute top-full left-0 right-0 h-16 bg-gradient-to-b from-slate-950 to-transparent pointer-events-none" />
+
+            {/* Switch Toggle (Nacional vs Valdivia vs Carreras) - Fixed below header */}
+            {zona === "inacap" && activeId !== 11 && (
+              <div className="absolute top-full mt-4 left-0 right-0 z-40 flex justify-center pointer-events-none">
+                <div className="inline-flex p-1 bg-slate-950/80 backdrop-blur-md rounded-full border border-slate-800/80 shadow-lg pointer-events-auto">
+                  <button
+                    onClick={() => setViewMode("nacional")}
+                    className={`relative px-4 py-1.5 rounded-full text-[11px] font-bold transition-colors duration-300 cursor-pointer ${
+                      viewMode === "nacional" ? "text-slate-50" : "text-slate-400 hover:text-slate-200"
+                    }`}
+                  >
+                    {viewMode === "nacional" && (
+                      <motion.span
+                        layoutId="viewmode-pill"
+                        className="absolute inset-0 rounded-full bg-inacap-blue shadow-md"
+                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                      />
+                    )}
+                    <span className="relative z-10">Nacional</span>
+                  </button>
+                  <button
+                    onClick={() => setViewMode("local")}
+                    className={`relative px-4 py-1.5 rounded-full text-[11px] font-bold transition-colors duration-300 cursor-pointer ${
+                      viewMode === "local" ? "text-slate-50" : "text-slate-400 hover:text-slate-200"
+                    }`}
+                  >
+                    {viewMode === "local" && (
+                      <motion.span
+                        layoutId="viewmode-pill"
+                        className="absolute inset-0 rounded-full bg-inacap-blue shadow-md"
+                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                      />
+                    )}
+                    <span className="relative z-10">Valdivia</span>
+                  </button>
+                  <button
+                    onClick={() => activeHito.carreras && setViewMode("carreras")}
+                    className={`relative px-4 py-1.5 rounded-full text-[11px] font-bold transition-colors duration-300 ${
+                      !activeHito.carreras ? "opacity-30 cursor-not-allowed" : "cursor-pointer"
+                    } ${
+                      viewMode === "carreras" ? "text-slate-50" : "text-slate-400 hover:text-slate-200"
+                    }`}
+                    disabled={!activeHito.carreras}
+                  >
+                    {viewMode === "carreras" && (
+                      <motion.span
+                        layoutId="viewmode-pill"
+                        className="absolute inset-0 rounded-full bg-inacap-blue shadow-md"
+                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                      />
+                    )}
+                    <span className="relative z-10">Carreras</span>
+                  </button>
+                </div>
               </div>
-            </div>
-          )}
-          </div> {/* END FIXED TOP SECTION */}
+            )}
+          </div>
 
           {/* --- SCROLLABLE CONTENT SECTION --- */}
           <div className="flex-1 overflow-y-auto overflow-x-hidden relative pb-32">
           {/* Content */}
           <motion.div
-            className="flex-1 mt-4 touch-pan-y"
+            className="flex-1 mt-0 touch-pan-y"
             drag="x"
             dragConstraints={{ left: 0, right: 0 }}
             dragElastic={0.6}

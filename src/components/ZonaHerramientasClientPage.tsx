@@ -5,7 +5,6 @@ import { useState, useCallback, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { exposicionData } from "@/data/exposicion";
 import { useProgress } from "@/hooks/useProgress";
-import AudioPlayer from "@/components/AudioPlayer";
 import dynamic from "next/dynamic";
 
 const MindARViewer = dynamic(() => import("@/components/MindARViewer"), {
@@ -19,7 +18,7 @@ export default function ZonaHerramientasClientPage() {
   const [step, setStep] = useState<FlowStep>("instructions");
   
   const [activeToolId, setActiveToolId] = useState<number | null>(null);
-  const [playingAudioId, setPlayingAudioId] = useState<number | null>(null);
+  const [showToolDetail, setShowToolDetail] = useState(false);
 
   const { markVisited, isVisited } = useProgress();
 
@@ -46,14 +45,6 @@ export default function ZonaHerramientasClientPage() {
     }
   }, [markVisited]);
 
-  const handlePlayAudio = (toolId: number) => {
-    if (playingAudioId === toolId) {
-      setPlayingAudioId(null);
-    } else {
-      setPlayingAudioId(toolId);
-    }
-  };
-
   const playBeep = () => {
     try {
       const AudioCtx = window.AudioContext || (window as any).webkitAudioContext;
@@ -75,6 +66,7 @@ export default function ZonaHerramientasClientPage() {
     playBeep();
     markVisited("herramientas", toolId);
     setActiveToolId(toolId);
+    setShowToolDetail(false);
   }, [markVisited]);
 
   return (
@@ -88,7 +80,6 @@ export default function ZonaHerramientasClientPage() {
               onClick={() => {
                 setStep("instructions");
                 setActiveToolId(null);
-                setPlayingAudioId(null);
               }}
               className="text-slate-400 hover:text-slate-100 transition-colors w-8 h-8 rounded-xl bg-slate-900/60 border border-slate-800/40 flex items-center justify-center active:scale-95"
             >
@@ -200,18 +191,6 @@ export default function ZonaHerramientasClientPage() {
                     </p>
                   </div>
                 </div>
-
-                <div className="flex gap-4 items-start p-4 rounded-2xl glass border border-slate-900 shadow-inner">
-                  <div className="w-8 h-8 rounded-xl bg-inacap-blue/10 border border-inacap-blue-light/20 flex items-center justify-center text-xs font-black text-inacap-blue-light flex-shrink-0">
-                    3
-                  </div>
-                  <div>
-                    <h3 className="text-xs font-bold text-slate-200">Escucha la guía</h3>
-                    <p className="text-[10px] text-slate-450 mt-1 leading-relaxed">
-                      Presiona el botón de audio para reproducir la audioguía histórica del hito.
-                    </p>
-                  </div>
-                </div>
               </div>
 
               {/* Action Button */}
@@ -247,16 +226,21 @@ export default function ZonaHerramientasClientPage() {
                 onClose={() => {
                   setStep("instructions");
                   setActiveToolId(null);
-                  setPlayingAudioId(null);
                 }}
               />
 
-              {/* Demo / Simulation trigger overlay for browser preview */}
-              <div className="absolute top-20 left-6 right-6 z-55 bg-slate-950/80 border border-slate-800 p-2.5 rounded-2xl flex items-center justify-between gap-3 shadow-2xl backdrop-blur-sm pointer-events-auto max-w-sm mx-auto">
-                <span className="text-[8px] font-black text-slate-400 uppercase tracking-widest leading-none flex-shrink-0">
-                  Simular QR:
+              {/* AR View Instructions & Simulator */}
+              <div className="absolute top-[88px] left-6 right-6 z-55 flex flex-col items-center gap-3 pointer-events-auto">
+                <span className="bg-slate-950/80 text-slate-200 font-extrabold text-[10px] px-3.5 py-2 rounded-full border border-slate-800 backdrop-blur-sm shadow-xl text-center">
+                  Apunta al código QR / Panel físico 🔍
                 </span>
-                <div className="flex gap-1.5 flex-1 justify-end">
+
+                {/* Demo / Simulation trigger overlay for browser preview */}
+                <div className="bg-slate-950/80 border border-slate-800 p-2.5 rounded-2xl flex items-center justify-between gap-3 shadow-2xl backdrop-blur-sm w-full max-w-sm">
+                  <span className="text-[8px] font-black text-slate-400 uppercase tracking-widest leading-none flex-shrink-0">
+                    Simular QR:
+                  </span>
+                  <div className="flex gap-1.5 flex-1 justify-end">
                   {[1, 2, 3, 4, 5].map((id) => (
                     <button
                       key={id}
@@ -272,87 +256,151 @@ export default function ZonaHerramientasClientPage() {
                   ))}
                 </div>
               </div>
+            </div>
 
-              {/* HUD detail card overlay when target QR code is tracked */}
-              {activeToolId !== null && (
-                <div className="absolute bottom-6 left-6 right-6 z-55 max-w-sm mx-auto pointer-events-auto">
-                  <div className="bg-slate-900/90 border border-slate-850 p-5 rounded-3xl shadow-2xl flex flex-col backdrop-blur-md">
-                    <div className="flex items-center justify-between gap-3 mb-2">
-                      <span className="bg-inacap-blue text-white font-extrabold text-[9px] px-2 py-0.5 rounded-full border border-inacap-blue-light/20">
+            {/* Collapsed Mini-Drawer (HUD) */}
+            <AnimatePresence>
+              {activeToolId !== null && !showToolDetail && (
+                <motion.div 
+                  initial={{ y: 100, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={{ y: 100, opacity: 0 }}
+                  className="absolute bottom-0 left-0 right-0 z-55 max-w-lg mx-auto bg-slate-900 border-x border-t border-slate-700/50 rounded-t-[2rem] p-5 shadow-[0_-10px_40px_rgba(0,0,0,0.5)] cursor-pointer pointer-events-auto"
+                  onClick={() => setShowToolDetail(true)}
+                >
+                  <div className="w-12 h-1.5 mx-auto bg-slate-700 rounded-full mb-3" />
+                  <div className="flex items-center justify-between gap-3">
+                    <div className="flex-1 min-w-0">
+                      <span className="bg-inacap-blue text-white font-extrabold text-[9px] px-2 py-0.5 rounded-full border border-inacap-blue-light/20 mb-1.5 inline-block">
                         Hito {activeToolId} · {hitos[activeToolId - 1].anio}
                       </span>
-
-                      {/* Audio Guide trigger */}
-                      <button
-                        onClick={() => handlePlayAudio(activeToolId)}
-                        className={`flex items-center justify-center w-8 h-8 rounded-lg border transition-all duration-300 active:scale-95 cursor-pointer ${
-                          playingAudioId === activeToolId
-                            ? "bg-emerald-500/20 text-emerald-400 border-emerald-500/40"
-                            : "bg-slate-950 border-slate-800 text-slate-400 hover:text-slate-200"
-                        }`}
-                      >
-                        {playingAudioId === activeToolId ? (
-                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="animate-pulse">
-                            <path d="M11 5L6 9H2v6h4l5 4V5z" />
-                            <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
-                            <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
-                          </svg>
-                        ) : (
-                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <path d="M11 5L6 9H2v6h4l5 4V5z" />
-                            <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
-                          </svg>
-                        )}
-                      </button>
+                      <h3 className="text-sm font-extrabold text-slate-100 truncate">
+                        {hitos[activeToolId - 1].titulo}
+                      </h3>
                     </div>
-
-                    <h3 className="text-base font-extrabold text-slate-100 mb-1 leading-snug">
-                      {hitos[activeToolId - 1].titulo}
-                    </h3>
-                    <p className="text-xs text-slate-400 leading-relaxed">
-                      {hitos[activeToolId - 1].descripcion}
-                    </p>
-
-                    <div className="flex gap-2.5 mt-4">
-                      {/* Button to clear current active hito */}
-                      <button
-                        onClick={() => {
-                          setActiveToolId(null);
-                          setPlayingAudioId(null);
-                        }}
-                        className="flex-1 py-2.5 rounded-xl bg-slate-950 hover:bg-slate-900 text-slate-450 hover:text-slate-200 text-[10px] font-bold border border-slate-850 transition-all active:scale-95 cursor-pointer"
-                      >
-                        Ocultar Detalle
-                      </button>
-                      <button
-                        onClick={() => {
-                          setActiveToolId(null);
-                          setPlayingAudioId(null);
-                        }}
-                        className="flex-1 py-2.5 rounded-xl bg-inacap-blue hover:bg-inacap-blue-light text-slate-50 text-[10px] font-extrabold border border-inacap-blue-light/20 transition-all active:scale-95 cursor-pointer flex items-center justify-center gap-1"
-                      >
-                        <span>Escanear Otro</span>
-                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className="animate-pulse">
-                          <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
-                        </svg>
-                      </button>
-                    </div>
+                    
+                    <button 
+                      onClick={(e) => { 
+                        e.stopPropagation(); 
+                        setActiveToolId(null); 
+                      }}
+                      className="flex-shrink-0 w-8 h-8 rounded-full bg-slate-800 border border-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition-colors cursor-pointer active:scale-95"
+                    >
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                        <path d="M18 6L6 18M6 6l12 12" />
+                      </svg>
+                    </button>
                   </div>
-                </div>
+                  <div className="text-center mt-2">
+                    <span className="text-[10px] text-slate-400 font-semibold animate-pulse flex items-center justify-center gap-1">
+                      Desliza o presiona para ver detalle
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                        <path d="M18 15l-6-6-6 6" />
+                      </svg>
+                    </span>
+                  </div>
+                </motion.div>
               )}
+            </AnimatePresence>
+
+            {/* Full Expanded Drawer */}
+            <AnimatePresence>
+              {showToolDetail && activeToolId !== null && (
+                <>
+                  {/* Backdrop */}
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    onClick={() => setShowToolDetail(false)}
+                    className="absolute inset-0 z-[60] bg-slate-950/70 backdrop-blur-sm cursor-pointer pointer-events-auto"
+                  />
+                  
+                  {/* Drawer */}
+                  <motion.div
+                    drag="y"
+                    dragConstraints={{ top: 0 }}
+                    dragElastic={0.2}
+                    onDragEnd={(e, info) => {
+                      if (info.offset.y > 100) setShowToolDetail(false);
+                    }}
+                    initial={{ y: "100%" }}
+                    animate={{ y: 0 }}
+                    exit={{ y: "100%" }}
+                    transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                    className="absolute inset-x-0 bottom-0 z-[70] max-h-[85vh] w-full max-w-lg mx-auto flex flex-col rounded-t-[2rem] bg-slate-900 border-x border-t border-slate-700/50 shadow-[0_-10px_40px_rgba(0,0,0,0.5)] overflow-hidden pointer-events-auto"
+                  >
+                    {/* Drag Handle & Header */}
+                    <div className="flex-shrink-0 pt-3 pb-4 px-6 bg-slate-900 sticky top-0 z-10 border-b border-slate-800/80">
+                      <div className="w-12 h-1.5 mx-auto bg-slate-700 rounded-full mb-4" />
+                      <div className="flex justify-between items-center">
+                        <span className="bg-inacap-blue text-white font-extrabold text-[10px] px-2.5 py-0.5 rounded-full border border-inacap-blue-light/20 shadow-sm">
+                          Hito {activeToolId} · {hitos[activeToolId - 1].anio}
+                        </span>
+                        <button 
+                          onClick={() => setShowToolDetail(false)}
+                          className="p-2 rounded-full bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700 transition-colors cursor-pointer active:scale-95"
+                        >
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                            <path d="M18 6L6 18M6 6l12 12" />
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Scrollable Content */}
+                    <div className="flex-1 overflow-y-auto px-6 py-6 pb-12 space-y-6 scrollbar-hide">
+                      <div className="flex flex-col gap-4">
+                        {(hitos[activeToolId - 1].imagenes?.length ?? 0) > 0 && (
+                          <div className="relative w-full h-48 sm:h-56 rounded-2xl overflow-hidden bg-slate-800 shadow-lg border border-slate-700/50 flex-shrink-0">
+                            <img
+                              src={hitos[activeToolId - 1].imagenes![0]}
+                              alt={hitos[activeToolId - 1].titulo}
+                              className="w-full h-full object-cover"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
+                          </div>
+                        )}
+                        <div>
+                          <h3 className="text-xl font-extrabold text-slate-100 mb-3 leading-snug">
+                            {hitos[activeToolId - 1].titulo}
+                          </h3>
+                          <p className="text-sm text-slate-300 leading-relaxed">
+                            {hitos[activeToolId - 1].descripcion}
+                          </p>
+                        </div>
+
+                        <div className="flex gap-2.5 mt-2">
+                          <button
+                            onClick={() => setShowToolDetail(false)}
+                            className="flex-1 py-3 rounded-xl bg-slate-950 hover:bg-slate-900 text-slate-450 hover:text-slate-200 text-xs font-bold border border-slate-850 transition-all active:scale-95 cursor-pointer"
+                          >
+                            Volver al Modelo 3D
+                          </button>
+                          <button
+                            onClick={() => {
+                              setShowToolDetail(false);
+                              setActiveToolId(null);
+                            }}
+                            className="flex-1 py-3 rounded-xl bg-inacap-blue hover:bg-inacap-blue-light text-slate-50 text-xs font-extrabold border border-inacap-blue-light/20 transition-all active:scale-95 cursor-pointer flex items-center justify-center gap-1.5 shadow-lg"
+                          >
+                            <span>Escanear Otro</span>
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className="animate-pulse">
+                              <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+                            </svg>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                </>
+              )}
+            </AnimatePresence>
             </motion.div>
           )}
 
         </AnimatePresence>
       </div>
-
-      {/* AUDIO PLAYER OVERLAY */}
-      {playingAudioId !== null && (
-        <AudioPlayer
-          audioUrl={hitos[playingAudioId - 1].audioUrl}
-          title={hitos[playingAudioId - 1].titulo}
-        />
-      )}
     </div>
   );
 }

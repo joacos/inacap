@@ -58,44 +58,23 @@ export default function InteractionGuide({ zona, onClose }: InteractionGuideProp
         </motion.div>
       )}
 
-      {/* 2. Obra Emblemática Guide (Construccion only) */}
-      {zona === "construccion" && (
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          exit="exit"
-          variants={pointerVariants}
-          className="absolute left-8 top-[195px] w-56 flex flex-col items-start z-50"
-        >
-          {/* Arrow pointing up */}
-          <div className="w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-b-[8px] border-b-inacap-red-light/90 ml-4" />
-          <div className="bg-slate-950/90 border border-inacap-red-light/50 rounded-xl px-3 py-2 shadow-[0_0_15px_rgba(239,68,68,0.3)] backdrop-blur-sm">
-            <span className="text-[10px] font-bold text-slate-100 flex items-center gap-1.5">
-              <span className="animate-pulse w-1.5 h-1.5 rounded-full bg-inacap-red-light" />
-              🏛️ Obra Emblemática
-            </span>
-            <p className="text-[8px] text-slate-400 mt-0.5 leading-relaxed">
-              Toca este botón para ver detalles de la obra
-            </p>
-          </div>
-        </motion.div>
-      )}
-
-      {/* 3. Scroll Down Guide (Construccion and Herramientas) */}
+      {/* 2. Scroll Down Guide (Construccion and Herramientas) */}
       {(zona === "construccion" || zona === "herramientas") && (
         <motion.div
           initial="hidden"
           animate="visible"
           exit="exit"
           variants={pointerVariants}
-          className="absolute left-1/2 -translate-x-1/2 bottom-[145px] w-64 flex flex-col items-center z-50"
+          className="absolute left-1/2 -translate-x-1/2 bottom-[145px] w-72 flex flex-col items-center z-50"
         >
           <div className="bg-slate-950/90 border border-slate-800 rounded-xl px-4 py-2.5 text-center shadow-[0_0_20px_rgba(255,255,255,0.05)] backdrop-blur-sm">
             <span className="text-[10px] font-bold text-slate-200 flex items-center gap-1.5 justify-center">
-              🕶️ Modelos 3D y Realidad Aumentada
+              {zona === "construccion" ? "🏛️ Obras Emblemáticas" : "🕶️ Modelos 3D y Realidad Aumentada"}
             </span>
             <p className="text-[8px] text-slate-450 mt-0.5 leading-relaxed">
-              Desliza hacia abajo para interactuar con la herramienta
+              {zona === "construccion" 
+                ? "Desliza hacia abajo para ver los detalles de las obras" 
+                : "Desliza hacia abajo para interactuar con la herramienta"}
             </p>
             {/* Animated bouncing arrow */}
             <motion.div

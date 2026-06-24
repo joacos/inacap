@@ -42,6 +42,7 @@ export default function HitoContent({ hito, zona, direction, viewMode = "naciona
   const [imgIndex, setImgIndex] = useState(0);
   const [showObra, setShowObra] = useState(false);
   const [obraIndex, setObraIndex] = useState(0);
+  const [isFullscreen, setIsFullscreen] = useState(false);
 
   const obrasArray = hito.obrasRelacionadas || (hito.obraRelacionada ? [hito.obraRelacionada] : []);
 
@@ -76,6 +77,7 @@ export default function HitoContent({ hito, zona, direction, viewMode = "naciona
     setImgIndex(0);
     setShowObra(false);
     setObraIndex(0);
+    setIsFullscreen(false);
   }, [hito.id, viewMode]);
 
   return (
@@ -94,37 +96,12 @@ export default function HitoContent({ hito, zona, direction, viewMode = "naciona
         >
 
 
-          {/* Swipe indicator (only on hito 10 to invite user to continue) */}
-          {hito.id === 10 && (
-            <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1, duration: 0.4 }}
-              className="mb-4 flex flex-col items-center justify-center gap-2 text-slate-400 text-center"
-            >
-              <div className="flex items-center gap-2 bg-slate-900/60 border border-slate-800/80 px-4 py-2 rounded-full glass-elevated shadow-lg animate-pulse-glow">
-                <span className="text-[11px] font-semibold tracking-wide text-slate-200">
-                  Desliza para finalizar recorrido
-                </span>
-                <svg
-                  className="w-3.5 h-3.5 text-inacap-blue-light animate-bounce-horizontal"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                  viewBox="0 0 24 24"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </div>
-            </motion.div>
-          )}
-
           {/* Header block (always present to keep layout structure uniform) */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.15, duration: 0.3 }}
-            className="relative -mx-6 h-52 sm:h-64 overflow-hidden mb-6 bg-slate-950/20 group flex items-center justify-center dot-grid"
+            className="relative -mx-6 h-64 sm:h-80 overflow-hidden mb-6 bg-slate-950/20 group flex items-center justify-center dot-grid"
           >
             {currentImages && currentImages.length > 0 ? (
               <>
@@ -137,7 +114,8 @@ export default function HitoContent({ hito, zona, direction, viewMode = "naciona
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.4 }}
-                    className="w-full h-full object-cover absolute inset-0"
+                    className="w-full h-full object-cover absolute inset-0 cursor-pointer"
+                    onClick={() => setIsFullscreen(true)}
                   />
                 </AnimatePresence>
 
@@ -236,7 +214,7 @@ export default function HitoContent({ hito, zona, direction, viewMode = "naciona
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.25, duration: 0.4 }}
-            className="text-base text-slate-300 leading-relaxed max-w-prose"
+            className="text-sm text-slate-300 leading-relaxed max-w-prose"
           >
             {currentDesc}
           </motion.p>
@@ -280,6 +258,31 @@ export default function HitoContent({ hito, zona, direction, viewMode = "naciona
                 </svg>
               </div>
             </motion.button>
+          )}
+
+          {/* Swipe indicator (only on hito 10 to invite user to continue) */}
+          {hito.id === 10 && (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.45, duration: 0.4 }}
+              className="mt-8 mb-2 flex flex-col items-center justify-center gap-2 text-slate-400 text-center"
+            >
+              <div className="flex items-center gap-2 bg-slate-900/60 border border-slate-800/80 px-4 py-2 rounded-full glass-elevated shadow-lg animate-pulse-glow">
+                <span className="text-[11px] font-semibold tracking-wide text-slate-200">
+                  Desliza para finalizar recorrido
+                </span>
+                <svg
+                  className="w-3.5 h-3.5 text-inacap-blue-light animate-bounce-horizontal"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </div>
+            </motion.div>
           )}
 
         </motion.div>
@@ -357,6 +360,38 @@ export default function HitoContent({ hito, zona, direction, viewMode = "naciona
               </div>
             </motion.div>
           </>
+        )}
+      </AnimatePresence>
+
+      {/* Full-screen Image Modal */}
+      <AnimatePresence>
+        {isFullscreen && currentImages && currentImages.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[60] bg-black/95 flex items-center justify-center p-4 cursor-zoom-out"
+            onClick={() => setIsFullscreen(false)}
+          >
+            <motion.img
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              src={currentImages[imgIndex]}
+              alt={`${currentTitle} - Pantalla completa`}
+              className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
+            />
+            {/* Close button */}
+            <button
+              onClick={() => setIsFullscreen(false)}
+              className="absolute top-6 right-6 p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer"
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <path d="M18 6L6 18M6 6l12 12" />
+              </svg>
+            </button>
+          </motion.div>
         )}
       </AnimatePresence>
     </div>

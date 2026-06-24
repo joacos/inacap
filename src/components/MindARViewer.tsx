@@ -201,22 +201,9 @@ export default function MindARViewer({
 
   return (
     <div ref={containerRef} className="absolute inset-0 z-50 bg-black overflow-hidden mindar-viewer-container">
-      {/* Header Info Overlay */}
-      <div className="absolute top-6 left-6 right-6 z-55 flex justify-between items-center pointer-events-auto">
-        <span className="bg-slate-950/80 text-slate-200 font-extrabold text-[10px] px-3.5 py-2 rounded-full border border-slate-800 backdrop-blur-sm shadow-xl">
-          Apunta al código QR / Panel físico 🔍
-        </span>
-        <button
-          onClick={onClose}
-          className="w-8 h-8 rounded-full bg-slate-950/80 border border-slate-800 text-slate-400 hover:text-slate-100 flex items-center justify-center active:scale-95 transition-all shadow-lg pointer-events-auto"
-        >
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-            <path d="M18 6L6 18M6 6l12 12" />
-          </svg>
-        </button>
-      </div>
-
-      <a-scene
+      <style>{`
+        .a-enter-vr, .a-enter-ar { display: none !important; }
+      `}</style>      <a-scene
         mindar-image={`imageTargetSrc: ${targetsUrl}; autoStart: true; maxTrack: 1; filterMinCF: 0.0001; filterBeta: 0.001`}
         color-space="sRGB"
         renderer="colorManagement: true, physicallyCorrectLights: true"

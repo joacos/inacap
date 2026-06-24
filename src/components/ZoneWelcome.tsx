@@ -103,9 +103,9 @@ const zoneConfig: Record<ZonaKey, ZoneDetails> = {
         desc: "Descubre en esta zona la transformación desde las herramientas manuales clásicas hasta la digitalización y los escáneres 3D."
       },
       {
-        emoji: "🎧",
-        title: "Modelos 3D y Narración",
-        desc: "Interactúa arrastrando los modelos 3D y activa tu audio para escuchar cómo revolucionaron la industria."
+        emoji: "🎮",
+        title: "Modelos 3D Interactivos",
+        desc: "Interactúa arrastrando y rotando los modelos 3D que aparecerán sobre la base física."
       }
     ]
   }
@@ -269,30 +269,32 @@ export default function ZoneWelcome({ zona, onStart }: ZoneWelcomeProps) {
           </div>
         </motion.div>
 
-        {/* Minimalist Headphone Preparation */}
-        <motion.div
-          variants={itemVariants}
-          className="flex flex-col items-center justify-center text-center py-2"
-        >
-          {/* Pulsing Headphone Icon */}
+        {/* Minimalist Headphone Preparation (Hidden for Herramientas since audio was removed) */}
+        {zona !== "herramientas" && (
           <motion.div
-            className={`w-12 h-12 rounded-full flex items-center justify-center border mb-3 ${config.accentClass}`}
-            animate={{
-              scale: [1, 1.05, 1],
-            }}
-            transition={{
-              duration: 2.5,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
+            variants={itemVariants}
+            className="flex flex-col items-center justify-center text-center py-2"
           >
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M3 18v-6a9 9 0 0 1 18 0v6" />
-              <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z" />
-            </svg>
+            {/* Pulsing Headphone Icon */}
+            <motion.div
+              className={`w-12 h-12 rounded-full flex items-center justify-center border mb-3 ${config.accentClass}`}
+              animate={{
+                scale: [1, 1.05, 1],
+              }}
+              transition={{
+                duration: 2.5,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            >
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M3 18v-6a9 9 0 0 1 18 0v6" />
+                <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z" />
+              </svg>
+            </motion.div>
+            <span className="text-xs font-bold text-slate-200">Uso recomendado de Audífonos</span>
           </motion.div>
-          <span className="text-xs font-bold text-slate-200">Uso recomendado de Audífonos</span>
-        </motion.div>
+        )}
       </div>
 
       {/* Bottom Section: Enter Button */}
