@@ -153,19 +153,26 @@ export default function ZonaClientPage({ zona }: ZonaClientPageProps) {
               : "overflow-y-auto pb-20 sm:pb-24"
           }`}>
           {/* Content */}
-          <motion.div
-            className="flex-1 mt-0 touch-pan-y"
-            drag="x"
-            dragConstraints={{ left: 0, right: 0 }}
-            dragElastic={0.6}
-            onDragEnd={(event, info) => {
-              const swipeThreshold = 50;
-              if (info.offset.x < -swipeThreshold) {
-                if (activeId < 11) {
+          <div
+            className="flex-1 mt-0"
+            onTouchStart={(e) => {
+              const touch = e.touches[0];
+              (e.currentTarget as any)._touchStartX = touch.clientX;
+              (e.currentTarget as any)._touchStartY = touch.clientY;
+            }}
+            onTouchEnd={(e) => {
+              const el = e.currentTarget as any;
+              if (el._touchStartX == null) return;
+              const touch = e.changedTouches[0];
+              const dx = touch.clientX - el._touchStartX;
+              const dy = touch.clientY - el._touchStartY;
+              el._touchStartX = null;
+              el._touchStartY = null;
+              // Only trigger if horizontal swipe is dominant
+              if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+                if (dx < 0 && activeId < 11) {
                   handleSelect(activeId + 1);
-                }
-              } else if (info.offset.x > swipeThreshold) {
-                if (activeId > 1) {
+                } else if (dx > 0 && activeId > 1) {
                   handleSelect(activeId - 1);
                 }
               }
@@ -192,7 +199,7 @@ export default function ZonaClientPage({ zona }: ZonaClientPageProps) {
                 />
               )}
             </AnimatePresence>
-          </motion.div>
+          </div>
 
           {/* AR Viewer (herramientas zone + some construccion) */}
           {activeId !== 11 && activeHito.modelo3dUrl && (

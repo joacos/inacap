@@ -28,9 +28,11 @@ jobs:
       - name: Build Next.js
         run: npm run build
 
-      - name: Deploy static files to deploy branch
-        uses: JamesIves/github-pages-deploy-action@v4
+      - name: 🚀 Deploy static files via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
-          folder: out
-          branch: deploy
-          clean: true
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./out/
+          server-dir: /
