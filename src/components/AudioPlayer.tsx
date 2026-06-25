@@ -45,7 +45,8 @@ export default function AudioPlayer({ audioUrl, title, autoPlay = false }: Audio
         animate={{ y: 0 }}
         exit={{ y: 80 }}
         transition={{ type: "spring", damping: 25, stiffness: 300 }}
-        className="fixed bottom-0 left-0 right-0 z-40 bg-slate-950 border-t border-slate-800/80 p-4 w-full"
+        className="fixed bottom-0 left-0 right-0 z-40 bg-slate-950 border-t border-slate-800/80 px-3 sm:px-4 pt-3 sm:pt-4 w-full"
+        style={{ paddingBottom: "max(env(safe-area-inset-bottom, 12px), 12px)" }}
         id="audio-player"
       >
         <div className="flex items-center gap-3 max-w-lg mx-auto w-full">

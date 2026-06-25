@@ -1,3 +1,5 @@
+import dialogosJson from "./dialogos.json";
+
 export type ObraRelacionada = {
   nombre: string;
   descripcion: string;
@@ -5,17 +7,24 @@ export type ObraRelacionada = {
   imagenUrl: string;
 };
 
+export type DialogueLine = {
+  time: number;
+  text: string;
+};
+
 export type LocalHito = {
   titulo: string;
   descripcion: string;
   audioUrl?: string;
   imagenes?: string[];
+  dialogue?: DialogueLine[];
 };
 
 export type CarreraHito = {
   titulo: string;
   descripcion: string;
   imagenes?: string[];
+  dialogue?: DialogueLine[];
 };
 
 export type Hito = {
@@ -32,6 +41,7 @@ export type Hito = {
   carreras?: CarreraHito;
   era?: string;
   tags?: string[];
+  dialogue?: DialogueLine[];
 };
 
 export type ZonaKey = "inacap" | "construccion" | "herramientas";
@@ -48,7 +58,7 @@ export const zonaDescripciones: Record<ZonaKey, string> = {
   herramientas: "De lo análogo a lo digital: herramientas que transformaron la industria",
 };
 
-export const exposicionData: Record<ZonaKey, Hito[]> = {
+const rawExposicionData: Record<ZonaKey, Hito[]> = {
   inacap: [
     {
       id: 1,
@@ -493,3 +503,38 @@ export const exposicionData: Record<ZonaKey, Hito[]> = {
     }
   ],
 };
+
+const dialogos = dialogosJson as Record<string, Record<string, DialogueLine[]>>;
+
+const mappedExposicionData: Record<ZonaKey, Hito[]> = {
+  inacap: rawExposicionData.inacap.map(hito => ({
+    ...hito,
+    dialogue: dialogos["inacap"]?.[String(hito.id)],
+    local: hito.local ? {
+      ...hito.local,
+      dialogue: dialogos["inacap_local"]?.[String(hito.id)]
+    } : undefined,
+    carreras: hito.carreras ? {
+      ...hito.carreras,
+      dialogue: dialogos["inacap_carreras"]?.[String(hito.id)]
+    } : undefined
+  })),
+  construccion: rawExposicionData.construccion.map(hito => ({
+    ...hito,
+    dialogue: dialogos["construccion"]?.[String(hito.id)],
+    local: hito.local ? {
+      ...hito.local,
+      dialogue: dialogos["construccion_local"]?.[String(hito.id)]
+    } : undefined,
+    carreras: hito.carreras ? {
+      ...hito.carreras,
+      dialogue: dialogos["construccion_carreras"]?.[String(hito.id)]
+    } : undefined
+  })),
+  herramientas: rawExposicionData.herramientas.map(hito => ({
+    ...hito,
+    dialogue: dialogos["herramientas"]?.[String(hito.id)],
+  }))
+};
+
+export const exposicionData = mappedExposicionData;

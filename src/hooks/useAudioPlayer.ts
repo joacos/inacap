@@ -19,7 +19,15 @@ export function useAudioPlayer(autoPlay: boolean = false) {
     setIsMuted(storedMute);
     audioRef.current = audio;
 
-    const onTimeUpdate = () => setCurrentTime(audio.currentTime);
+    const onTimeUpdate = () => {
+      const time = audio.currentTime;
+      setCurrentTime(time);
+      window.dispatchEvent(
+        new CustomEvent("audio-time-update", {
+          detail: { currentTime: time, url: audio.src },
+        })
+      );
+    };
     const onLoadedMetadata = () => {
       setDuration(audio.duration);
       setIsLoading(false);
@@ -28,13 +36,23 @@ export function useAudioPlayer(autoPlay: boolean = false) {
     const onWaiting = () => setIsLoading(true);
     const onCanPlay = () => setIsLoading(false);
 
+    const handleSeekTo = (e: Event) => {
+      const customEvent = e as CustomEvent;
+      if (typeof customEvent.detail.time === "number") {
+        audio.currentTime = customEvent.detail.time;
+        setCurrentTime(customEvent.detail.time);
+      }
+    };
+
     audio.addEventListener("timeupdate", onTimeUpdate);
     audio.addEventListener("loadedmetadata", onLoadedMetadata);
     audio.addEventListener("ended", onEnded);
     audio.addEventListener("waiting", onWaiting);
     audio.addEventListener("canplay", onCanPlay);
+    window.addEventListener("audio-seek-to", handleSeekTo);
 
     return () => {
+      window.removeEventListener("audio-seek-to", handleSeekTo);
       audio.removeEventListener("timeupdate", onTimeUpdate);
       audio.removeEventListener("loadedmetadata", onLoadedMetadata);
       audio.removeEventListener("ended", onEnded);

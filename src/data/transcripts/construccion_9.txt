@@ -1,0 +1,23 @@
+1
+00:00:00,000 --> 00:00:05,000
+Construir virtualmente antes de hacerlo en terreno.
+Esa fue la revolución de la metodología BIM.
+
+2
+00:00:05,000 --> 00:00:11,000
+Implementada por pioneros en el hospital de alto hospicio,
+permitió coordinar redes completas en modelos tridimensionales.
+
+3
+00:00:11,000 --> 00:00:17,000
+Esta hiperprecisión fue la antesala tecnológica para
+megaproyectos contemporáneos que hoy desafían a la geografía chilena,
+
+4
+00:00:17,000 --> 00:00:23,000
+como la expansión del aeropuerto de Santiago
+o la faraónica hazaña de anclar el puente Chacao
+
+5
+00:00:23,000 --> 00:00:27,000
+en las extremas corrientes marinas.

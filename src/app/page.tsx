@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-dvh px-6 dot-grid">
+    <div className="flex flex-col items-center justify-center min-h-dvh px-5 sm:px-6 dot-grid">
       {/* Hero */}
       <div className="text-center mb-12">
         {/* Logo */}
@@ -21,7 +21,7 @@ export default function Home() {
       </div>
 
       {/* Zone Cards */}
-      <div className="flex flex-col gap-4 w-full max-w-sm">
+      <div className="flex flex-col md:grid md:grid-cols-2 gap-4 w-full max-w-sm md:max-w-xl">
         <Link
           href="/inacap"
           className="group relative glass-elevated rounded-2xl p-5 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"

@@ -186,7 +186,7 @@ export default function ZoneWelcome({ zona, onStart }: ZoneWelcomeProps) {
         {/* Floating Halo and Icon */}
         <motion.div
           variants={itemVariants}
-          className="relative flex items-center justify-center w-24 h-24 rounded-2xl mb-6 border glass-elevated"
+          className="relative flex items-center justify-center w-20 h-20 sm:w-24 sm:h-24 rounded-2xl mb-5 sm:mb-6 border glass-elevated"
           style={{
             boxShadow: glowBoxShadow
           }}
@@ -208,7 +208,7 @@ export default function ZoneWelcome({ zona, onStart }: ZoneWelcomeProps) {
 
         <motion.h1
           variants={itemVariants}
-          className={`text-3xl font-extrabold tracking-tight ${config.textGlowClass} text-slate-50`}
+          className={`text-2xl sm:text-3xl font-extrabold tracking-tight ${config.textGlowClass} text-slate-50`}
         >
           Zona {name}
         </motion.h1>

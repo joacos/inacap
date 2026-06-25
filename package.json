@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "parse": "node scripts/parse-dialogues.js",
+    "build": "npm run parse && next build",
     "start": "next start",
     "lint": "eslint",
     "deploy": "node scripts/deploy.js"

@@ -44,7 +44,7 @@ export default function TimelineSelector({
 
       <div
         ref={scrollRef}
-        className="timeline-scroll flex items-center gap-0 overflow-x-auto px-8 py-3 snap-x snap-mandatory"
+        className="timeline-scroll flex items-center gap-0 overflow-x-auto px-8 py-2 sm:py-3 snap-x snap-mandatory"
       >
         {hitos.map((hito, index) => {
           const isActive = hito.id === activeId;

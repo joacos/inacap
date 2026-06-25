@@ -1,0 +1,29 @@
+1
+00:00:00,000 --> 00:00:05,000
+Los primeros computadores personales encendían
+sus pantallas en la sede Valdivia.
+
+2
+00:00:05,000 --> 00:00:10,000
+La habilitación de modernos laboratorios
+informáticos acercó, de golpe,
+
+3
+00:00:10,000 --> 00:00:14,000
+la tecnología del futuro a los
+estudiantes de la región.
+
+4
+00:00:14,000 --> 00:00:19,000
+Esta revolución local acompañó a un
+hito nacional histórico.
+
+5
+00:00:19,000 --> 00:00:25,000
+Tras la gran reforma universitaria de los 80,
+INACAP dio el salto definitivo,
+
+6
+00:00:25,000 --> 00:00:32,000
+impartiendo por primera vez títulos técnicos de nivel superior
+y profesionalizando los oficios en Chile.

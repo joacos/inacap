@@ -20,6 +20,7 @@ interface ZonaClientPageProps {
 }
 
 export default function ZonaClientPage({ zona }: ZonaClientPageProps) {
+  const isBlueAccent = zona === "inacap" || zona === "herramientas";
   const hitos = exposicionData[zona];
   const [activeId, setActiveId] = useState(1);
   const [direction, setDirection] = useState(1);
@@ -65,7 +66,7 @@ export default function ZonaClientPage({ zona }: ZonaClientPageProps) {
           {/* --- FIXED TOP SECTION --- */}
           <div className="flex-shrink-0 z-40 relative pt-1 pb-0 bg-slate-950">
             {/* Header bar */}
-            <header className="px-5 pt-3 pb-1 flex items-center justify-between">
+            <header className="px-4 sm:px-5 pt-2 sm:pt-3 pb-1 flex items-center justify-between">
               <Link href="/">
                 <img
                   src="/inacap60.png"
@@ -90,7 +91,7 @@ export default function ZonaClientPage({ zona }: ZonaClientPageProps) {
 
             {/* Switch Toggle (Nacional vs Valdivia vs Carreras) - Fixed below header */}
             {zona === "inacap" && activeId !== 11 && (
-              <div className="absolute top-full mt-4 left-0 right-0 z-40 flex justify-center pointer-events-none">
+              <div className="absolute top-full mt-2 sm:mt-4 left-0 right-0 z-40 flex justify-center pointer-events-none">
                 <div className="inline-flex p-1 bg-slate-950/80 backdrop-blur-md rounded-full border border-slate-800/80 shadow-lg pointer-events-auto">
                   <button
                     onClick={() => setViewMode("nacional")}
@@ -146,7 +147,11 @@ export default function ZonaClientPage({ zona }: ZonaClientPageProps) {
           </div>
 
           {/* --- SCROLLABLE CONTENT SECTION --- */}
-          <div className="flex-1 overflow-y-auto overflow-x-hidden relative pb-32">
+          <div className={`flex-1 overflow-x-hidden relative ${
+            isBlueAccent && activeId !== 11
+              ? "overflow-y-hidden pb-0"
+              : "overflow-y-auto pb-20 sm:pb-24"
+          }`}>
           {/* Content */}
           <motion.div
             className="flex-1 mt-0 touch-pan-y"

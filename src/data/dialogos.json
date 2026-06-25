@@ -1,0 +1,508 @@
+{
+  "construccion": {
+    "1": [
+      {
+        "time": 0,
+        "text": "El terremoto de 1960 puso a prueba el ingenio chileno."
+      },
+      {
+        "time": 5,
+        "text": "Mientras en Valdivia cientos de obreros realizaban la heroica hazaña del Riñihuazo para evitar una catástrofe,"
+      },
+      {
+        "time": 11,
+        "text": "la arquitectura nacional daba un giro."
+      },
+      {
+        "time": 14,
+        "text": "Nacían maravillas del hormigón armado adaptadas a las exigencias sísmicas,"
+      },
+      {
+        "time": 19,
+        "text": "como el imponente edificio de la CEPAL en Santiago y,  de forma local, el majestuoso Coliseo Municipal de Valdivia."
+      },
+      {
+        "time": 26,
+        "text": "Consolidando una era donde la ingeniería venció a la fuerza de la naturaleza."
+      }
+    ],
+    "2": [
+      {
+        "time": 0,
+        "text": "Romper el aislamiento fue la gran misión de esta década."
+      },
+      {
+        "time": 5,
+        "text": "La consolidación de la ruta 5 sur representó un salto gigante en la integración territorial de Chile,"
+      },
+      {
+        "time": 10,
+        "text": "uniendo más de 3000 kilómetros pavimentados."
+      },
+      {
+        "time": 14,
+        "text": "Este avance vial sin precedentes se vio acompañado por colosales proezas estructurales en la montaña,"
+      },
+      {
+        "time": 19,
+        "text": "como la central hidroeléctrica Antuco, donde complejas redes de túneles subterráneos"
+      },
+      {
+        "time": 24,
+        "text": "demostraron que ninguna geografía era invencible para la ingeniería moderna."
+      }
+    ],
+    "3": [
+      {
+        "time": 0,
+        "text": "El sur de Chile respira tradición fluvial. En 1974,"
+      },
+      {
+        "time": 4,
+        "text": "el ingeniero Eberhard Kossmann funda Asenav en la ribera del Calle Calle,"
+      },
+      {
+        "time": 9,
+        "text": "marcando el inicio del que sería el astillero privado más importante del Pacífico Sur."
+      },
+      {
+        "time": 15,
+        "text": "Paradójicamente, mientras en Valdivia nacía este gigante naval,"
+      },
+      {
+        "time": 20,
+        "text": "en la capital se terminaba de alzar la monumental Torre Entel."
+      },
+      {
+        "time": 25,
+        "text": "Dos obras cumbres, una en el agua y otra en el cielo,"
+      },
+      {
+        "time": 30,
+        "text": "que transformaron la conectividad y la industria del país."
+      }
+    ],
+    "4": [
+      {
+        "time": 0,
+        "text": "Ordenar el territorio era urgente. La promulgación de la Ley General de Urbanismo fijó,"
+      },
+      {
+        "time": 5,
+        "text": "por primera vez, un marco normativo moderno para todo Chile. Y mientras la ley organizaba las ciudades,"
+      },
+      {
+        "time": 11,
+        "text": "en 1976 se iniciaba una epopeya en el rincón más indómito del país:"
+      },
+      {
+        "time": 17,
+        "text": "la construcción de la Carretera Austral. Una obra titánica a través de montañas y fiordos,"
+      },
+      {
+        "time": 22,
+        "text": "diseñada para conquistar la Patagonia y llevar soberanía al fin del mundo."
+      }
+    ],
+    "5": [
+      {
+        "time": 0,
+        "text": "En los 80, los puertos chilenos enfrentaron una revolución logística."
+      },
+      {
+        "time": 5,
+        "text": "La llegada de los contenedores exigió muelles más amplios y grúas de alto tonelaje para el comercio exterior."
+      },
+      {
+        "time": 10,
+        "text": "En paralelo, Valdivia iniciaba su propia transformación costera."
+      },
+      {
+        "time": 15,
+        "text": "Se alzaron estructuras vitales como el puente Naguilán y el viaducto Cruces."
+      },
+      {
+        "time": 20,
+        "text": "Obras fundamentales que, sostenidas sobre profundos pilotes, terminaron para siempre con el aislamiento histórico"
+      },
+      {
+        "time": 26,
+        "text": "de la zona de Corral y Niebla."
+      }
+    ],
+    "6": [
+      {
+        "time": 0,
+        "text": "El tablero de dibujo quedó atrás. La llegada de la era digital con AutoCAD"
+      },
+      {
+        "time": 5,
+        "text": "revolucionó los estudios de arquitectura e ingeniería. Gracias a estos cálculos precisos,"
+      },
+      {
+        "time": 10,
+        "text": "se lograron maravillas urbanas. Desde el milimétrico diseño para la reconstrucción"
+      },
+      {
+        "time": 15,
+        "text": "antisísmica de la catedral de Valdivia y la normalización del hospital base,"
+      },
+      {
+        "time": 20,
+        "text": "hasta colosales proyectos de infraestructura interurbana como el nuevo puente Calle Calle"
+      },
+      {
+        "time": 25,
+        "text": "y el majestuoso viaducto Yacolén sobre el río Biobío."
+      }
+    ],
+    "7": [
+      {
+        "time": 0,
+        "text": "La ingeniería alcanzó literalmente nuevas alturas. Mientras en Santiago el Costanera Center marcaba historia"
+      },
+      {
+        "time": 5,
+        "text": "bombeando hormigón a más de 300 metros para alzar el rascacielos más alto de Sudamérica,"
+      },
+      {
+        "time": 10,
+        "text": "el desarrollo urbano exigía intervenciones complejas a nivel de suelo."
+      },
+      {
+        "time": 15,
+        "text": "En Valdivia, la remodelación de la avenida Pedro Aguirre Cerda"
+      },
+      {
+        "time": 20,
+        "text": "se convirtió en una verdadera cirugía urbana de 3 kilómetros y medio,"
+      },
+      {
+        "time": 25,
+        "text": "soterrando kilómetros de cables para modernizar la ciudad."
+      }
+    ],
+    "8": [
+      {
+        "time": 0,
+        "text": "La modernización del país requiere mantenimiento constante. Bajo los nuevos contratos globales de conservación del MOP,"
+      },
+      {
+        "time": 5,
+        "text": "se ejecutaron pavimentaciones integrales como la ruta Valdivia-Antilhue,"
+      },
+      {
+        "time": 10,
+        "text": "y enormes estructuras mixtas como el puente Santa Elvira, cuyos pilotes penetraron a 44 metros de profundidad."
+      },
+      {
+        "time": 16,
+        "text": "Esta mejorada conectividad impulsó el desarrollo inmobiliario local,"
+      },
+      {
+        "time": 22,
+        "text": "atrayendo proyectos que revolucionaron las dinámicas de consumo, como el Mall Plaza de Los Ríos."
+      }
+    ],
+    "9": [
+      {
+        "time": 0,
+        "text": "Construir virtualmente antes de hacerlo en terreno. Esa fue la revolución de la metodología BIM."
+      },
+      {
+        "time": 5,
+        "text": "Implementada por pioneros en el hospital de alto hospicio, permitió coordinar redes completas en modelos tridimensionales."
+      },
+      {
+        "time": 11,
+        "text": "Esta hiperprecisión fue la antesala tecnológica para megaproyectos contemporáneos que hoy desafían a la geografía chilena,"
+      },
+      {
+        "time": 17,
+        "text": "como la expansión del aeropuerto de Santiago o la faraónica hazaña de anclar el puente Chacao"
+      },
+      {
+        "time": 23,
+        "text": "en las extremas corrientes marinas."
+      }
+    ]
+  },
+  "inacap": {
+    "1": [
+      {
+        "time": 0,
+        "text": "En la década de los 60, Chile demandaba especialistas técnicos para impulsar su industria."
+      },
+      {
+        "time": 6,
+        "text": "Así nace INACAP, forjando a los primeros obreros calificados a través de cursos de capacitación en oficios básicos."
+      },
+      {
+        "time": 13.5,
+        "text": "A nivel nacional, este impacto fue coronado con la visita de la Reina Isabel Segunda a nuestras sedes."
+      },
+      {
+        "time": 20,
+        "text": "En el sur de Chile, la historia comenzó a escribirse poco después, en 1970,"
+      },
+      {
+        "time": 26,
+        "text": "con la inauguración de la primera sede en Valdivia, abriendo las puertas a una educación que cambiaría la región para siempre."
+      }
+    ],
+    "2": [
+      {
+        "time": 0,
+        "text": "Cerca de los ríos y astilleros de Valdivia, los primeros talleres pioneros de INACAP cobraron vida."
+      },
+      {
+        "time": 6,
+        "text": "Nuestros alumnos se especializaban en mecánica naval y carpintería de ribera,"
+      },
+      {
+        "time": 12,
+        "text": "respondiendo directamente al corazón industrial de la zona sur."
+      },
+      {
+        "time": 17,
+        "text": "Este fuerte empuje regional fue el reflejo perfecto de lo que sucedía a nivel país,"
+      },
+      {
+        "time": 23,
+        "text": "época en la que INACAP lograba consolidarse formalmente"
+      },
+      {
+        "time": 27,
+        "text": "como el organismo técnico de capacitación más grande de todo Chile."
+      }
+    ],
+    "3": [
+      {
+        "time": 0,
+        "text": "Los primeros computadores personales encendían sus pantallas en la sede Valdivia."
+      },
+      {
+        "time": 5,
+        "text": "La habilitación de modernos laboratorios informáticos acercó, de golpe,"
+      },
+      {
+        "time": 10,
+        "text": "la tecnología del futuro a los estudiantes de la región."
+      },
+      {
+        "time": 14,
+        "text": "Esta revolución local acompañó a un hito nacional histórico."
+      },
+      {
+        "time": 19,
+        "text": "Tras la gran reforma universitaria de los 80, INACAP dio el salto definitivo,"
+      },
+      {
+        "time": 25,
+        "text": "impartiendo por primera vez títulos técnicos de nivel superior y profesionalizando los oficios en Chile."
+      }
+    ],
+    "4": [
+      {
+        "time": 0,
+        "text": "El ecosistema del sur exigía cada vez más y Valdivia respondió vinculándose fuertemente"
+      },
+      {
+        "time": 5,
+        "text": "con el comercio y las empresas locales para asegurar el futuro laboral de sus egresados."
+      },
+      {
+        "time": 10,
+        "text": "Este profundo arraigo regional fue posible gracias a la autonomía institucional,"
+      },
+      {
+        "time": 15,
+        "text": "lograda a mediados de los noventa. Fue una era de madurez académica,"
+      },
+      {
+        "time": 20,
+        "text": "marcada por el auge de carreras icónicas como analista programador,"
+      },
+      {
+        "time": 25,
+        "text": "que sentaron las bases  de la pauta tecnológica del país."
+      }
+    ],
+    "5": [
+      {
+        "time": 0,
+        "text": "La excelencia no es casualidad. El inicio del nuevo milenio"
+      },
+      {
+        "time": 5,
+        "text": "vio a INACAP obtener su primera acreditación y la certificación ISO,"
+      },
+      {
+        "time": 10,
+        "text": "elevando nuestros estándares a niveles sin precedentes."
+      },
+      {
+        "time": 15,
+        "text": "Este estricto compromiso bajó directamente a nuestras aulas en Valdivia,"
+      },
+      {
+        "time": 20,
+        "text": "donde se construyeron laboratorios de especialidad de primer nivel."
+      },
+      {
+        "time": 25,
+        "text": "El enfoque de aprender haciendo se arraigó con proyectos prácticos orientados"
+      },
+      {
+        "time": 30,
+        "text": "a las áreas forestales, acuícolas y de servicios."
+      }
+    ],
+    "6": [
+      {
+        "time": 0,
+        "text": "La naciente industria pesquera y logística de la región de Los Ríos requería de soluciones reales."
+      },
+      {
+        "time": 5,
+        "text": "Así, la sede Valdivia adoptó con fuerza un nuevo sello profesional,"
+      },
+      {
+        "time": 10,
+        "text": "formando a los primeros ingenieros orientados a la aplicación práctica en el sur de Chile."
+      },
+      {
+        "time": 15,
+        "text": "Este avance académico de alto nivel fue el resultado de la histórica creación de la"
+      },
+      {
+        "time": 20,
+        "text": "Universidad Tecnológica INACAP en 2006,"
+      },
+      {
+        "time": 25,
+        "text": "brindando a los estudiantes la articulación definitiva hacia títulos más complejos."
+      }
+    ],
+    "7": [
+      {
+        "time": 0,
+        "text": "La innovación educativa se convirtió en nuestra mejor herramienta contra la pobreza aquí, en Valdivia."
+      },
+      {
+        "time": 5,
+        "text": "Nos enfocamos en abrir oportunidades transformadoras y dotar de nuevas herramientas a cientos de familias."
+      },
+      {
+        "time": 10,
+        "text": "Este esfuerzo regional cobró una fuerza imparable en el año 2016"
+      },
+      {
+        "time": 15,
+        "text": "con el histórico primer año de gratuidad universal."
+      },
+      {
+        "time": 20,
+        "text": "Un hito que derribó las barreras económicas y permitió que miles de jóvenes accedieran"
+      },
+      {
+        "time": 25,
+        "text": "por fin a la educación superior."
+      }
+    ],
+    "8": [
+      {
+        "time": 0,
+        "text": "Las puertas se abrieron de par en par en nuestra moderna sede de Las Ánimas en Valdivia,"
+      },
+      {
+        "time": 5,
+        "text": "convirtiéndonos en un vibrante epicentro de innovación docente."
+      },
+      {
+        "time": 10,
+        "text": "Fomentamos la inclusión femenina temprana en disciplinas STEM"
+      },
+      {
+        "time": 15,
+        "text": "y dimos origen al campeonato Sur Austral."
+      },
+      {
+        "time": 19,
+        "text": "Todo esto respaldado por una oferta académica totalmente renovada,"
+      },
+      {
+        "time": 24,
+        "text": "que trajo al sur carreras de vanguardia tecnológica, como la ciberseguridad y la robótica,"
+      },
+      {
+        "time": 29,
+        "text": "posicionando a nuestros estudiantes en la primera línea del futuro."
+      }
+    ],
+    "9": [
+      {
+        "time": 0,
+        "text": "Una pandemia mundial paralizó al globo. Pero no a INACAP."
+      },
+      {
+        "time": 5,
+        "text": "Aceleramos nuestra transformación digital integrando simuladores y cerrando alianzas tecnológicas mundiales"
+      },
+      {
+        "time": 11,
+        "text": "para que nadie detuviera su aprendizaje. Mientras tanto, en Valdivia,"
+      },
+      {
+        "time": 16,
+        "text": "conmemorábamos 80 años de la educación técnico-profesional"
+      },
+      {
+        "time": 21,
+        "text": "fortaleciendo nuestra gran red de exalumnos destacados."
+      },
+      {
+        "time": 26,
+        "text": "A pesar de la distancia física, el vínculo de la comunidad inacapina"
+      },
+      {
+        "time": 31,
+        "text": "se mantuvo más fuerte y resiliente que nunca."
+      }
+    ],
+    "10": [
+      {
+        "time": 0,
+        "text": "Un récord histórico se vive en Valdivia."
+      },
+      {
+        "time": 4,
+        "text": "Casi 500 nuevos técnicos y profesionales salen a transformar la región,"
+      },
+      {
+        "time": 9,
+        "text": "respaldados por alianzas productivas icónicas con la industria cervecera local"
+      },
+      {
+        "time": 15,
+        "text": "y celebrando podios tecnológicos de nuestros alumnos en China."
+      },
+      {
+        "time": 20,
+        "text": "Todo esto ocurre en el marco de nuestro aniversario número 60."
+      },
+      {
+        "time": 25,
+        "text": "Una época en la que alcanzamos la cima de la excelencia"
+      },
+      {
+        "time": 30,
+        "text": "con la máxima acreditación institucional de 7 años."
+      },
+      {
+        "time": 35,
+        "text": "60 años transformando vidas. Y esto es solo el comienzo."
+      }
+    ]
+  }
+}

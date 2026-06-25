@@ -17,7 +17,7 @@ export default function ProgressTracker({
     <motion.div
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
-      className="flex items-center gap-3 glass rounded-full px-4 py-2"
+      className="flex items-center gap-2 sm:gap-3 glass rounded-full px-3 sm:px-4 py-1.5 sm:py-2"
       id="progress-tracker"
     >
       {/* Circular progress */}

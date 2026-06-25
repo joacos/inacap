@@ -1,0 +1,28 @@
+1
+00:00:00,000 --> 00:00:05,000
+El terremoto de 1960 puso a prueba
+el ingenio chileno.
+
+2
+00:00:05,000 --> 00:00:11,000
+Mientras en Valdivia cientos de obreros realizaban la heroica
+hazaña del Riñihuazo para evitar una catástrofe,
+
+3
+00:00:11,000 --> 00:00:14,000
+la arquitectura nacional daba un giro.
+
+4
+00:00:14,000 --> 00:00:19,000
+Nacían maravillas del hormigón armado
+adaptadas a las exigencias sísmicas,
+
+5
+00:00:19,000 --> 00:00:26,000
+como el imponente edificio de la CEPAL en Santiago y, 
+de forma local, el majestuoso Coliseo Municipal de Valdivia.
+
+6
+00:00:26,000 --> 00:00:31,000
+Consolidando una era donde la ingeniería
+venció a la fuerza de la naturaleza.
