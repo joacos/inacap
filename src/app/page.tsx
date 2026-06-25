@@ -96,7 +96,7 @@ export default function Home() {
             <div>
               <h2 className="text-base font-bold text-slate-100">Zona Herramientas</h2>
               <p className="text-xs text-slate-400 mt-0.5">
-                Realidad Aumentada · 10 hitos
+                Realidad Aumentada · 5 hitos
               </p>
             </div>
             <svg className="ml-auto text-slate-600 group-hover:text-inacap-blue-light transition-colors" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

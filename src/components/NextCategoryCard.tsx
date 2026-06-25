@@ -166,7 +166,7 @@ export default function NextCategoryCard({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isScanning]);
 
-  if (totalVisited === 30) {
+  if (totalVisited === 25) {
     return (
       <motion.div
         custom={direction}

@@ -9,7 +9,7 @@ interface ProgressTrackerProps {
 
 export default function ProgressTracker({
   totalVisited,
-  total = 30,
+  total = 25,
 }: ProgressTrackerProps) {
   const percentage = Math.round((totalVisited / total) * 100);
 
