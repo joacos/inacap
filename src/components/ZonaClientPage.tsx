@@ -13,7 +13,7 @@ import ARViewer from "@/components/ARViewer";
 import ProgressTracker from "@/components/ProgressTracker";
 import NextCategoryCard from "@/components/NextCategoryCard";
 import ZoneWelcome from "@/components/ZoneWelcome";
-import InteractionGuide from "@/components/InteractionGuide";
+
 
 interface ZonaClientPageProps {
   zona: ZonaKey;
@@ -26,7 +26,7 @@ export default function ZonaClientPage({ zona }: ZonaClientPageProps) {
   const [direction, setDirection] = useState(1);
   const [showWelcome, setShowWelcome] = useState(true);
   const [viewMode, setViewMode] = useState<"nacional" | "local" | "carreras">("nacional");
-  const [showGuide, setShowGuide] = useState(true);
+
   const prevIdRef = useRef(1);
   const { markVisited, isVisited, totalVisited, resetProgress } = useProgress();
 
@@ -212,12 +212,7 @@ export default function ZonaClientPage({ zona }: ZonaClientPageProps) {
 
           </div> {/* END SCROLLABLE CONTENT SECTION */}
 
-          {/* Onboarding Interactive Guide Overlay */}
-          <AnimatePresence>
-            {activeId === 1 && !showWelcome && showGuide && (
-              <InteractionGuide zona={zona} onClose={() => setShowGuide(false)} />
-            )}
-          </AnimatePresence>
+
         </motion.div>
       )}
     </AnimatePresence>
