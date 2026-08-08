@@ -37,6 +37,7 @@ export default function ZonaHerramientasClientPage() {
         if (idNum >= 1 && idNum <= 5) {
           markVisited("herramientas", idNum);
           setActiveToolId(idNum);
+          setShowToolDetail(true);
           setStep("scanning");
           // Clean URL
           const newUrl = window.location.pathname;
@@ -70,7 +71,7 @@ export default function ZonaHerramientasClientPage() {
     playBeep();
     markVisited("herramientas", toolId);
     setActiveToolId(toolId);
-    setShowToolDetail(false);
+    setShowToolDetail(true);
   }, [markVisited]);
 
   return (

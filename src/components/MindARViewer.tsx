@@ -62,6 +62,17 @@ export default function MindARViewer({
         });
       }
 
+      // Load jsQR library for scanning QR codes in camera stream
+      if (!(window as any).jsQR) {
+        await new Promise<void>((resolve) => {
+          const script = document.createElement("script");
+          script.src = "https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js";
+          script.onload = () => resolve();
+          script.onerror = () => resolve();
+          document.head.appendChild(script);
+        });
+      }
+
       // Register drag-rotate component
       if ((window as any).AFRAME && !(window as any).AFRAME.components["drag-rotate-component"]) {
         (window as any).AFRAME.registerComponent("drag-rotate-component", {
@@ -182,7 +193,49 @@ export default function MindARViewer({
       target.addEventListener("targetLost", handleTargetLost);
     });
 
+    // Canvas & QR scanner loop on video stream
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d", { willReadFrequently: true });
+    let lastScannedTime = 0;
+
+    const intervalId = setInterval(() => {
+      if (!(window as any).jsQR) return;
+      const video = document.querySelector("video") as HTMLVideoElement;
+      if (!video || video.readyState !== video.HAVE_ENOUGH_DATA) return;
+
+      canvas.width = video.videoWidth || 640;
+      canvas.height = video.videoHeight || 480;
+
+      if (!ctx || canvas.width === 0 || canvas.height === 0) return;
+
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      const code = (window as any).jsQR(imageData.data, imageData.width, imageData.height, {
+        inversionAttempts: "dontInvert",
+      });
+
+      if (code && code.data) {
+        const now = Date.now();
+        if (now - lastScannedTime < 2500) return;
+
+        let detectedId: number | null = null;
+
+        const match = code.data.match(/scan=(\d+)/i) || code.data.match(/estacion[_-]?(\d+)/i);
+        if (match) {
+          detectedId = parseInt(match[1], 10);
+        } else if (/^[1-5]$/.test(code.data.trim())) {
+          detectedId = parseInt(code.data.trim(), 10);
+        }
+
+        if (detectedId !== null && detectedId >= 1 && detectedId <= 5) {
+          lastScannedTime = now;
+          onTargetFound(detectedId - 1);
+        }
+      }
+    }, 300);
+
     return () => {
+      clearInterval(intervalId);
       targets.forEach((target) => {
         target.removeEventListener("targetFound", handleTargetFound);
         target.removeEventListener("targetLost", handleTargetLost);
