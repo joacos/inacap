@@ -165,25 +165,48 @@ export default function MindARViewer({
     };
   }, []);
 
+  const onTargetFoundRef = useRef(onTargetFound);
+  const onTargetLostRef = useRef(onTargetLost);
+
+  useEffect(() => {
+    onTargetFoundRef.current = onTargetFound;
+    onTargetLostRef.current = onTargetLost;
+  }, [onTargetFound, onTargetLost]);
+
   useEffect(() => {
     if (!loaded) return;
 
     const sceneEl = document.querySelector("a-scene");
     if (!sceneEl) return;
 
+    const getTargetIndex = (el: Element): number | null => {
+      const targetAttr = el.getAttribute("mindar-image-target");
+      if (!targetAttr) return null;
+      if (typeof targetAttr === "object" && targetAttr !== null && "targetIndex" in targetAttr) {
+        const val = parseInt((targetAttr as any).targetIndex, 10);
+        return isNaN(val) ? null : val;
+      }
+      if (typeof targetAttr === "string") {
+        const match = targetAttr.match(/targetIndex:\s*(\d+)/);
+        if (match) {
+          const val = parseInt(match[1], 10);
+          return isNaN(val) ? null : val;
+        }
+      }
+      return null;
+    };
+
     const handleTargetFound = (e: any) => {
-      const targetStr = e.target.getAttribute("mindar-image-target");
-      const match = targetStr?.match(/targetIndex:\s*(\d+)/);
-      if (match) {
-        onTargetFound(parseInt(match[1], 10));
+      const idx = getTargetIndex(e.target);
+      if (idx !== null) {
+        onTargetFoundRef.current(idx);
       }
     };
 
     const handleTargetLost = (e: any) => {
-      const targetStr = e.target.getAttribute("mindar-image-target");
-      const match = targetStr?.match(/targetIndex:\s*(\d+)/);
-      if (match) {
-        onTargetLost(parseInt(match[1], 10));
+      const idx = getTargetIndex(e.target);
+      if (idx !== null) {
+        onTargetLostRef.current(idx);
       }
     };
 
@@ -211,7 +234,7 @@ export default function MindARViewer({
       ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
       const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
       const code = (window as any).jsQR(imageData.data, imageData.width, imageData.height, {
-        inversionAttempts: "dontInvert",
+        inversionAttempts: "attemptBoth",
       });
 
       if (code && code.data) {
@@ -229,10 +252,10 @@ export default function MindARViewer({
 
         if (detectedId !== null && detectedId >= 1 && detectedId <= 5) {
           lastScannedTime = now;
-          onTargetFound(detectedId - 1);
+          onTargetFoundRef.current(detectedId - 1);
         }
       }
-    }, 300);
+    }, 250);
 
     return () => {
       clearInterval(intervalId);
@@ -241,7 +264,7 @@ export default function MindARViewer({
         target.removeEventListener("targetLost", handleTargetLost);
       });
     };
-  }, [loaded, onTargetFound, onTargetLost]);
+  }, [loaded]);
 
   if (!loaded) {
     return (
