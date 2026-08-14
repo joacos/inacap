@@ -456,7 +456,7 @@ const rawExposicionData: Record<ZonaKey, Hito[]> = {
       era: "Carpintería Artesanal",
       tags: ["Madera de haya y roble", "Hierro forjado", "Uso: Acabado de superficies", "Precisión manual"],
       imagenes: [
-        "https://images.unsplash.com/photo-1601058268499-e52658b8bb88?w=800&auto=format&fit=crop&q=85"
+        "/images/herramientas/cepillo_moderno.jpg"
       ]
     },
     {
@@ -469,7 +469,7 @@ const rawExposicionData: Record<ZonaKey, Hito[]> = {
       era: "Mecanización del Taller",
       tags: ["Motor eléctrico", "Acero de alta velocidad", "Uso: Perforación en obra", "Batería de litio (era moderna)"],
       imagenes: [
-        "https://images.unsplash.com/photo-1504148455328-c376907d081c?w=800&auto=format&fit=crop&q=85"
+        "/images/herramientas/taladro_moderno.jpg"
       ]
     },
     {
@@ -482,7 +482,7 @@ const rawExposicionData: Record<ZonaKey, Hito[]> = {
       era: "Era de la Productividad",
       tags: ["Acero templado al carbono", "Disco de widia", "Uso: Corte de madera y metal", "Guiado láser (moderno)"],
       imagenes: [
-        "https://images.unsplash.com/photo-1530124560677-bdaea027df01?w=800&auto=format&fit=crop&q=85"
+        "/images/herramientas/sierra_moderna.jpg"
       ]
     },
     {
@@ -495,7 +495,7 @@ const rawExposicionData: Record<ZonaKey, Hito[]> = {
       era: "Digitalización del Terreno",
       tags: ["Óptica de precisión", "Electrónica digital", "Uso: Topografía y construcción", "Precisión ±1mm"],
       imagenes: [
-        "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=800&auto=format&fit=crop&q=85"
+        "/images/herramientas/estacion_total_moderna.jpg"
       ]
     },
     {
@@ -508,7 +508,7 @@ const rawExposicionData: Record<ZonaKey, Hito[]> = {
       era: "Industria 4.0",
       tags: ["Corriente continua inversa", "Electrodo revestido / MIG-MAG", "Uso: Unión estructural de acero", "Automatización robótica"],
       imagenes: [
-        "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=800&auto=format&fit=crop&q=85"
+        "/images/herramientas/soldadora_moderna.jpg"
       ]
     }
   ],
