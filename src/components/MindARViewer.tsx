@@ -176,9 +176,6 @@ export default function MindARViewer({
   useEffect(() => {
     if (!loaded) return;
 
-    const sceneEl = document.querySelector("a-scene");
-    if (!sceneEl) return;
-
     const getTargetIndex = (el: Element): number | null => {
       const targetAttr = el.getAttribute("mindar-image-target");
       if (!targetAttr) return null;
@@ -210,13 +207,16 @@ export default function MindARViewer({
       }
     };
 
-    const targets = document.querySelectorAll("[mindar-image-target]");
-    targets.forEach((target) => {
-      target.addEventListener("targetFound", handleTargetFound);
-      target.addEventListener("targetLost", handleTargetLost);
-    });
+    // Wait for DOM repaint so a-scene and targets are available
+    const mindarSetupTimeout = setTimeout(() => {
+      const targets = document.querySelectorAll("[mindar-image-target]");
+      targets.forEach((target) => {
+        target.addEventListener("targetFound", handleTargetFound);
+        target.addEventListener("targetLost", handleTargetLost);
+      });
+    }, 500);
 
-    // Canvas & QR scanner loop on video stream
+    // Canvas & QR scanner loop on video stream (independent of MindAR)
     const canvas = document.createElement("canvas");
     const ctx = canvas.getContext("2d", { willReadFrequently: true });
     let lastScannedTime = 0;
@@ -258,7 +258,9 @@ export default function MindARViewer({
     }, 250);
 
     return () => {
+      clearTimeout(mindarSetupTimeout);
       clearInterval(intervalId);
+      const targets = document.querySelectorAll("[mindar-image-target]");
       targets.forEach((target) => {
         target.removeEventListener("targetFound", handleTargetFound);
         target.removeEventListener("targetLost", handleTargetLost);
