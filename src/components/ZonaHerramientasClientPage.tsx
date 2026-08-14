@@ -364,20 +364,29 @@ export default function ZonaHerramientasClientPage() {
                     </div>
 
                     {/* Scrollable Content */}
-                    <div className="flex-1 overflow-y-auto px-6 py-6 pb-12 space-y-6 scrollbar-hide">
-                      <div className="flex flex-col gap-4">
+                    <div className="flex-1 overflow-y-auto px-6 py-5 pb-12 space-y-5 scrollbar-hide">
+                      <div className="flex flex-col gap-5">
                         {(hitos[activeToolId - 1].imagenes?.length ?? 0) > 0 && (
-                          <div className="relative w-full h-48 sm:h-56 rounded-2xl overflow-hidden bg-slate-800 shadow-lg border border-slate-700/50 flex-shrink-0">
+                          <div className="relative w-full h-52 sm:h-60 rounded-2xl overflow-hidden bg-slate-800 shadow-xl border border-slate-700/50 flex-shrink-0">
                             <img
                               src={hitos[activeToolId - 1].imagenes![0]}
                               alt={hitos[activeToolId - 1].titulo}
                               className="w-full h-full object-cover"
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
+                            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent" />
+                            {/* Era badge sobre la imagen */}
+                            {hitos[activeToolId - 1].era && (
+                              <div className="absolute bottom-3 left-3">
+                                <span className="text-[9px] font-black uppercase tracking-widest bg-slate-950/70 text-slate-300 border border-slate-600/50 backdrop-blur-sm px-2.5 py-1 rounded-full">
+                                  ✦ {hitos[activeToolId - 1].era}
+                                </span>
+                              </div>
+                            )}
                           </div>
                         )}
+
                         <div>
-                          <h3 className="text-xl font-extrabold text-slate-100 mb-3 leading-snug">
+                          <h3 className="text-xl font-extrabold text-slate-100 mb-2 leading-snug">
                             {hitos[activeToolId - 1].titulo}
                           </h3>
                           <p className="text-sm text-slate-300 leading-relaxed">
@@ -385,7 +394,29 @@ export default function ZonaHerramientasClientPage() {
                           </p>
                         </div>
 
-                        <div className="flex gap-2.5 mt-2">
+                        {/* Datos Técnicos */}
+                        {(hitos[activeToolId - 1].tags?.length ?? 0) > 0 && (
+                          <div className="rounded-2xl bg-slate-950/60 border border-slate-800/80 p-4">
+                            <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3 flex items-center gap-1.5">
+                              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                              </svg>
+                              Datos Técnicos
+                            </h4>
+                            <div className="flex flex-wrap gap-2">
+                              {hitos[activeToolId - 1].tags!.map((tag, i) => (
+                                <span
+                                  key={i}
+                                  className="text-[10px] font-semibold text-slate-300 bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-lg"
+                                >
+                                  {tag}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+
+                        <div className="flex gap-2.5 mt-1">
                           <button
                             onClick={() => setShowToolDetail(false)}
                             className="flex-1 py-3 rounded-xl bg-slate-950 hover:bg-slate-900 text-slate-450 hover:text-slate-200 text-xs font-bold border border-slate-850 transition-all active:scale-95 cursor-pointer"

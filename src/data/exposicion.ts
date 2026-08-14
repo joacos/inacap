@@ -450,55 +450,65 @@ const rawExposicionData: Record<ZonaKey, Hito[]> = {
       id: 1,
       anio: 1966,
       titulo: "Familia del Desbaste y Carpintería (Los Cepillos)",
-      descripcion: "El cepillo manual y las garlopas de madera dominaban los talleres de carpintería a mediados del siglo XX. El dominio de estas herramientas definía la precisión del oficio y la calidad del acabado en madera.",
+      descripcion: "El cepillo manual y las garlopas de madera dominaban los talleres de carpintería a mediados del siglo XX. Estas herramientas de precisión artesanal —fabricadas enteramente en maderas nobles como el haya y el roble— exigían años de práctica para dominar el ángulo correcto del hierro y la presión uniforme del golpe. El acabado perfecto de una superficie dependía exclusivamente de la habilidad y sensibilidad táctil del oficial. Con la llegada de las primeras cepilladoras eléctricas a Chile en los años 70, el oficio fue transformado para siempre, pero el cepillo manual nunca desapareció: sigue siendo la herramienta definitiva para el ajuste fino en carpintería de alta gama.",
       audioUrl: "/assets/audio/herramientas/herramienta_1.mp3",
       modelo3dUrl: "/cepillo.glb",
+      era: "Carpintería Artesanal",
+      tags: ["Madera de haya y roble", "Hierro forjado", "Uso: Acabado de superficies", "Precisión manual"],
       imagenes: [
-        "https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?w=600&auto=format&fit=crop&q=80"
+        "https://images.unsplash.com/photo-1601058268499-e52658b8bb88?w=800&auto=format&fit=crop&q=85"
       ]
     },
     {
       id: 2,
       anio: 1978,
       titulo: "Familia del Perforado (Los Taladros)",
-      descripcion: "Los taladros eléctricos portátiles y de pedestal transformaron la velocidad de perforación en madera y metales, marcando el inicio de la mecanización a gran escala en los talleres técnicos.",
+      descripcion: "Los taladros eléctricos portátiles y de pedestal transformaron radicalmente la velocidad de perforación en madera, metales y hormigón, marcando el inicio de la mecanización a gran escala en los talleres técnicos. El primer taladro eléctrico de percusión portátil llegó a los talleres de INACAP en la década de 1970, reduciendo el tiempo de perforación en un 90% respecto al berbiquí manual. La evolución fue vertiginosa: del taladro de cable al inalámbrico de batería de litio, con velocidades variables y control electrónico de par. Hoy un taladro percutor moderno puede perforar hasta 50 mm en hormigón armado en segundos, algo impensable para las generaciones anteriores de trabajadores.",
       audioUrl: "/assets/audio/herramientas/herramienta_2.mp3",
       modelo3dUrl: "/deWalt.glb",
+      era: "Mecanización del Taller",
+      tags: ["Motor eléctrico", "Acero de alta velocidad", "Uso: Perforación en obra", "Batería de litio (era moderna)"],
       imagenes: [
-        "https://images.unsplash.com/photo-1504148455328-c376907d081c?w=600&auto=format&fit=crop&q=80"
+        "https://images.unsplash.com/photo-1504148455328-c376907d081c?w=800&auto=format&fit=crop&q=85"
       ]
     },
     {
       id: 3,
       anio: 1992,
       titulo: "Familia del Corte (Los Serruchos y Sierras)",
-      descripcion: "Serruchos tradicionales, sierras de calar y sierras circulares portátiles agilizaron el dimensionamiento de piezas, incrementando la productividad y disminuyendo el esfuerzo físico en obra.",
+      descripcion: "Del serrucho de mango de madera a la sierra circular láser: la familia del corte experimentó la evolución más dramática de todas las herramientas manuales. Los primeros serruchos utilizados en los talleres de INACAP eran importados desde España y Alemania, con hojas de acero templado al carbono que conservaban el filo hasta dos veces más que las versiones locales. La sierra de calar eléctrica (caladora) democratizó el corte de curvas y ángulos complejos en los años 80, y la sierra ingleteadora con disco de widia permitió cortes de precisión milimétrica para marcos de ventana, molduras y estructuras metálicas livianas. Hoy el guiado láser integrado elimina el lápiz marcador del proceso.",
       audioUrl: "/assets/audio/herramientas/herramienta_3.mp3",
       modelo3dUrl: "/ingleteadora.glb",
+      era: "Era de la Productividad",
+      tags: ["Acero templado al carbono", "Disco de widia", "Uso: Corte de madera y metal", "Guiado láser (moderno)"],
       imagenes: [
-        "https://images.unsplash.com/photo-1530124560677-bdaea027df01?w=600&auto=format&fit=crop&q=80"
+        "https://images.unsplash.com/photo-1530124560677-bdaea027df01?w=800&auto=format&fit=crop&q=85"
       ]
     },
     {
       id: 4,
       anio: 2005,
       titulo: "Familia de la Nivelación y Topografía (Los Plomos y Niveles)",
-      descripcion: "La Estación Total Electrónica unificó la medición de ángulos y distancias en un solo dispositivo digital, aportando precisión milimétrica y permitiendo exportar datos directamente a planos CAD.",
+      descripcion: "La Estación Total Electrónica integró en un solo dispositivo lo que antes requería tres instrumentos distintos: el teodolito para ángulos, el distanciómetro electrónico y la plomada óptica. Este salto tecnológico llegó a los talleres de topografía de INACAP a mediados de los 2000, permitiendo registrar puntos GPS georreferenciados y exportarlos directamente al software AutoCAD y Civil 3D. La precisión pasó de ±5 mm en 100 metros (nivel óptico de los años 60) a ±1 mm en más de 500 metros. El nivel láser rotatorio con receptor, antecedente directo de las estaciones modernas, eliminó la figura del 'portamira' en muchas obras, reduciendo los equipos de topografía de 3 personas a 1 sola.",
       audioUrl: "/assets/audio/herramientas/herramienta_4.mp3",
       modelo3dUrl: "/estacion_total.glb",
+      era: "Digitalización del Terreno",
+      tags: ["Óptica de precisión", "Electrónica digital", "Uso: Topografía y construcción", "Precisión ±1mm"],
       imagenes: [
-        "https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?w=600&auto=format&fit=crop&q=80"
+        "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=800&auto=format&fit=crop&q=85"
       ]
     },
     {
       id: 5,
       anio: 2026,
       titulo: "Familia de la Unión y Estructura (Las Soldadoras)",
-      descripcion: "Soldadoras inversoras compactas y de alta frecuencia facilitaron la unión estructural del acero, permitiendo un arco más de calidad y adaptándose al trabajo pesado tanto en terreno como en taller.",
+      descripcion: "La soldadura eléctrica transformó la construcción metálica en Chile desde la segunda mitad del siglo XX. Los primeros equipos de soldadura por arco eléctrico que llegaron a los talleres de INACAP en los años 70 eran transformadores de cobre de más de 50 kg, que generaban corriente alterna para soldar electrodos revestidos. La revolución llegó con las soldadoras inversoras de alta frecuencia en los años 2000: dispositivos de apenas 5 kg que generan corriente continua estable, permitiendo arcos más suaves y costuras de mayor calidad. La soldadura MIG/MAG automatizada y los robots de soldadura de última generación —presentes hoy en los laboratorios de INACAP— representan el futuro de la unión estructural en la era de la Industria 4.0.",
       audioUrl: "/assets/audio/herramientas/herramienta_5.mp3",
       modelo3dUrl: "/soldadora.glb",
+      era: "Industria 4.0",
+      tags: ["Corriente continua inversa", "Electrodo revestido / MIG-MAG", "Uso: Unión estructural de acero", "Automatización robótica"],
       imagenes: [
-        "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=600&auto=format&fit=crop&q=80"
+        "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=800&auto=format&fit=crop&q=85"
       ]
     }
   ],
