@@ -244,34 +244,12 @@ export default function ZonaHerramientasClientPage() {
                 }}
               />
 
-              {/* AR View Instructions & Simulator */}
-              <div className="absolute top-[88px] left-6 right-6 z-[55] flex flex-col items-center gap-3 pointer-events-auto">
+              {/* AR View Instructions */}
+              <div className="absolute top-[88px] left-6 right-6 z-[55] flex flex-col items-center gap-3 pointer-events-none">
                 <span className="bg-slate-950/80 text-slate-200 font-extrabold text-[10px] px-3.5 py-2 rounded-full border border-slate-800 backdrop-blur-sm shadow-xl text-center">
                   Apunta al código QR / Panel físico 🔍
                 </span>
-
-                {/* Demo / Simulation trigger overlay for browser preview */}
-                <div className="bg-slate-950/80 border border-slate-800 p-2.5 rounded-2xl flex items-center justify-between gap-3 shadow-2xl backdrop-blur-sm w-full max-w-sm">
-                  <span className="text-[8px] font-black text-slate-400 uppercase tracking-widest leading-none flex-shrink-0">
-                    Simular QR:
-                  </span>
-                  <div className="flex gap-1.5 flex-1 justify-end">
-                  {[1, 2, 3, 4, 5].map((id) => (
-                    <button
-                      key={id}
-                      onClick={() => handleSuccessfulScan(id)}
-                      className={`w-7 h-7 flex items-center justify-center rounded-lg border text-[10px] font-black transition-all active:scale-95 cursor-pointer ${
-                        activeToolId === id
-                          ? "bg-inacap-blue/20 border-inacap-blue-light/50 text-inacap-blue-light"
-                          : "bg-slate-900 border-slate-800 text-slate-400 hover:bg-slate-850"
-                      }`}
-                    >
-                      {id}
-                    </button>
-                  ))}
-                </div>
               </div>
-            </div>
 
             {/* Collapsed Mini-Drawer (HUD) */}
             <AnimatePresence>
