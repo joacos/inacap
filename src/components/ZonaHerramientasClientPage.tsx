@@ -37,7 +37,7 @@ export default function ZonaHerramientasClientPage() {
         if (idNum >= 1 && idNum <= 5) {
           markVisited("herramientas", idNum);
           setActiveToolId(idNum);
-          setShowToolDetail(true);
+          setShowToolDetail(false);
           setStep("scanning");
           // Clean URL
           const newUrl = window.location.pathname;
@@ -71,7 +71,7 @@ export default function ZonaHerramientasClientPage() {
     playBeep();
     markVisited("herramientas", toolId);
     setActiveToolId(toolId);
-    setShowToolDetail(true);
+    setShowToolDetail(false); // Solo muestra el mini-drawer HUD, el usuario abre el detalle manualmente
   }, [markVisited]);
 
   return (
