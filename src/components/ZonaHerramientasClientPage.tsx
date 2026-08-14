@@ -16,7 +16,7 @@ type FlowStep = "instructions" | "scanning";
 export default function ZonaHerramientasClientPage() {
   const hitos = exposicionData.herramientas;
   const [step, setStep] = useState<FlowStep>("instructions");
-  
+
   const [activeToolId, setActiveToolId] = useState<number | null>(null);
   const [showToolDetail, setShowToolDetail] = useState(false);
   const [showHistoryDrawer, setShowHistoryDrawer] = useState(false);
@@ -64,7 +64,7 @@ export default function ZonaHerramientasClientPage() {
       gainNode.gain.setValueAtTime(0.08, audioCtx.currentTime);
       oscillator.start();
       oscillator.stop(audioCtx.currentTime + 0.15);
-    } catch {}
+    } catch { }
   };
 
   const handleSuccessfulScan = useCallback((toolId: number) => {
@@ -76,7 +76,7 @@ export default function ZonaHerramientasClientPage() {
 
   return (
     <div className="flex flex-col min-h-dvh bg-slate-950 text-slate-100 dot-grid relative overflow-x-hidden">
-      
+
       {/* FIXED HEADER (Always Visible) */}
       <header className="fixed top-0 left-0 right-0 z-40 px-6 pt-6 pb-4 bg-gradient-to-b from-slate-950 via-slate-950/80 to-transparent flex items-center justify-between pointer-events-none">
         <div className="flex items-center gap-3 pointer-events-auto">
@@ -156,7 +156,7 @@ export default function ZonaHerramientasClientPage() {
       {/* VIEWPORT CONTROLLER */}
       <div className="relative z-10 flex-grow flex flex-col">
         <AnimatePresence mode="wait">
-          
+
           {/* STEP 1: INSTRUCTIONS VIEW */}
           {step === "instructions" && (
             <motion.div
@@ -237,7 +237,7 @@ export default function ZonaHerramientasClientPage() {
                   const toolId = index + 1;
                   handleSuccessfulScan(toolId);
                 }}
-                onTargetLost={() => {}}
+                onTargetLost={() => { }}
                 onClose={() => {
                   setStep("instructions");
                   setActiveToolId(null);
@@ -247,179 +247,179 @@ export default function ZonaHerramientasClientPage() {
               {/* AR View Instructions */}
               <div className="absolute top-[88px] left-6 right-6 z-[55] flex flex-col items-center gap-3 pointer-events-none">
                 <span className="bg-slate-950/80 text-slate-200 font-extrabold text-[10px] px-3.5 py-2 rounded-full border border-slate-800 backdrop-blur-sm shadow-xl text-center">
-                  Apunta al código QR / Panel físico 🔍
+                  Apunta a la tarjeta 🔍
                 </span>
               </div>
 
-            {/* Collapsed Mini-Drawer (HUD) */}
-            <AnimatePresence>
-              {activeToolId !== null && !showToolDetail && (
-                <motion.div 
-                  initial={{ y: 100, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  exit={{ y: 100, opacity: 0 }}
-                  className="absolute bottom-0 left-0 right-0 z-[60] max-w-lg mx-auto bg-slate-900 border-x border-t border-slate-700/50 rounded-t-[2rem] p-5 shadow-[0_-10px_40px_rgba(0,0,0,0.5)] cursor-pointer pointer-events-auto"
-                  onClick={() => setShowToolDetail(true)}
-                >
-                  <div className="w-12 h-1.5 mx-auto bg-slate-700 rounded-full mb-3" />
-                  <div className="flex items-center justify-between gap-3">
-                    <div className="flex-1 min-w-0">
-                      <span className="bg-inacap-blue text-white font-extrabold text-[9px] px-2 py-0.5 rounded-full border border-inacap-blue-light/20 mb-1.5 inline-block">
-                        Hito {activeToolId} · {hitos[activeToolId - 1].anio}
-                      </span>
-                      <h3 className="text-sm font-extrabold text-slate-100 truncate">
-                        {hitos[activeToolId - 1].titulo}
-                      </h3>
-                    </div>
-                    
-                    <button 
-                      onClick={(e) => { 
-                        e.stopPropagation(); 
-                        setActiveToolId(null); 
-                      }}
-                      className="flex-shrink-0 w-8 h-8 rounded-full bg-slate-800 border border-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition-colors cursor-pointer active:scale-95"
-                    >
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                        <path d="M18 6L6 18M6 6l12 12" />
-                      </svg>
-                    </button>
-                  </div>
-                  <div className="text-center mt-2">
-                    <span className="text-[10px] text-slate-400 font-semibold animate-pulse flex items-center justify-center gap-1">
-                      Desliza o presiona para ver detalle
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                        <path d="M18 15l-6-6-6 6" />
-                      </svg>
-                    </span>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-
-            {/* Full Expanded Drawer */}
-            <AnimatePresence>
-              {showToolDetail && activeToolId !== null && (
-                <>
-                  {/* Backdrop */}
+              {/* Collapsed Mini-Drawer (HUD) */}
+              <AnimatePresence>
+                {activeToolId !== null && !showToolDetail && (
                   <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    onClick={() => setShowToolDetail(false)}
-                    className="absolute inset-0 z-[60] bg-slate-950/70 backdrop-blur-sm cursor-pointer pointer-events-auto"
-                  />
-                  
-                  {/* Drawer */}
-                  <motion.div
-                    drag="y"
-                    dragConstraints={{ top: 0 }}
-                    dragElastic={0.2}
-                    onDragEnd={(e, info) => {
-                      if (info.offset.y > 100) setShowToolDetail(false);
-                    }}
-                    initial={{ y: "100%" }}
-                    animate={{ y: 0 }}
-                    exit={{ y: "100%" }}
-                    transition={{ type: "spring", damping: 25, stiffness: 300 }}
-                    className="absolute inset-x-0 bottom-0 z-[70] max-h-[85vh] w-full max-w-lg mx-auto flex flex-col rounded-t-[2rem] bg-slate-900 border-x border-t border-slate-700/50 shadow-[0_-10px_40px_rgba(0,0,0,0.5)] overflow-hidden pointer-events-auto"
+                    initial={{ y: 100, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ y: 100, opacity: 0 }}
+                    className="absolute bottom-0 left-0 right-0 z-[60] max-w-lg mx-auto bg-slate-900 border-x border-t border-slate-700/50 rounded-t-[2rem] p-5 shadow-[0_-10px_40px_rgba(0,0,0,0.5)] cursor-pointer pointer-events-auto"
+                    onClick={() => setShowToolDetail(true)}
                   >
-                    {/* Drag Handle & Header */}
-                    <div className="flex-shrink-0 pt-3 pb-4 px-6 bg-slate-900 sticky top-0 z-10 border-b border-slate-800/80">
-                      <div className="w-12 h-1.5 mx-auto bg-slate-700 rounded-full mb-4" />
-                      <div className="flex justify-between items-center">
-                        <span className="bg-inacap-blue text-white font-extrabold text-[10px] px-2.5 py-0.5 rounded-full border border-inacap-blue-light/20 shadow-sm">
+                    <div className="w-12 h-1.5 mx-auto bg-slate-700 rounded-full mb-3" />
+                    <div className="flex items-center justify-between gap-3">
+                      <div className="flex-1 min-w-0">
+                        <span className="bg-inacap-blue text-white font-extrabold text-[9px] px-2 py-0.5 rounded-full border border-inacap-blue-light/20 mb-1.5 inline-block">
                           Hito {activeToolId} · {hitos[activeToolId - 1].anio}
                         </span>
-                        <button 
-                          onClick={() => setShowToolDetail(false)}
-                          className="p-2 rounded-full bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700 transition-colors cursor-pointer active:scale-95"
-                        >
-                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                            <path d="M18 6L6 18M6 6l12 12" />
-                          </svg>
-                        </button>
+                        <h3 className="text-sm font-extrabold text-slate-100 truncate">
+                          {hitos[activeToolId - 1].titulo}
+                        </h3>
                       </div>
+
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setActiveToolId(null);
+                        }}
+                        className="flex-shrink-0 w-8 h-8 rounded-full bg-slate-800 border border-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition-colors cursor-pointer active:scale-95"
+                      >
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                          <path d="M18 6L6 18M6 6l12 12" />
+                        </svg>
+                      </button>
                     </div>
+                    <div className="text-center mt-2">
+                      <span className="text-[10px] text-slate-400 font-semibold animate-pulse flex items-center justify-center gap-1">
+                        Desliza o presiona para ver detalle
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                          <path d="M18 15l-6-6-6 6" />
+                        </svg>
+                      </span>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
 
-                    {/* Scrollable Content */}
-                    <div className="flex-1 overflow-y-auto px-6 py-5 pb-12 space-y-5 scrollbar-hide">
-                      <div className="flex flex-col gap-5">
-                        {(hitos[activeToolId - 1].imagenes?.length ?? 0) > 0 && (
-                          <div className="relative w-full h-52 sm:h-60 rounded-2xl overflow-hidden bg-slate-800 shadow-xl border border-slate-700/50 flex-shrink-0">
-                            <img
-                              src={hitos[activeToolId - 1].imagenes![0]}
-                              alt={hitos[activeToolId - 1].titulo}
-                              className="w-full h-full object-cover"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent" />
-                            {/* Era badge sobre la imagen */}
-                            {hitos[activeToolId - 1].era && (
-                              <div className="absolute bottom-3 left-3">
-                                <span className="text-[9px] font-black uppercase tracking-widest bg-slate-950/70 text-slate-300 border border-slate-600/50 backdrop-blur-sm px-2.5 py-1 rounded-full">
-                                  ✦ {hitos[activeToolId - 1].era}
-                                </span>
-                              </div>
-                            )}
-                          </div>
-                        )}
+              {/* Full Expanded Drawer */}
+              <AnimatePresence>
+                {showToolDetail && activeToolId !== null && (
+                  <>
+                    {/* Backdrop */}
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      onClick={() => setShowToolDetail(false)}
+                      className="absolute inset-0 z-[60] bg-slate-950/70 backdrop-blur-sm cursor-pointer pointer-events-auto"
+                    />
 
-                        <div>
-                          <h3 className="text-xl font-extrabold text-slate-100 mb-2 leading-snug">
-                            {hitos[activeToolId - 1].titulo}
-                          </h3>
-                          <p className="text-sm text-slate-300 leading-relaxed">
-                            {hitos[activeToolId - 1].descripcion}
-                          </p>
-                        </div>
-
-                        {/* Datos Técnicos */}
-                        {(hitos[activeToolId - 1].tags?.length ?? 0) > 0 && (
-                          <div className="rounded-2xl bg-slate-950/60 border border-slate-800/80 p-4">
-                            <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3 flex items-center gap-1.5">
-                              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                              </svg>
-                              Datos Técnicos
-                            </h4>
-                            <div className="flex flex-wrap gap-2">
-                              {hitos[activeToolId - 1].tags!.map((tag, i) => (
-                                <span
-                                  key={i}
-                                  className="text-[10px] font-semibold text-slate-300 bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-lg"
-                                >
-                                  {tag}
-                                </span>
-                              ))}
-                            </div>
-                          </div>
-                        )}
-
-                        <div className="flex gap-2.5 mt-1">
+                    {/* Drawer */}
+                    <motion.div
+                      drag="y"
+                      dragConstraints={{ top: 0 }}
+                      dragElastic={0.2}
+                      onDragEnd={(e, info) => {
+                        if (info.offset.y > 100) setShowToolDetail(false);
+                      }}
+                      initial={{ y: "100%" }}
+                      animate={{ y: 0 }}
+                      exit={{ y: "100%" }}
+                      transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                      className="absolute inset-x-0 bottom-0 z-[70] max-h-[85vh] w-full max-w-lg mx-auto flex flex-col rounded-t-[2rem] bg-slate-900 border-x border-t border-slate-700/50 shadow-[0_-10px_40px_rgba(0,0,0,0.5)] overflow-hidden pointer-events-auto"
+                    >
+                      {/* Drag Handle & Header */}
+                      <div className="flex-shrink-0 pt-3 pb-4 px-6 bg-slate-900 sticky top-0 z-10 border-b border-slate-800/80">
+                        <div className="w-12 h-1.5 mx-auto bg-slate-700 rounded-full mb-4" />
+                        <div className="flex justify-between items-center">
+                          <span className="bg-inacap-blue text-white font-extrabold text-[10px] px-2.5 py-0.5 rounded-full border border-inacap-blue-light/20 shadow-sm">
+                            Hito {activeToolId} · {hitos[activeToolId - 1].anio}
+                          </span>
                           <button
                             onClick={() => setShowToolDetail(false)}
-                            className="flex-1 py-3 rounded-xl bg-slate-950 hover:bg-slate-900 text-slate-450 hover:text-slate-200 text-xs font-bold border border-slate-850 transition-all active:scale-95 cursor-pointer"
+                            className="p-2 rounded-full bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700 transition-colors cursor-pointer active:scale-95"
                           >
-                            Volver al Modelo 3D
-                          </button>
-                          <button
-                            onClick={() => {
-                              setShowToolDetail(false);
-                              setActiveToolId(null);
-                            }}
-                            className="flex-1 py-3 rounded-xl bg-inacap-blue hover:bg-inacap-blue-light text-slate-50 text-xs font-extrabold border border-inacap-blue-light/20 transition-all active:scale-95 cursor-pointer flex items-center justify-center gap-1.5 shadow-lg"
-                          >
-                            <span>Escanear Otro</span>
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className="animate-pulse">
-                              <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                              <path d="M18 6L6 18M6 6l12 12" />
                             </svg>
                           </button>
                         </div>
                       </div>
-                    </div>
-                  </motion.div>
-                </>
-              )}
-            </AnimatePresence>
+
+                      {/* Scrollable Content */}
+                      <div className="flex-1 overflow-y-auto px-6 py-5 pb-12 space-y-5 scrollbar-hide">
+                        <div className="flex flex-col gap-5">
+                          {(hitos[activeToolId - 1].imagenes?.length ?? 0) > 0 && (
+                            <div className="relative w-full h-52 sm:h-60 rounded-2xl overflow-hidden bg-slate-800 shadow-xl border border-slate-700/50 flex-shrink-0">
+                              <img
+                                src={hitos[activeToolId - 1].imagenes![0]}
+                                alt={hitos[activeToolId - 1].titulo}
+                                className="w-full h-full object-cover"
+                              />
+                              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent" />
+                              {/* Era badge sobre la imagen */}
+                              {hitos[activeToolId - 1].era && (
+                                <div className="absolute bottom-3 left-3">
+                                  <span className="text-[9px] font-black uppercase tracking-widest bg-slate-950/70 text-slate-300 border border-slate-600/50 backdrop-blur-sm px-2.5 py-1 rounded-full">
+                                    ✦ {hitos[activeToolId - 1].era}
+                                  </span>
+                                </div>
+                              )}
+                            </div>
+                          )}
+
+                          <div>
+                            <h3 className="text-xl font-extrabold text-slate-100 mb-2 leading-snug">
+                              {hitos[activeToolId - 1].titulo}
+                            </h3>
+                            <p className="text-sm text-slate-300 leading-relaxed">
+                              {hitos[activeToolId - 1].descripcion}
+                            </p>
+                          </div>
+
+                          {/* Datos Técnicos */}
+                          {(hitos[activeToolId - 1].tags?.length ?? 0) > 0 && (
+                            <div className="rounded-2xl bg-slate-950/60 border border-slate-800/80 p-4">
+                              <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3 flex items-center gap-1.5">
+                                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                                </svg>
+                                Datos Técnicos
+                              </h4>
+                              <div className="flex flex-wrap gap-2">
+                                {hitos[activeToolId - 1].tags!.map((tag, i) => (
+                                  <span
+                                    key={i}
+                                    className="text-[10px] font-semibold text-slate-300 bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-lg"
+                                  >
+                                    {tag}
+                                  </span>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+
+                          <div className="flex gap-2.5 mt-1">
+                            <button
+                              onClick={() => setShowToolDetail(false)}
+                              className="flex-1 py-3 rounded-xl bg-slate-950 hover:bg-slate-900 text-slate-450 hover:text-slate-200 text-xs font-bold border border-slate-850 transition-all active:scale-95 cursor-pointer"
+                            >
+                              Volver al Modelo 3D
+                            </button>
+                            <button
+                              onClick={() => {
+                                setShowToolDetail(false);
+                                setActiveToolId(null);
+                              }}
+                              className="flex-1 py-3 rounded-xl bg-inacap-blue hover:bg-inacap-blue-light text-slate-50 text-xs font-extrabold border border-inacap-blue-light/20 transition-all active:scale-95 cursor-pointer flex items-center justify-center gap-1.5 shadow-lg"
+                            >
+                              <span>Escanear Otro</span>
+                              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className="animate-pulse">
+                                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+                              </svg>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  </>
+                )}
+              </AnimatePresence>
             </motion.div>
           )}
 
@@ -437,7 +437,7 @@ export default function ZonaHerramientasClientPage() {
                 onClick={() => setShowHistoryDrawer(false)}
                 className="fixed inset-0 z-[75] bg-slate-950/70 backdrop-blur-sm cursor-pointer"
               />
-              
+
               {/* Drawer */}
               <motion.div
                 initial={{ y: "100%" }}
@@ -458,7 +458,7 @@ export default function ZonaHerramientasClientPage() {
                         Progreso: {discoveredCount} de 5 completadas
                       </p>
                     </div>
-                    <button 
+                    <button
                       onClick={() => setShowHistoryDrawer(false)}
                       className="p-2 rounded-full bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700 transition-colors cursor-pointer active:scale-95"
                     >
@@ -474,21 +474,19 @@ export default function ZonaHerramientasClientPage() {
                   {hitos.map((tool) => {
                     const visited = isVisited("herramientas", tool.id);
                     return (
-                      <div 
+                      <div
                         key={tool.id}
-                        className={`p-4 rounded-2xl border transition-all ${
-                          visited 
-                            ? "bg-slate-850/60 border-slate-800/80" 
-                            : "bg-slate-900/30 border-slate-900/50 opacity-60"
-                        }`}
+                        className={`p-4 rounded-2xl border transition-all ${visited
+                          ? "bg-slate-850/60 border-slate-800/80"
+                          : "bg-slate-900/30 border-slate-900/50 opacity-60"
+                          }`}
                       >
                         <div className="flex justify-between items-start gap-4">
                           <div className="min-w-0">
-                            <span className={`text-[9px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full mb-1.5 inline-block ${
-                              visited 
-                                ? "bg-inacap-blue/20 text-inacap-blue-light border border-inacap-blue-light/20" 
-                                : "bg-slate-950 text-slate-500 border border-slate-900"
-                            }`}>
+                            <span className={`text-[9px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full mb-1.5 inline-block ${visited
+                              ? "bg-inacap-blue/20 text-inacap-blue-light border border-inacap-blue-light/20"
+                              : "bg-slate-950 text-slate-500 border border-slate-900"
+                              }`}>
                               Estación {tool.id}
                             </span>
                             <h4 className={`text-xs font-bold truncate ${visited ? "text-slate-200" : "text-slate-500"}`}>
